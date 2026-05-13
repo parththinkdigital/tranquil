@@ -1,59 +1,79 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tranquil — Premium Real Estate Platform
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" width="100%" alt="Tranquil Hero Banner">
 </p>
 
-## About Laravel
+Tranquil is a high-end, editorial-style real estate platform designed to offer a "serene" property search experience. Built with a focus on premium aesthetics and fluid interactions, Tranquil transforms the real estate journey into an architectural narrative.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Premium Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **"Pro Max" Design System**: A sophisticated visual hierarchy using the **Cinzel** serif for elegance and **Josefin Sans** for modern readability.
+- **Layered Brand Hero**: A statement hero section featuring massive brand typography layered with high-fidelity property imagery.
+- **Smooth Interaction Engine**: Integrated with **Lenis Smooth Scroll** and custom minimalist 'pill' scrollbars for a fluid, high-end agency feel.
+- **Modular 11-Section Homepage**: A comprehensive, responsive layout including Featured Estates, Popular Locations, Interactive Maps, and Testimonials.
+- **Dynamic Content Architecture**: Fully powered by Laravel, featuring property categories, location-based filtering, and a powerful admin management system.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠 Tech Stack
 
-## Learning Laravel
+- **Framework**: [Laravel 11](https://laravel.com)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) (Utility-first)
+- **Icons**: [Lucide Icons](https://lucide.dev)
+- **Smooth Scroll**: [Lenis](https://lenis.studiofreight.com/)
+- **Typography**: Cinzel & Josefin Sans (Google Fonts)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🚀 Getting Started
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Prerequisites
 
-## Laravel Sponsors
+- PHP 8.2+
+- Composer
+- Node.js & NPM
+- MySQL/SQLite
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Installation
 
-### Premium Partners
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ParthGorde/tranquil.git
+   cd tranquil
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Install Dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## Contributing
+3. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Database Configuration**
+   Configure your database in `.env`, then run migrations and seeders:
+   ```bash
+   php artisan migrate --seed
+   ```
 
-## Code of Conduct
+5. **Build Assets**
+   ```bash
+   npm run dev
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **Start the Server**
+   ```bash
+   php artisan serve
+   ```
 
-## Security Vulnerabilities
+## 📸 visual Overview
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The project follows a specific "Sanctuary" aesthetic:
+- **Teal Palette**: Primary colors focus on #0F766E (Teal-800) and #14B8A6 (Teal-500).
+- **Glassmorphism**: Heavy use of glass-blur effects for search bars and UI overlays.
+- **Fluid Scaling**: Typography and spacing use modern `clamp()` functions for seamless responsiveness.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Built with ❤️ for elevated real estate experiences.
