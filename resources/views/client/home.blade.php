@@ -2,6 +2,12 @@
 
 @section('content')
 
+@php
+    $defaultLocation = $locations->firstWhere('name', 'Nashik');
+    $defaultLocationId = $defaultLocation ? $defaultLocation->id : '';
+    $defaultLocationName = $defaultLocation ? $defaultLocation->name : 'Nashik';
+@endphp
+
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION 1 — HERO (Premium Text-Cutout Style)
      Giant "TRANQUIL" behind property image, subtitle overlay,
@@ -76,48 +82,105 @@
                 </h2>
             </div>
 
-            {{-- Glass search bar --}}
             <form action="{{ route('properties.index') }}" method="GET"
-                  class="hero-search-glass rounded-2xl p-2.5 flex flex-col md:flex-row items-stretch gap-0 max-w-4xl mx-auto">
-
-                {{-- Location --}}
-                <div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10">
-                    <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Location</label>
-                    <div class="flex items-center gap-2">
-                        <input type="text" name="keyword" placeholder="Select Your City"
-                               class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white placeholder:text-white/40 p-0">
-                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-white/30 flex-shrink-0"></i>
-                    </div>
-                </div>
+                  class="hero-search-glass rounded-[2rem] p-3 flex flex-col md:flex-row items-stretch gap-2 max-w-5xl mx-auto shadow-2xl border border-white/20">
 
                 {{-- Property Type --}}
-                <div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10">
-                    <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Property Type</label>
-                    <select name="category_id" class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white/80 p-0 cursor-pointer">
-                        <option value="" class="text-primary">Choose Property Type</option>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->id }}" class="text-primary">{{ $cat->name }}</option>
-                        @endforeach
-                    </select>
+                <div x-data="{ open: false, value: '', label: 'Any Property' }" class="flex-1 px-6 py-3 relative group/hero-item">
+                    <button type="button" @click="open = !open" @click.away="open = false" class="w-full text-left cursor-pointer outline-none">
+                        <label class="text-[9px] uppercase tracking-[.2em] text-white/40 font-bold block mb-1.5 group-hover/hero-item:text-secondary transition-colors">Property Type</label>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-white/90" x-text="label">Any Property</span>
+                            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-white/30 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="absolute bottom-full left-0 right-0 mb-4 z-[100] bg-primary/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden p-1.5"
+                         style="display: none;">
+                        <div class="max-h-60 overflow-y-auto scrollbar-hide">
+                            <div @click="value = ''; label = 'Any Property'; open = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white/90 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">Any Property</div>
+                            @foreach($categories as $cat)
+                                <div @click="value = '{{ $cat->id }}'; label = '{{ $cat->name }}'; open = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white/90 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">{{ $cat->name }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" name="category_id" x-model="value">
                 </div>
 
-                {{-- Price Range --}}
-                <div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10">
-                    <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Price Range</label>
-                    <select name="max_price" class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white/80 p-0 cursor-pointer">
-                        <option value="" class="text-primary">Choose Price Range</option>
-                        <option value="5000000" class="text-primary">Up to ₹50 Lakhs</option>
-                        <option value="10000000" class="text-primary">Up to ₹1 Crore</option>
-                        <option value="50000000" class="text-primary">Up to ₹5 Crore</option>
-                        <option value="100000000" class="text-primary">Up to ₹10 Crore</option>
-                    </select>
+                <div class="hidden md:block w-px h-8 self-center bg-white/10"></div>
+
+                {{-- Location --}}
+                <div x-data="{ open: false, value: '{{ $defaultLocationId }}', label: '{{ $defaultLocationName }}' }" class="flex-1 px-6 py-3 relative group/hero-item">
+                    <button type="button" @click="open = !open" @click.away="open = false" class="w-full text-left cursor-pointer outline-none">
+                        <label class="text-[9px] uppercase tracking-[.2em] text-white/40 font-bold block mb-1.5 group-hover/hero-item:text-secondary transition-colors">Location</label>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-white/90" x-text="label">Nashik</span>
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-white/30 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="absolute bottom-full left-0 right-0 mb-4 z-[100] bg-primary/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden p-1.5"
+                         style="display: none;">
+                        <div class="max-h-60 overflow-y-auto scrollbar-hide">
+                            <div @click="value = ''; label = 'Any City'; open = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white/90 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">Any City</div>
+                            @foreach($locations as $loc)
+                                <div @click="value = '{{ $loc->id }}'; label = '{{ $loc->name }}'; open = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white/90 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">{{ $loc->name }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" name="location_id" x-model="value">
+                </div>
+
+                <div class="hidden md:block w-px h-8 self-center bg-white/10"></div>
+
+                {{-- Configuration --}}
+                <div x-data="{ open: false, value: '', label: 'Any BHK' }" class="flex-1 px-6 py-3 relative group/hero-item">
+                    <button type="button" @click="open = !open" @click.away="open = false" class="w-full text-left cursor-pointer outline-none">
+                        <label class="text-[9px] uppercase tracking-[.2em] text-white/40 font-bold block mb-1.5 group-hover/hero-item:text-secondary transition-colors">Configuration</label>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-white/90" x-text="label">Any BHK</span>
+                            <i data-lucide="layout-grid" class="w-3.5 h-3.5 text-white/30 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="absolute bottom-full left-0 right-0 mb-4 z-[100] bg-primary/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden p-1.5"
+                         style="display: none;">
+                        <div class="max-h-60 overflow-y-auto scrollbar-hide">
+                            <div @click="value = ''; label = 'Any BHK'; open = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white/90 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">Any BHK</div>
+                            @foreach(['RK', '1 BHK', '2 BHK', '3 BHK', '4 BHK'] as $option)
+                                <div @click="value = '{{ $option }}'; label = '{{ $option }}'; open = false" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white/90 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">{{ $option }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" name="bhk" x-model="value">
                 </div>
 
                 {{-- Submit --}}
                 <button type="submit"
-                        class="bg-white text-primary px-8 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all duration-300 cursor-pointer whitespace-nowrap shadow-lg">
+                        class="bg-white text-primary px-10 py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary hover:text-white hover:scale-[1.02] active:scale-95 transition-all duration-300 cursor-pointer whitespace-nowrap shadow-xl">
                     <i data-lucide="search" class="w-4 h-4"></i>
-                    Browse Properties
+                    Explore Properties
                 </button>
             </form>
 
@@ -231,71 +294,152 @@
     </div>
 </section>
 
-
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 3 — FIND YOUR DREAM HOME (Search Filter Bar)
-     Stayli layout: centered heading, subtitle, multi-dropdown row
+     SECTION 3 — Find Your Dream Home
      ═══════════════════════════════════════════════════════════════ --}}
-<section id="dream-search" class="py-24 md:py-32 bg-background">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 text-center">
-        <h2 class="font-heading text-primary mb-4"
-            style="font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; line-height: 1.1;">
-            Find your <em class="text-secondary italic font-light not-italic" style="font-style: italic;">dream home</em>
-        </h2>
-        <p class="text-sm text-text-main/40 max-w-md mx-auto mb-12">
-            Connecting you with the perfect property for your loved ones
-        </p>
+<section id="dream-search" class="relative py-24 md:py-32 bg-background overflow-hidden">
+    <!-- Background Decorative Elements -->
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[60%] rounded-full bg-secondary/10 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
+    </div>
+    
+    <!-- Subtle Pattern Overlay -->
+    <div class="absolute inset-0 opacity-[0.03] -z-20" style="background-image: radial-gradient(#0F766E 1px, transparent 1px); background-size: 40px 40px;"></div>
 
-        <form action="{{ route('properties.index') }}" method="GET"
-              class="bg-white rounded-2xl shadow-lg border border-gray-100 p-2.5 flex flex-col md:flex-row items-stretch max-w-4xl mx-auto">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 text-center relative">
+        <div class="mb-14">
+            <span class="text-[10px] uppercase tracking-[.4em] font-bold text-secondary mb-4 block">Refined Selection</span>
+            <h2 class="font-heading text-primary mb-6"
+                style="font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.04em; line-height: 1;">
+                Find your <em class="text-secondary italic font-light not-italic" style="font-style: italic;">dream home</em>
+            </h2>
+            <p class="text-base text-text-main/50 max-w-lg mx-auto leading-relaxed">
+                Seamlessly connecting you with the most prestigious properties and peaceful environments tailored to your lifestyle.
+            </p>
+        </div>
 
-            <div class="flex items-center gap-2.5 flex-1 px-4 py-2.5 border-b md:border-b-0 md:border-r border-gray-100">
-                <i data-lucide="building-2" class="w-4 h-4 text-primary/25 flex-shrink-0"></i>
-                <select name="category_id" class="w-full border-none focus:ring-0 text-sm bg-transparent text-primary/60 cursor-pointer">
-                    <option value="">Property</option>
-                    @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+        <div class="relative max-w-6xl mx-auto group z-100">
+            <!-- Form Glow Effect -->
+            <div class="absolute -inset-1 bg-gradient-to-r from-secondary/10 via-primary/5 to-secondary/10 rounded-[2rem] blur-2xl opacity-40 group-hover:opacity-100 transition duration-1000"></div>
+            
+            <form action="{{ route('properties.index') }}" method="GET"
+                  class="relative bg-white/90 backdrop-blur-2xl rounded-3xl shadow-[0_32px_64px_-16px_rgba(15,118,110,0.12)] border border-white p-3 flex flex-col lg:flex-row items-stretch gap-2 transition-all duration-500 hover:shadow-[0_48px_80px_-20px_rgba(15,118,110,0.18)]">
 
-            <div class="flex items-center gap-2.5 flex-1 px-4 py-2.5 border-b md:border-b-0 md:border-r border-gray-100">
-                <i data-lucide="map-pin" class="w-4 h-4 text-primary/25 flex-shrink-0"></i>
-                <select name="location_id" class="w-full border-none focus:ring-0 text-sm bg-transparent text-primary/60 cursor-pointer">
-                    <option value="">Location</option>
-                    @foreach($locations as $loc)
-                        <option value="{{ $loc->id }}">{{ $loc->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+                <!-- Property Type Dropdown -->
+                <div x-data="{ open: false, value: '', label: 'Any Type' }" class="group/item flex items-center gap-3 flex-1 px-5 py-3.5 rounded-2xl transition-all duration-300 hover:bg-primary/[0.03] relative">
+                    <div class="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-300">
+                        <i data-lucide="building-2" class="w-5 h-5"></i>
+                    </div>
+                    <button type="button" @click="open = !open" @click.away="open = false" class="flex flex-col items-start flex-1 text-left cursor-pointer">
+                        <label class="text-[10px] uppercase tracking-wider font-bold text-primary/40 mb-0.5">Property</label>
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-[15px] text-primary/80 font-semibold" x-text="label">Any Type</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-primary/30 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
 
-            <div class="flex items-center gap-2.5 flex-1 px-4 py-2.5 border-b md:border-b-0 md:border-r border-gray-100">
-                <i data-lucide="calendar" class="w-4 h-4 text-primary/25 flex-shrink-0"></i>
-                <select class="w-full border-none focus:ring-0 text-sm bg-transparent text-primary/60 cursor-pointer">
-                    <option value="">Date</option>
-                    <option>This Week</option>
-                    <option>This Month</option>
-                    <option>This Year</option>
-                </select>
-            </div>
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="absolute top-full left-0 right-0 mt-3 z-50 bg-white/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white overflow-hidden p-1.5"
+                         style="display: none;">
+                        <div class="max-h-60 overflow-y-auto scrollbar-hide">
+                            <div @click="value = ''; label = 'Any Type'; open = false" class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer">Any Type</div>
+                            @foreach($categories as $cat)
+                                <div @click="value = '{{ $cat->id }}'; label = '{{ $cat->name }}'; open = false" class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer">{{ $cat->name }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" name="category_id" x-model="value">
+                </div>
 
-            <div class="flex items-center gap-2.5 flex-1 px-4 py-2.5 border-b md:border-b-0 md:border-r border-gray-100">
-                <i data-lucide="banknote" class="w-4 h-4 text-primary/25 flex-shrink-0"></i>
-                <select name="max_price" class="w-full border-none focus:ring-0 text-sm bg-transparent text-primary/60 cursor-pointer">
-                    <option value="">Price</option>
-                    <option value="5000000">Up to ₹50L</option>
-                    <option value="10000000">Up to ₹1Cr</option>
-                    <option value="50000000">Up to ₹5Cr</option>
-                    <option value="100000000">Up to ₹10Cr</option>
-                </select>
-            </div>
+                <div class="hidden lg:block w-px h-10 self-center bg-primary/10"></div>
 
-            <button type="submit"
-                    class="bg-primary text-white px-7 py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-all duration-200 cursor-pointer whitespace-nowrap">
-                <i data-lucide="search" class="w-4 h-4"></i>
-                Search
-            </button>
-        </form>
+                <!-- Location Dropdown -->
+                <div x-data="{ open: false, value: '{{ $defaultLocationId }}', label: '{{ $defaultLocationName }}' }" class="group/item flex items-center gap-3 flex-1 px-5 py-3.5 rounded-2xl transition-all duration-300 hover:bg-primary/[0.03] relative">
+                    <div class="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-300">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <button type="button" @click="open = !open" @click.away="open = false" class="flex flex-col items-start flex-1 text-left cursor-pointer">
+                        <label class="text-[10px] uppercase tracking-wider font-bold text-primary/40 mb-0.5">Location</label>
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-[15px] text-primary/80 font-semibold" x-text="label">{{ $defaultLocationName }}</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-primary/30 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="absolute top-full left-0 right-0 mt-3 z-50 bg-white/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white overflow-hidden p-1.5"
+                         style="display: none;">
+                        <div class="max-h-60 overflow-y-auto scrollbar-hide">
+                            <div @click="value = ''; label = 'Select City'; open = false" class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer">Any City</div>
+                            @foreach($locations as $loc)
+                                <div @click="value = '{{ $loc->id }}'; label = '{{ $loc->name }}'; open = false" class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer">{{ $loc->name }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" name="location_id" x-model="value">
+                </div>
+
+                <div class="hidden lg:block w-px h-10 self-center bg-primary/10"></div>
+
+                <!-- BHK Dropdown -->
+                <div x-data="{ open: false, value: '', label: 'Any BHK' }" class="group/item flex items-center gap-3 flex-1 px-5 py-3.5 rounded-2xl transition-all duration-300 hover:bg-primary/[0.03] relative">
+                    <div class="w-10 h-10 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover/item:bg-primary group-hover/item:text-white transition-all duration-300">
+                        <i data-lucide="layout-grid" class="w-5 h-5"></i>
+                    </div>
+                    <button type="button" @click="open = !open" @click.away="open = false" class="flex flex-col items-start flex-1 text-left cursor-pointer">
+                        <label class="text-[10px] uppercase tracking-wider font-bold text-primary/40 mb-0.5">Configuration</label>
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-[15px] text-primary/80 font-semibold" x-text="label">Any BHK</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-primary/30 transition-transform duration-300" :class="open ? 'rotate-180' : ''"></i>
+                        </div>
+                    </button>
+
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                         x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                         class="absolute top-full left-0 right-0 mt-3 z-50 bg-white/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white overflow-hidden p-1.5"
+                         style="display: none;">
+                        <div class="max-h-60 overflow-y-auto scrollbar-hide">
+                            <div @click="value = ''; label = 'Any BHK'; open = false" class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer">Any BHK</div>
+                            @foreach(['RK', '1 BHK', '2 BHK', '3 BHK', '4 BHK'] as $option)
+                                <div @click="value = '{{ $option }}'; label = '{{ $option }}'; open = false" class="px-4 py-2.5 rounded-xl text-[13px] font-semibold text-primary/60 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer">{{ $option }}</div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <input type="hidden" name="bhk" x-model="value">
+                </div>
+
+                <button type="submit"
+                        class="bg-primary text-white px-8 py-4 rounded-2xl text-base font-bold flex items-center justify-center gap-3 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 cursor-pointer whitespace-nowrap group/btn lg:ml-2">
+                    <i data-lucide="search" class="w-5 h-5 group-hover/btn:scale-110 transition-transform"></i>
+                    Search
+                </button>
+            </form>
+
+            <p class="mt-10 text-[11px] text-primary/40 font-medium tracking-wide">
+                Looking for a larger estate or custom requirement? 
+                <a href="{{ route('pages.contact') }}" class="text-secondary font-bold hover:underline transition-all underline-offset-4 decoration-secondary/30 ml-1">
+                    Contact our luxury consultants directly
+                </a>
+            </p>
+        </div>
     </div>
 </section>
 
@@ -303,7 +447,7 @@
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION 4 — FEATURED LISTINGS
      ═══════════════════════════════════════════════════════════════ --}}
-<section id="featured" class="py-24 md:py-32 bg-white">
+<section id="featured" class="py-24 md:py-32 bg-white z-1">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-5">
             <div>
