@@ -1,10 +1,14 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
-    </div>
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
+@section('content')
+    <div class="max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-3xl p-8">
+            <div class="mb-4 text-sm text-gray-600">
+                {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+            </div>
+
+            <form method="POST" action="{{ route('password.confirm') }}">
+                @csrf
 
         <!-- Password -->
         <div>
@@ -23,5 +27,7 @@
                 {{ __('Confirm') }}
             </x-primary-button>
         </div>
-    </form>
-</x-guest-layout>
+            </form>
+        </div>
+    </div>
+@endsection

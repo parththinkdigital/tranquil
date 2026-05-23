@@ -1,6 +1,10 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.app')
+
+@section('content')
+    <div class="max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-3xl p-8">
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
         <!-- Name -->
         <div>
@@ -40,7 +44,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
@@ -48,5 +52,7 @@
                 {{ __('Register') }}
             </x-primary-button>
         </div>
-    </form>
-</x-guest-layout>
+            </form>
+        </div>
+    </div>
+@endsection
