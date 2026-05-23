@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->integer('bathrooms')->default(0);
             $table->decimal('area', 10, 2)->comment('Square feet/meters');
             $table->string('furnished_status')->nullable(); // furnished, unfurnished, semi-furnished
+            $table->string('sub_type')->nullable()->after('furnished_status'); // 1bhk, 2bhk, Rk, office, etc.
             $table->integer('build_year')->nullable();
             
             // Geographical attributes
@@ -49,7 +51,9 @@ return new class extends Migration
             // Indexes for hot search paths
             $table->index(['status', 'type']);
             $table->index('price');
-            $table->fullText(['title', 'description']);
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->fullText(['title', 'description']);
+            }
         });
     }
 

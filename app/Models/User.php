@@ -18,6 +18,11 @@ class User extends Authenticatable
         return $this->hasMany(Property::class);
     }
 
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
+
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
