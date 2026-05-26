@@ -16,9 +16,13 @@
             <i data-lucide="users" class="w-5 h-5"></i>
             <span>Agents</span>
         </a>
-        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
+        <a href="{{ route('admin.contacts.index') }}" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="message-square" class="w-5 h-5"></i>
             <span>Inquiries</span>
+        </a>
+        <a href="{{ route('admin.testimonials.index') }}" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            <span>Testimonials</span>
         </a>
         <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="target" class="w-5 h-5"></i>
@@ -42,7 +46,7 @@
                 <p class="text-[10px] uppercase tracking-widest text-teal-400">Administrator</p>
             </div>
         </div>
-        <form method="POST" action="{{ route('logout') }}" class="mt-4">
+        <form method="POST" action="{{ route('admin.logout') }}" class="mt-4">
             @csrf
             <button type="submit" class="w-full text-left text-xs text-teal-100/40 hover:text-white transition-colors flex items-center gap-2">
                 <i data-lucide="log-out" class="w-3 h-3"></i> Log out

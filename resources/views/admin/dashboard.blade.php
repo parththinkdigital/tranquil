@@ -65,7 +65,6 @@
             <h3 class="text-2xl font-heading font-bold text-primary italic">Recent <span class="text-secondary">Listings</span></h3>
             <a href="#" class="text-xs font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">View All</a>
         </div>
-        
         <div class="space-y-6">
             @foreach($recent_properties as $property)
             <div class="flex items-center gap-6 p-4 rounded-2xl hover:bg-teal-50/50 transition-all border border-transparent hover:border-teal-50 group">
@@ -90,10 +89,9 @@
 
     <!-- Recent Inquiries -->
     <div class="bg-white rounded-[40px] p-10 shadow-sm border border-teal-50">
-         <div class="flex justify-between items-center mb-10">
+        <div class="flex justify-between items-center mb-10">
             <h3 class="text-2xl font-heading font-bold text-primary italic">Latest <span class="text-secondary">Inquiries</span></h3>
         </div>
-
         <div class="space-y-8">
             @foreach($recent_inquiries as $inquiry)
             <div class="relative pl-6 border-l-2 border-teal-100 group hover:border-secondary transition-all">
