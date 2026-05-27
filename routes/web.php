@@ -23,16 +23,21 @@ Route::post('/contact', [\App\Http\Controllers\PageController::class, 'submitCon
 // });
 
 //---------------------------------AdminLogin--------------------------------// 
+Route::get('/login', fn() => redirect('/admin/login'))->name('login');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('signIn');
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
     Route::get('/register', [AuthController::class, 'register'])->name('register'); // Temporary route to seed admin
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     //----------------- Admin Authentication -----------------//
-    Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
         Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index', 'destroy']);
+        Route::resource('property', \App\Http\Controllers\Admin\PropertyController::class);
+        Route::resource('property-type', \App\Http\Controllers\Admin\PropertyTypeController::class);
+        Route::get('property-details/get-property-types/{property}', [\App\Http\Controllers\Admin\PropertyDetailController::class, 'getPropertyTypes'])->name('property-details.get-types');
+        Route::resource('property-details', \App\Http\Controllers\Admin\PropertyDetailController::class);
     });
 });
 

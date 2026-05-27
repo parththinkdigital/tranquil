@@ -95,9 +95,10 @@
                     <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Property Type</label>
                     <select name="category_id" class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white/80 p-0 cursor-pointer">
                         <option value="" class="text-primary">Choose Property Type</option>
-                        @foreach($categories as $cat)
-                            <option value="{{ $cat->id }}" class="text-primary">{{ $cat->name }}</option>
-                        @endforeach
+                        <option value="1" class="text-primary">Apartment</option>
+                        <option value="2" class="text-primary">Villa</option>
+                        <option value="3" class="text-primary">Commercial</option>
+                        <option value="4" class="text-primary">Plot</option>
                     </select>
                 </div>
 
@@ -151,11 +152,10 @@
             {{-- Avatar stack --}}
             <div>
                 <div class="flex -space-x-3 mb-6">
-                    @for($i = 0; $i < 4; $i++)
-                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden">
-                        <img src="https://i.pravatar.cc/80?img={{ $i + 10 }}" alt="Happy buyer" class="w-full h-full object-cover">
-                    </div>
-                    @endfor
+                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=10" alt="Happy buyer" class="w-full h-full object-cover"></div>
+                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=11" alt="Happy buyer" class="w-full h-full object-cover"></div>
+                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=12" alt="Happy buyer" class="w-full h-full object-cover"></div>
+                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=13" alt="Happy buyer" class="w-full h-full object-cover"></div>
                 </div>
 
                 <div class="flex gap-10">
@@ -253,9 +253,10 @@
                 <i data-lucide="building-2" class="w-4 h-4 text-primary/25 flex-shrink-0"></i>
                 <select name="category_id" class="w-full border-none focus:ring-0 text-sm bg-transparent text-primary/60 cursor-pointer">
                     <option value="">Property</option>
-                    @foreach($categories as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                    @endforeach
+                    <option value="1">Apartment</option>
+                    <option value="2">Villa</option>
+                    <option value="3">Commercial</option>
+                    <option value="4">Plot</option>
                 </select>
             </div>
 
@@ -263,9 +264,10 @@
                 <i data-lucide="map-pin" class="w-4 h-4 text-primary/25 flex-shrink-0"></i>
                 <select name="location_id" class="w-full border-none focus:ring-0 text-sm bg-transparent text-primary/60 cursor-pointer">
                     <option value="">Location</option>
-                    @foreach($locations as $loc)
-                        <option value="{{ $loc->id }}">{{ $loc->name }}</option>
-                    @endforeach
+                    <option value="1">Mumbai</option>
+                    <option value="2">Pune</option>
+                    <option value="3">Bangalore</option>
+                    <option value="4">Delhi</option>
                 </select>
             </div>
 
@@ -319,37 +321,69 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            @foreach($featured as $property)
-            <a href="{{ route('properties.show', $property->slug) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+            {{-- Card 1 --}}
+            <a href="#" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
                 <div class="relative h-60 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                         alt="{{ $property->title }}">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Sea View Apartment">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
-                    <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                        {{ $property->category->name }}
-                    </span>
+                    <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Apartment</span>
                 </div>
                 <div class="p-6">
-                    <div class="flex items-center gap-1.5 text-[11px] text-text-main/35 mb-2">
-                        <i data-lucide="map-pin" class="w-3 h-3"></i>
-                        <span>{{ $property->location->name }}</span>
-                    </div>
-                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">{{ $property->title }}</h3>
-                    <div class="flex gap-5 text-[11px] text-text-main/35 mb-5">
-                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> {{ $property->bedrooms }} Bed</span>
-                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> {{ $property->bathrooms }} Bath</span>
-                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> {{ number_format($property->area) }} sqft</span>
+                    <p class="text-[11px] text-primary/40 mb-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Bandra West, Mumbai</p>
+                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Sea View Luxury Apartment</h3>
+                    <div class="flex gap-4 text-[11px] text-primary/40 mb-4">
+                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 3 Bed</span>
+                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 2 Bath</span>
+                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 1,800 sqft</span>
                     </div>
                     <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-                        <span class="font-heading font-bold text-primary text-lg">₹{{ number_format($property->price / 10000000, 2) }} Cr</span>
-                        <span class="text-secondary font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-                            Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
+                        <span class="font-heading font-bold text-primary text-lg">₹2.50 Cr</span>
+                        <span class="text-secondary font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all duration-200">Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
                     </div>
                 </div>
             </a>
-            @endforeach
+            {{-- Card 2 --}}
+            <a href="#" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+                <div class="relative h-60 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Modern Villa">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
+                    <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Villa</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-[11px] text-primary/40 mb-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Juhu, Mumbai</p>
+                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Modern Private Villa</h3>
+                    <div class="flex gap-4 text-[11px] text-primary/40 mb-4">
+                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 5 Bed</span>
+                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 4 Bath</span>
+                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 4,200 sqft</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+                        <span class="font-heading font-bold text-primary text-lg">₹8.75 Cr</span>
+                        <span class="text-secondary font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all duration-200">Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+                </div>
+            </a>
+            {{-- Card 3 --}}
+            <a href="#" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+                <div class="relative h-60 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Studio Apartment">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent"></div>
+                    <span class="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Apartment</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-[11px] text-primary/40 mb-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Worli, Mumbai</p>
+                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Premium Studio Flat</h3>
+                    <div class="flex gap-4 text-[11px] text-primary/40 mb-4">
+                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 1 Bed</span>
+                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 1 Bath</span>
+                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 650 sqft</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+                        <span class="font-heading font-bold text-primary text-lg">₹1.20 Cr</span>
+                        <span class="text-secondary font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all duration-200">Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -367,32 +401,39 @@
             </h2>
         </div>
 
-        @php
-            $locImgs = [
-                'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1567157577867-05ccb1388e13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-            ];
-            $fallback = ['Juhu','Worli','Andheri','Powai'];
-        @endphp
-
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            @for($i = 0; $i < 4; $i++)
-            <a href="{{ isset($locations[$i]) ? route('properties.index', ['location_id' => $locations[$i]->id]) : '#' }}"
-               class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
-                <img src="{{ $locImgs[$i] }}"
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                     alt="{{ isset($locations[$i]) ? $locations[$i]->name : $fallback[$i] }}">
+            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Juhu">
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
                 <div class="absolute bottom-5 left-5">
-                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">{{ isset($locations[$i]) ? $locations[$i]->name : $fallback[$i] }}</h3>
-                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1">
-                        <i data-lucide="map-pin" class="w-3 h-3"></i> {{ rand(8, 35) }}+ Properties
-                    </p>
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Juhu</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 12+ Properties</p>
                 </div>
             </a>
-            @endfor
+            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Worli">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
+                <div class="absolute bottom-5 left-5">
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Worli</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 28+ Properties</p>
+                </div>
+            </a>
+            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Andheri">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
+                <div class="absolute bottom-5 left-5">
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Andheri</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 19+ Properties</p>
+                </div>
+            </a>
+            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Powai">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
+                <div class="absolute bottom-5 left-5">
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Powai</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 35+ Properties</p>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -460,33 +501,66 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            @foreach($latest as $property)
-            <a href="{{ route('properties.show', $property->slug) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+            {{-- Latest 1 --}}
+            <a href="#" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
                 <div class="relative h-52 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                         alt="{{ $property->title }}">
-                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
-                        {{ ucfirst($property->type) }}
-                    </span>
+                    <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="2BHK Apartment">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">Sale</span>
                 </div>
                 <div class="p-6">
-                    <span class="text-[11px] text-text-main/35 flex items-center gap-1 mb-2"><i data-lucide="map-pin" class="w-3 h-3"></i> {{ $property->location->name }} &bull; {{ $property->category->name }}</span>
-                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">{{ $property->title }}</h3>
-                    <div class="flex gap-4 text-[11px] text-text-main/35 mb-4">
-                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> {{ $property->bedrooms }}</span>
-                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> {{ $property->bathrooms }}</span>
-                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> {{ number_format($property->area) }} sqft</span>
+                    <p class="text-[11px] text-primary/40 mb-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Andheri East &bull; Apartment</p>
+                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Spacious 2BHK Near Metro</h3>
+                    <div class="flex gap-4 text-[11px] text-primary/40 mb-4">
+                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 2</span>
+                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 2</span>
+                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 1,050 sqft</span>
                     </div>
                     <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-                        <span class="font-heading font-bold text-primary">₹{{ number_format($property->price / 10000000, 2) }} Cr</span>
-                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-                            View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
+                        <span class="font-heading font-bold text-primary">₹1.85 Cr</span>
+                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
                     </div>
                 </div>
             </a>
-            @endforeach
+            {{-- Latest 2 --}}
+            <a href="#" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Penthouse">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">Rent</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-[11px] text-primary/40 mb-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Powai &bull; Penthouse</p>
+                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Skyline Penthouse Suite</h3>
+                    <div class="flex gap-4 text-[11px] text-primary/40 mb-4">
+                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 4</span>
+                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 3</span>
+                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 3,500 sqft</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+                        <span class="font-heading font-bold text-primary">₹1.2L/mo</span>
+                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+                </div>
+            </a>
+            {{-- Latest 3 --}}
+            <a href="#" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Garden Villa">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">Sale</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-[11px] text-primary/40 mb-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Juhu &bull; Villa</p>
+                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Garden-Facing Corner Villa</h3>
+                    <div class="flex gap-4 text-[11px] text-primary/40 mb-4">
+                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 4</span>
+                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 3</span>
+                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 2,800 sqft</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
+                        <span class="font-heading font-bold text-primary">₹5.40 Cr</span>
+                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></span>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -508,7 +582,7 @@
                     class="w-full h-full border-0" allowfullscreen="" loading="lazy" title="Mumbai Properties Map"></iframe>
             <div class="absolute top-5 left-5 bg-white/95 backdrop-blur rounded-xl p-4 shadow-md border border-gray-100">
                 <p class="font-heading font-bold text-primary text-sm mb-0.5">Mumbai Metropolitan</p>
-                <p class="text-[10px] text-text-main/35">{{ \App\Models\Property::published()->count() }} active listings</p>
+                <p class="text-[10px] text-text-main/35">listings</p>
             </div>
         </div>
     </div>

@@ -34,19 +34,6 @@
     <div class="bg-white p-8 rounded-[32px] shadow-sm border border-teal-50 flex flex-col justify-between group hover:border-secondary transition-all">
         <div class="flex justify-between items-start mb-6">
             <div class="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center text-primary group-hover:bg-secondary group-hover:text-white transition-all">
-                <i data-lucide="message-square" class="w-6 h-6"></i>
-            </div>
-            <span class="text-[10px] font-bold uppercase tracking-widest text-orange-500 bg-orange-50 px-2 py-1 rounded-full">NEW</span>
-        </div>
-        <div>
-            <h4 class="text-3xl font-heading font-bold text-primary mb-1">{{ $stats['total_inquiries'] }}</h4>
-            <p class="text-xs uppercase tracking-widest font-bold text-primary/40">Total Inquiries</p>
-        </div>
-    </div>
-
-    <div class="bg-white p-8 rounded-[32px] shadow-sm border border-teal-50 flex flex-col justify-between group hover:border-secondary transition-all">
-        <div class="flex justify-between items-start mb-6">
-            <div class="w-12 h-12 rounded-2xl bg-teal-50 flex items-center justify-center text-primary group-hover:bg-secondary group-hover:text-white transition-all">
                 <i data-lucide="target" class="w-6 h-6"></i>
             </div>
             <span class="text-[10px] font-bold uppercase tracking-widest text-blue-500 bg-blue-50 px-2 py-1 rounded-full">VALUE</span>
@@ -72,7 +59,7 @@
                     <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
                 </div>
                 <div class="flex-1">
-                    <p class="text-[10px] uppercase tracking-widest font-bold text-secondary mb-1">{{ $property->category->name }} &bull; {{ $property->location->name }}</p>
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-secondary mb-1">{{ $property->category?->name ?? 'Uncategorized' }} &bull; {{ $property->location?->name ?? 'Unknown Location' }}</p>
                     <h5 class="text-lg font-heading font-bold text-primary leading-none mb-2">{{ $property->title }}</h5>
                     <p class="text-sm font-bold text-primary/40 italic">₹{{ number_format($property->price / 10000000, 2) }} Cr</p>
                 </div>
@@ -82,26 +69,6 @@
                     </div>
                     <p class="text-[10px] text-primary/20 font-bold uppercase">{{ $property->created_at->diffForHumans() }}</p>
                 </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-
-    <!-- Recent Inquiries -->
-    <div class="bg-white rounded-[40px] p-10 shadow-sm border border-teal-50">
-        <div class="flex justify-between items-center mb-10">
-            <h3 class="text-2xl font-heading font-bold text-primary italic">Latest <span class="text-secondary">Inquiries</span></h3>
-        </div>
-        <div class="space-y-8">
-            @foreach($recent_inquiries as $inquiry)
-            <div class="relative pl-6 border-l-2 border-teal-100 group hover:border-secondary transition-all">
-                <div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-teal-100 group-hover:bg-secondary transition-all"></div>
-                <p class="text-sm font-bold text-primary mb-1">{{ $inquiry->name }}</p>
-                <p class="text-[10px] text-primary/40 uppercase tracking-widest font-medium mb-3">Re: {{ $inquiry->property->title ?? 'General Inquiry' }}</p>
-                <div class="bg-teal-50/50 p-4 rounded-xl text-xs text-text-main leading-relaxed italic">
-                    "{{ Str::limit($inquiry->message, 80) }}"
-                </div>
-                <p class="text-[10px] text-secondary font-bold uppercase mt-3 tracking-widest">{{ $inquiry->created_at->format('M d, H:i') }}</p>
             </div>
             @endforeach
         </div>

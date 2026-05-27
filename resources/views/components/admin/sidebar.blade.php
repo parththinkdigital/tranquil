@@ -4,26 +4,62 @@
     </div>
 
     <nav class="flex-1 px-4 space-y-2">
-        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-4 px-4 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition-all">
+        {{-- Dashboard --}}
+        <a href="{{ route('admin.dashboard') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.dashboard')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }}  transition-all font-medium">
             <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
             <span>Dashboard</span>
         </a>
-        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
+        {{-- Properties --}}
+        <a href="{{ route('admin.property.index') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.property.*')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }} transition-all font-medium">
             <i data-lucide="building-2" class="w-5 h-5"></i>
             <span>Properties</span>
         </a>
-        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-            <i data-lucide="users" class="w-5 h-5"></i>
-            <span>Agents</span>
+        {{-- Property Type --}}
+        <a href="{{ route('admin.property-type.index') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.property-type.*')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }}   transition-all font-medium">
+            <i data-lucide="home" class="w-5 h-5"></i>
+            <span>Property Types</span>
         </a>
-        <a href="{{ route('admin.contacts.index') }}" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
+        {{-- Inquiries --}}
+        <a href="{{ route('admin.contacts.index') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.contacts.*')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }}
+        transition-all font-medium">
             <i data-lucide="message-square" class="w-5 h-5"></i>
             <span>Inquiries</span>
         </a>
-        <a href="{{ route('admin.testimonials.index') }}" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
+        {{-- Testimonials --}}
+        <a href="{{ route('admin.testimonials.index') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.testimonials.*')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }}   transition-all font-medium">
             <i data-lucide="message-circle" class="w-5 h-5"></i>
             <span>Testimonials</span>
         </a>
+        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white transition-all font-medium">
+            <i data-lucide="users" class="w-5 h-5"></i>
+            <span>Agents</span>
+        </a>
+
         <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="target" class="w-5 h-5"></i>
             <span>Leads</span>

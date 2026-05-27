@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Testimonials')
+@section('page-title', 'Property Types')
 
 @section('content')
 <div class="bg-white rounded-[40px] p-10 shadow-sm border border-teal-50">
     <div class="flex justify-between items-center mb-10">
-        <h3 class="text-2xl font-heading font-bold text-primary italic">Manage <span class="text-secondary">Testimonials</span></h3>
-        <a href="{{ route('admin.testimonials.create') }}" class="bg-primary hover:bg-secondary text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full transition-colors flex items-center gap-2">
+        <h3 class="text-2xl font-heading font-bold text-primary italic">Manage <span class="text-secondary">Property Types</span></h3>
+        <a href="{{ route('admin.property-type.create') }}" class="bg-primary hover:bg-secondary text-white text-xs font-bold uppercase tracking-widest px-6 py-3 rounded-full transition-colors flex items-center gap-2">
             <i data-lucide="plus" class="w-4 h-4"></i> Add New
         </a>
     </div>
@@ -17,34 +17,31 @@
         {{ session('success') }}
     </div>
     @endif
+
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
                 <tr class="border-b border-teal-50">
-                    <th class="py-4 px-6 text-xs font-bold uppercase tracking-widest text-primary/40">Name</th>
-                    <th class="py-4 px-6 text-xs font-bold uppercase tracking-widest text-primary/40">Designation</th>
-                    <th class="py-4 px-6 text-xs font-bold uppercase tracking-widest text-primary/40">Review</th>
+                    <th class="py-4 px-6 text-xs font-bold uppercase tracking-widest text-primary/40">Property</th>
+                    <th class="py-4 px-6 text-xs font-bold uppercase tracking-widest text-primary/40">Type Name</th>
                     <th class="py-4 px-6 text-xs font-bold uppercase tracking-widest text-primary/40 text-right">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-teal-50">
-                @forelse($testimonials as $testimonial)
+                @forelse($propertyTypes as $type)
                 <tr class="hover:bg-teal-50/20 transition-colors">
                     <td class="py-4 px-6">
-                        <p class="font-bold text-primary">{{ $testimonial->name }}</p>
+                        <span class="bg-teal-50 text-teal-700 py-1 px-3 rounded-full text-xs font-bold uppercase tracking-widest">{{ $type->property->name ?? 'N/A' }}</span>
                     </td>
                     <td class="py-4 px-6">
-                        <p class="text-sm text-primary/60">{{ $testimonial->designation }}</p>
-                    </td>
-                    <td class="py-4 px-6 max-w-md">
-                        <p class="text-sm text-primary/80 truncate">{{ Str::limit($testimonial->review, 50) }}</p>
+                        <p class="font-bold text-primary">{{ $type->name }}</p>
                     </td>
                     <td class="py-4 px-6 text-right">
                         <div class="flex items-center justify-end gap-3">
-                            <a href="{{ route('admin.testimonials.edit', $testimonial) }}" class="text-secondary hover:text-primary transition-colors">
+                            <a href="{{ route('admin.property-type.edit', $type) }}" class="text-secondary hover:text-primary transition-colors">
                                 <i data-lucide="edit-2" class="w-4 h-4"></i>
                             </a>
-                            <form action="{{ route('admin.testimonials.destroy', $testimonial) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this testimonial?');">
+                            <form action="{{ route('admin.property-type.destroy', $type) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this property type?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-400 hover:text-red-600 transition-colors">
@@ -56,8 +53,8 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" class="py-8 text-center text-primary/40 italic text-sm">
-                        No testimonials found.
+                    <td colspan="3" class="py-8 text-center text-primary/40 italic text-sm">
+                        No property types found.
                     </td>
                 </tr>
                 @endforelse
@@ -65,7 +62,7 @@
         </table>
     </div>
     <div class="mt-8">
-        {{ $testimonials->links() }}
+        {{ $propertyTypes->links() }}
     </div>
 </div>
 @endsection

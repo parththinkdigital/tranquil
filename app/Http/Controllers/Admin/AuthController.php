@@ -30,12 +30,9 @@ class AuthController extends Controller
         $user = User::firstOrCreate(['email' => $data['email']], $data);
         
         if ($user) {
-            // Create and assign Spatie role
-            $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
-            $user->assignRole($role);
-            echo "Registerd successfully";
+            echo "Registered successfully";
         } else {
-            echo "something went wrong";
+            echo "Something went wrong";
         }
     }
 
