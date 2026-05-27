@@ -51,13 +51,18 @@ class PropertyDetailController extends Controller
         ]);
 
         if ($request->hasFile('cover_image')) {
-            $validated['cover_image'] = $request->file('cover_image')->store('properties/covers', 'public');
+            $file = $request->file('cover_image');
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/coverimg'), $filename);
+            $validated['cover_image'] = 'uploads/coverimg/' . $filename;
         }
 
         if ($request->hasFile('property_images')) {
             $images = [];
             foreach ($request->file('property_images') as $file) {
-                $images[] = $file->store('properties/images', 'public');
+                $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/propertyimgs'), $filename);
+                $images[] = 'uploads/propertyimgs/' . $filename;
             }
             $validated['property_images'] = $images;
         }
@@ -103,26 +108,42 @@ class PropertyDetailController extends Controller
         ]);
 
         if ($request->hasFile('cover_image')) {
-            if ($propertyDetail->cover_image && \Storage::disk('public')->exists($propertyDetail->cover_image)) {
-                \Storage::disk('public')->delete($propertyDetail->cover_image);
+            if ($propertyDetail->cover_image && file_exists(public_path($propertyDetail->cover_image))) {
+                unlink(public_path($propertyDetail->cover_image));
             }
-            $validated['cover_image'] = $request->file('cover_image')->store('properties/covers', 'public');
+            $file = $request->file('cover_image');
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/coverimg'), $filename);
+            $validated['cover_image'] = 'uploads/coverimg/' . $filename;
         }
 
-        if ($request->hasFile('property_images')) {
-            if ($propertyDetail->property_images) {
-                foreach ($propertyDetail->property_images as $oldImage) {
-                    if (\Storage::disk('public')->exists($oldImage)) {
-                        \Storage::disk('public')->delete($oldImage);
-                    }
+        // --- Property Images: handle reorder + delete + new uploads ---
+
+        // 1. Delete physically removed images
+        if ($request->filled('deleted_images')) {
+            $toDelete = json_decode($request->input('deleted_images'), true) ?? [];
+            foreach ($toDelete as $deletedPath) {
+                $fullPath = public_path($deletedPath);
+                if (file_exists($fullPath)) {
+                    unlink($fullPath);
                 }
             }
-            $images = [];
-            foreach ($request->file('property_images') as $file) {
-                $images[] = $file->store('properties/images', 'public');
-            }
-            $validated['property_images'] = $images;
         }
+
+        // 2. Start with the existing images in their (possibly reordered) sequence
+        $finalImages = $request->input('existing_images', []);
+
+        // 3. Append any new file uploads
+        if ($request->hasFile('property_images')) {
+            foreach ($request->file('property_images') as $file) {
+                $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/propertyimgs'), $filename);
+                $finalImages[] = 'uploads/propertyimgs/' . $filename;
+            }
+        }
+
+        // 4. Persist the merged, reordered list (null if empty to clear the column)
+        $validated['property_images'] = !empty($finalImages) ? $finalImages : null;
 
         $propertyDetail->update($validated);
 
@@ -131,13 +152,13 @@ class PropertyDetailController extends Controller
 
     public function destroy(PropertyDetail $propertyDetail)
     {
-        if ($propertyDetail->cover_image && \Storage::disk('public')->exists($propertyDetail->cover_image)) {
-            \Storage::disk('public')->delete($propertyDetail->cover_image);
+        if ($propertyDetail->cover_image && file_exists(public_path($propertyDetail->cover_image))) {
+            unlink(public_path($propertyDetail->cover_image));
         }
         if ($propertyDetail->property_images) {
             foreach ($propertyDetail->property_images as $oldImage) {
-                if (\Storage::disk('public')->exists($oldImage)) {
-                    \Storage::disk('public')->delete($oldImage);
+                if (file_exists(public_path($oldImage))) {
+                    unlink(public_path($oldImage));
                 }
             }
         }

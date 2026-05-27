@@ -34,6 +34,16 @@
             <i data-lucide="home" class="w-5 h-5"></i>
             <span>Property Types</span>
         </a>
+        {{-- Property Details --}}
+        <a href="{{ route('admin.property-details.index') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.property-details.*')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }}   transition-all font-medium">
+            <i data-lucide="info" class="w-5 h-5"></i>
+            <span>Property Details</span>
+        </a>
         {{-- Inquiries --}}
         <a href="{{ route('admin.contacts.index') }}"
             class="flex items-center gap-4 px-4 py-3 rounded-xl

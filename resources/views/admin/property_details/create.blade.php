@@ -45,7 +45,7 @@
             <label class="text-[10px] uppercase tracking-widest font-bold text-primary/60 mb-2 block">Project Name</label>
             <input type="text" name="project_name" value="{{ old('project_name') }}" class="w-full border-teal-100 rounded-xl focus:ring-primary text-sm">
         </div>
-        <div>
+        <div id="bhk_type_wrapper">
             <label class="text-[10px] uppercase tracking-widest font-bold text-primary/60 mb-2 block">BHK Type</label>
             <select name="bhk_type" class="w-full border-teal-100 rounded-xl focus:ring-primary text-sm">
                 <option value="">Select BHK</option>
@@ -174,7 +174,7 @@
     <div id="amenities-container" class="space-y-3 mb-4">
         <div class="flex gap-2 amenity-row">
             <input type="text" name="amenities[]" class="flex-1 border-teal-100 rounded-xl focus:ring-primary text-sm" placeholder="e.g. Swimming Pool">
-            <button type="button" class="px-4 py-2 bg-red-50 text-red-500 rounded-xl hover:bg-red-100 transition-colors remove-amenity" style="display:none;">
+            <button type="button" class="px-4 py-2 bg-red-50 text-red-500 rounded-xl hover:bg-red-100 transition-colors remove-amenity">
                 <i data-lucide="x" class="w-4 h-4"></i>
             </button>
         </div>
@@ -204,6 +204,8 @@
             height: 250,
             toolbar: [
                 ['style', ['style']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
                 ['font', ['bold', 'underline', 'clear']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
@@ -214,7 +216,20 @@
         });
 
         // Dynamic Property Type loading
+        function toggleBHK() {
+            var selectedPropertyText = $('#property_id option:selected').text().toLowerCase();
+            if (selectedPropertyText.includes('commercial')) {
+                $('#bhk_type_wrapper').hide();
+                $('select[name="bhk_type"]').val('');
+            } else {
+                $('#bhk_type_wrapper').show();
+            }
+        }
+        
+        toggleBHK();
+
         $('#property_id').change(function() {
+            toggleBHK();
             var propertyId = $(this).val();
             if(propertyId) {
                 $.ajax({
