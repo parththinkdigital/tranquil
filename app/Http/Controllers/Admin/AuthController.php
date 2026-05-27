@@ -12,10 +12,17 @@ class AuthController extends Controller
 {
     public function loginForm()
     {
-        if (Auth::check()) {
-            return redirect()->back();
+        // If already logged in as admin → go straight to dashboard
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
         }
-        return view('admin.auth.login'); // Make sure this view file exists
+
+        // If somehow a non-admin is authenticated, log them out first
+        if (Auth::check()) {
+            Auth::logout();
+        }
+
+        return view('admin.auth.login');
     }
 
     // Register new admin user

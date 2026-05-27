@@ -25,8 +25,13 @@ Route::post('/contact', [\App\Http\Controllers\PageController::class, 'submitCon
 //---------------------------------AdminLogin--------------------------------// 
 Route::get('/login', fn() => redirect('/admin/login'))->name('login');
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AuthController::class, 'loginForm'])->name('signIn');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
+    // Guest-only routes: redirect to dashboard if already logged in as admin
+    Route::middleware('admin.guest')->group(function () {
+        Route::get('/login', [AuthController::class, 'loginForm'])->name('signIn');
+        Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    });
+
     Route::get('/register', [AuthController::class, 'register'])->name('register'); // Temporary route to seed admin
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     //----------------- Admin Authentication -----------------//
