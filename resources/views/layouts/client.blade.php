@@ -9,6 +9,8 @@
     <!-- Fonts handled in app.css -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 
 <body class="antialiased">
@@ -21,6 +23,7 @@
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <script>
         lucide.createIcons();
+
         // Lenis Smooth Scroll
         const lenis = new Lenis({
             duration: 1.2,
@@ -39,6 +42,11 @@
             requestAnimationFrame(raf)
         }
         requestAnimationFrame(raf)
+
+        // GSAP ScrollTrigger + Lenis integration
+        if (typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+        }
     </script>
 </body>
 
