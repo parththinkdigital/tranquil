@@ -13,6 +13,10 @@ Route::get('/about', [\App\Http\Controllers\PageController::class, 'about'])->na
 Route::get('/contact', [\App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
 Route::post('/contact', [\App\Http\Controllers\PageController::class, 'submitContact'])->name('pages.contact.submit');
 
+// Blog routes (frontend only - controller pending)
+Route::get('/journal', fn() => view('client.blogs.index'))->name('blogs.index');
+Route::get('/journal/{slug}', fn($slug) => view('client.blogs.show'))->name('blogs.show');
+
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     Route::get('/dashboard', function () {
 //         return view('dashboard');

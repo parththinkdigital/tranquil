@@ -4,7 +4,7 @@
         
         <div class="hidden md:flex gap-8 items-center font-medium">
             <a href="{{ route('properties.index') }}" class="hover:text-primary transition-colors">Listings</a>
-            <a href="#" class="hover:text-primary transition-colors">Blog</a>
+            <a href="{{ route('blogs.index') }}" class="hover:text-primary transition-colors">Blog</a>
             <a href="{{ route('pages.about') }}" class="hover:text-primary transition-colors">About</a>
             <a href="{{ route('pages.contact') }}" class="hover:text-primary transition-colors">Contact</a>
         </div>

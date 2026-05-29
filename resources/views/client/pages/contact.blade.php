@@ -1,4 +1,9 @@
 @extends('layouts.client')
+
+@section('meta_title', 'Contact Us - Get in Touch with Tranquil | Luxury Real Estate')
+@section('meta_description', 'Reach out to the Tranquil team. Whether you\'re buying, selling, or exploring — we\'d love to hear from you.')
+@section('canonical_url', route('pages.contact'))
+
 @section('content')
 <section class="pt-40 pb-20 bg-background min-h-screen">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">

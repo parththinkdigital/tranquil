@@ -1,5 +1,9 @@
 @extends('layouts.client')
 
+@section('meta_title', 'About Us - The Story Behind Tranquil | Luxury Real Estate')
+@section('meta_description', 'Discover the ethos behind Tranquil — a premium platform dedicated to curating the finest luxury real estate, architecture, and design stories.')
+@section('canonical_url', route('pages.about'))
+
 @section('content')
 <section class="pt-40 pb-20">
     <div class="max-w-7xl mx-auto px-6">

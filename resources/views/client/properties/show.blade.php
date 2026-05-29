@@ -1,5 +1,9 @@
 @extends('layouts.client')
 
+@section('meta_title', ($property->title ?? 'Property Details') . ' - Tranquil')
+@section('meta_description', 'Explore ' . ($property->title ?? 'this luxury property') . ' — ' . ($property->excerpt ?? 'premium real estate listing by Tranquil.'))
+@section('og_type', 'article')
+
 @section('content')
 <section class="pt-40 pb-20">
     <div class="max-w-7xl mx-auto px-6">

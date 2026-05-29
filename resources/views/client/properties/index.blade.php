@@ -1,5 +1,9 @@
 @extends('layouts.client')
 
+@section('meta_title', 'Property Listings - Explore Premium Real Estate | Tranquil')
+@section('meta_description', 'Browse our curated collection of luxury properties across Mumbai. From oceanfront villas to modern city apartments — find your dream home.')
+@section('canonical_url', route('properties.index'))
+
 @section('content')
 <section class="pt-40 pb-20 bg-teal-50/30">
     <div class="max-w-7xl mx-auto px-6">
