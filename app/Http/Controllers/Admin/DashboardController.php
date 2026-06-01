@@ -19,7 +19,7 @@ class DashboardController extends Controller
             'total_leads' => \App\Models\Lead::count(),
         ];
 
-        $recent_properties = \App\Models\Property::with(['category', 'location'])
+        $recent_properties = \App\Models\PropertyDetail::with(['property', 'propertyType'])
             ->latest()
             ->take(5)
             ->get();

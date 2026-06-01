@@ -84,18 +84,22 @@
             @forelse($recent_properties ?? [] as $property)
             <div class="flex items-center gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-all border border-transparent hover:border-slate-100">
                 <div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm flex-shrink-0 bg-slate-100">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                    @if($property->cover_image)
+                        <img src="{{ asset($property->cover_image) }}" class="w-full h-full object-cover">
+                    @else
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover">
+                    @endif
                 </div>
                 <div class="flex-1 min-w-0">
-                    <p class="text-[10px] uppercase tracking-widest font-bold text-teal-600 mb-1 truncate">{{ $property->category?->name ?? 'Uncategorized' }} &bull; {{ $property->location?->name ?? 'Unknown Location' }}</p>
-                    <h5 class="text-base font-heading font-bold text-slate-800 leading-tight mb-1 truncate">{{ $property->title ?? $property->name ?? 'Untitled' }}</h5>
-                    @if(isset($property->price))
-                    <p class="text-sm font-bold text-slate-400">₹{{ number_format((float)$property->price / 10000000, 2) }} Cr</p>
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-teal-600 mb-1 truncate">{{ $property->property?->name ?? 'Uncategorized' }} &bull; {{ $property->city ?? 'Unknown Location' }}</p>
+                    <h5 class="text-base font-heading font-bold text-slate-800 leading-tight mb-1 truncate">{{ $property->project_name ?? 'Untitled' }}</h5>
+                    @if(isset($property->total_price))
+                    <p class="text-sm font-bold text-slate-400">₹{{ $property->total_price }}</p>
                     @endif
                 </div>
                 <div class="text-right flex-shrink-0">
-                    <div class="bg-{{ ($property->status ?? '') == 'published' ? 'green' : 'amber' }}-50 text-{{ ($property->status ?? '') == 'published' ? 'green' : 'amber' }}-600 border border-{{ ($property->status ?? '') == 'published' ? 'green' : 'amber' }}-100 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest mb-2 inline-block">
-                        {{ $property->status ?? 'Draft' }}
+                    <div class="bg-{{ strtolower($property->property_status ?? '') == 'ready to move' ? 'green' : 'amber' }}-50 text-{{ strtolower($property->property_status ?? '') == 'ready to move' ? 'green' : 'amber' }}-600 border border-{{ strtolower($property->property_status ?? '') == 'ready to move' ? 'green' : 'amber' }}-100 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest mb-2 inline-block">
+                        {{ $property->property_status ?? 'Draft' }}
                     </div>
                     @if($property->created_at)
                     <p class="text-[10px] text-slate-400 font-bold uppercase block">{{ $property->created_at->diffForHumans() }}</p>
