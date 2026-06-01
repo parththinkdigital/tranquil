@@ -47,6 +47,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('property-type', \App\Http\Controllers\Admin\PropertyTypeController::class);
         Route::get('property-details/get-property-types/{property}', [\App\Http\Controllers\Admin\PropertyDetailController::class, 'getPropertyTypes'])->name('property-details.get-types');
         Route::resource('property-details', \App\Http\Controllers\Admin\PropertyDetailController::class);
+        Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class);
     });
 });
 

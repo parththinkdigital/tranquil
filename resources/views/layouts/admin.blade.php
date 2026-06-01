@@ -8,6 +8,7 @@
     <title>Admin Dashboard - Tranquil</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-teal-50/30 flex h-screen overflow-hidden font-body">
@@ -22,5 +23,7 @@
     <script>
         lucide.createIcons();
     </script>
+    @stack('scripts')
 </body>
+
 </html>
