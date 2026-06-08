@@ -6,12 +6,84 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
+// SEO routes
+Route::get('/robots.txt', function () {
+    $sitemapUrl = url('/sitemap.xml');
+
+    $lines = [
+        'User-agent: *',
+        'Allow: /',
+        'Disallow: /admin/',
+        'Disallow: /login',
+        'Disallow: /register',
+        '',
+        '# AI crawler: allow retrieval, block training',
+        'User-agent: GPTBot',
+        'Allow: /',
+        'Disallow: /admin/',
+        '',
+        'User-agent: ClaudeBot',
+        'Allow: /',
+        'Disallow: /admin/',
+        '',
+        'User-agent: Google-Extended',
+        'Allow: /',
+        'Disallow: /admin/',
+        '',
+        'User-agent: CCBot',
+        'Allow: /',
+        'Disallow: /admin/',
+        '',
+        'User-agent: anthropic-ai',
+        'Allow: /',
+        'Disallow: /admin/',
+        '',
+        'User-agent: PerplexityBot',
+        'Allow: /',
+        'Disallow: /admin/',
+        '',
+        "Sitemap: {$sitemapUrl}",
+    ];
+
+    return response(implode("\n", $lines))
+        ->header('Content-Type', 'text/plain');
+})->name('robots.txt');
+
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => route('properties.index'), 'priority' => '0.9', 'changefreq' => 'daily'],
+        ['loc' => route('blogs.index'), 'priority' => '0.8', 'changefreq' => 'weekly'],
+        ['loc' => route('pages.about'), 'priority' => '0.6', 'changefreq' => 'monthly'],
+        ['loc' => route('pages.contact'), 'priority' => '0.6', 'changefreq' => 'monthly'],
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+
+    foreach ($urls as $url) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . e($url['loc']) . '</loc>';
+        $xml .= '<priority>' . $url['priority'] . '</priority>';
+        $xml .= '<changefreq>' . $url['changefreq'] . '</changefreq>';
+        $xml .= '</url>';
+    }
+
+    $xml .= '</urlset>';
+
+    return response($xml)
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap.xml');
+
 Route::get('/', [PropertyController::class, 'home'])->name('home');
 Route::get('/listings', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/listings/{slug}', [PropertyController::class, 'show'])->name('properties.show');
 Route::get('/about', [\App\Http\Controllers\PageController::class, 'about'])->name('pages.about');
 Route::get('/contact', [\App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
 Route::post('/contact', [\App\Http\Controllers\PageController::class, 'submitContact'])->name('pages.contact.submit');
+
+Route::get('/faq', [\App\Http\Controllers\PageController::class, 'faq'])->name('pages.faq');
+Route::get('/sell', [\App\Http\Controllers\PageController::class, 'sell'])->name('pages.sell');
 
 // Blog routes (frontend only - controller pending)
 Route::get('/journal', fn() => view('client.blogs.index'))->name('blogs.index');

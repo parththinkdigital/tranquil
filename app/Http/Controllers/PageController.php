@@ -11,6 +11,20 @@ class PageController extends Controller
         return view('client.pages.about');
     }
 
+    public function faq()
+    {
+        return view('client.pages.faq');
+    }
+
+    public function sell()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $captcha = substr(str_shuffle($characters), 0, 6);
+        session(['captcha_code' => $captcha]);
+
+        return view('client.pages.sell', compact('captcha'));
+    }
+
     public function contact()
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

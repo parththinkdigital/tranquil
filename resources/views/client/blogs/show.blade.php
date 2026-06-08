@@ -43,6 +43,49 @@ $related = [
 @section('meta_title', $article['title'] . ' - Tranquil Journal')
 @section('meta_description', $article['excerpt'])
 @section('og_type', 'article')
+@section('og_image', $article['img'])
+
+{{-- JSON-LD Article + BreadcrumbList --}}
+@section('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Journal', 'item' => route('blogs.index')],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $article['title'], 'item' => url()->current()],
+    ],
+]) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Article',
+    'headline' => $article['title'],
+    'description' => $article['excerpt'],
+    'image' => $article['img'],
+    'datePublished' => '2026-05-25',
+    'dateModified' => '2026-05-25',
+    'author' => [
+        '@type' => 'Person',
+        'name' => $article['author']['name'],
+    ],
+    'publisher' => [
+        '@type' => 'Organization',
+        'name' => 'Tranquil',
+        'logo' => [
+            '@type' => 'ImageObject',
+            'url' => asset('images/og-default.jpg'),
+        ],
+    ],
+    'mainEntityOfPage' => [
+        '@type' => 'WebPage',
+        '@id' => url()->current(),
+    ],
+]) !!}
+</script>
+@endsection
 
 @section('content')
 

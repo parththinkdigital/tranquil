@@ -4,6 +4,32 @@
 @section('meta_description', 'Discover the ethos behind Tranquil — a premium platform dedicated to curating the finest luxury real estate, architecture, and design stories.')
 @section('canonical_url', route('pages.about'))
 
+{{-- JSON-LD LocalBusiness --}}
+@section('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'RealEstateAgent',
+    'name' => 'Tranquil',
+    'description' => 'Premium luxury real estate platform dedicated to curating the finest properties, architecture, and design stories.',
+    'url' => url('/'),
+    'telephone' => '+91-22-4567-8901',
+    'email' => 'concierge@tranquil.com',
+    'address' => [
+        '@type' => 'PostalAddress',
+        'streetAddress' => 'Nariman Point',
+        'addressLocality' => 'Mumbai',
+        'addressRegion' => 'Maharashtra',
+        'postalCode' => '400021',
+        'addressCountry' => 'IN',
+    ],
+    'openingHours' => 'Mo-Sa 09:00-18:00',
+    'areaServed' => 'Mumbai, India',
+    'priceRange' => '₹1Cr+',
+]) !!}
+</script>
+@endsection
+
 @section('content')
 <section class="pt-40 pb-20">
     <div class="max-w-7xl mx-auto px-6">

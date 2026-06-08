@@ -3,17 +3,49 @@
 @section('meta_title', ($property->title ?? 'Property Details') . ' - Tranquil')
 @section('meta_description', 'Explore ' . ($property->title ?? 'this luxury property') . ' — ' . ($property->excerpt ?? 'premium real estate listing by Tranquil.'))
 @section('og_type', 'article')
+@section('og_image', $property->cover_image ?? asset('images/og-default.jpg'))
+
+{{-- JSON-LD BreadcrumbList + RealEstateListing --}}
+@section('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Listings', 'item' => route('properties.index')],
+        ['@type' => 'ListItem', 'position' => 3, 'name' => $property->title ?? 'Property', 'item' => url()->current()],
+    ],
+]) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => $property->title ?? 'Luxury Property',
+    'description' => $property->excerpt ?? ($property->description ?? 'Premium luxury property listing'),
+    'image' => $property->cover_image ?? asset('images/og-default.jpg'),
+    'url' => url()->current(),
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => $property->price ?? '0',
+        'priceCurrency' => 'INR',
+        'availability' => 'https://schema.org/InStock',
+    ],
+]) !!}
+</script>
+@endsection
 
 @section('content')
 <section class="pt-40 pb-20">
     <div class="max-w-7xl mx-auto px-6">
         <!-- Breadcrumb -->
-        <nav class="flex text-[10px] uppercase tracking-widest font-bold text-primary/40 mb-12 gap-2">
+        <nav class="flex text-[10px] uppercase tracking-widest font-bold text-primary/40 mb-12 gap-2" aria-label="Breadcrumb">
             <a href="/" class="hover:text-secondary">Home</a>
             <span>/</span>
             <a href="{{ route('properties.index') }}" class="hover:text-secondary">Listings</a>
             <span>/</span>
-            <span class="text-primary">{{ $property->title }}</span>
+            <span class="text-primary" aria-current="page">{{ $property->title }}</span>
         </nav>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-20">

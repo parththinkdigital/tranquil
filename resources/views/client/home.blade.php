@@ -4,6 +4,37 @@
 @section('meta_description', 'Discover premium luxury real estate with Tranquil. Explore exclusive properties, architecture stories, and market insights across Mumbai and India.')
 @section('canonical_url', route('home'))
 
+{{-- JSON-LD AggregateRating + BreadcrumbList --}}
+@section('schema')
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+    ],
+]) !!}
+</script>
+<script type="application/ld+json">
+{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => 'Tranquil Real Estate Services',
+    'aggregateRating' => [
+        '@type' => 'AggregateRating',
+        'ratingValue' => '4.6',
+        'reviewCount' => '40000000',
+        'bestRating' => '5',
+    ],
+    'offers' => [
+        '@type' => 'AggregateOffer',
+        'offerCount' => '500',
+        'availability' => 'https://schema.org/InStock',
+    ],
+]) !!}
+</script>
+@endsection
+
 @section('content')
 
 {{-- ═══════════════════════════════════════════════════════════════
@@ -155,28 +186,19 @@
                 </p>
             </div>
 
-            {{-- Avatar stack + Stats --}}
-            <div>
-                <div class="flex -space-x-3 mb-6">
-                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=10" alt="Happy buyer" class="w-full h-full object-cover"></div>
-                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=11" alt="Happy buyer" class="w-full h-full object-cover"></div>
-                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=12" alt="Happy buyer" class="w-full h-full object-cover"></div>
-                    <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden"><img src="https://i.pravatar.cc/80?img=13" alt="Happy buyer" class="w-full h-full object-cover"></div>
+            {{-- Stats --}}
+            <div class="flex gap-12">
+                <div>
+                    <h4 class="text-3xl font-heading font-bold text-primary leading-none">100M</h4>
+                    <p class="text-[11px] text-text-main/40 mt-1.5">Happy buyers</p>
                 </div>
-
-                <div class="flex gap-12">
-                    <div>
-                        <h4 class="text-3xl font-heading font-bold text-primary leading-none">100M</h4>
-                        <p class="text-[11px] text-text-main/40 mt-1.5">Happy buyers</p>
-                    </div>
-                    <div>
-                        <h4 class="text-3xl font-heading font-bold text-primary leading-none">40M</h4>
-                        <p class="text-[11px] text-text-main/40 mt-1.5">Client reviews</p>
-                    </div>
-                    <div>
-                        <h4 class="text-3xl font-heading font-bold text-primary leading-none">4.6</h4>
-                        <p class="text-[11px] text-text-main/40 mt-1.5">Positive rating</p>
-                    </div>
+                <div>
+                    <h4 class="text-3xl font-heading font-bold text-primary leading-none">40M</h4>
+                    <p class="text-[11px] text-text-main/40 mt-1.5">Client reviews</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-heading font-bold text-primary leading-none">4.6</h4>
+                    <p class="text-[11px] text-text-main/40 mt-1.5">Positive rating</p>
                 </div>
             </div>
         </div>
@@ -264,7 +286,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            <a href="{{ route('properties.index') }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+            <a href="{{ route('properties.index', ['keyword' => 'Garden Terrace']) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
                 <div class="relative h-52 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1560185127-6f5fd2a02e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -290,7 +312,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('properties.index') }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+            <a href="{{ route('properties.index', ['keyword' => 'Oceanview Penthouse']) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
                 <div class="relative h-52 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -316,7 +338,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('properties.index') }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+            <a href="{{ route('properties.index', ['keyword' => 'Skyline Residence']) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
                 <div class="relative h-52 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1494527145368-48b2450bace5?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -347,48 +369,48 @@
 
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 5 — POPULAR LOCATIONS
+     SECTION 4 — POPULAR LOCATIONS (Nashik)
      ═══════════════════════════════════════════════════════════════ --}}
 <section id="locations" class="py-24 md:py-32 bg-background">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
         <div class="text-center mb-14">
-            <p class="text-[11px] uppercase tracking-[.3em] font-semibold text-secondary mb-3">Explore Areas</p>
+            <p class="text-[11px] uppercase tracking-[.3em] font-semibold text-secondary mb-3">Prime Areas</p>
             <h2 class="font-heading font-light text-primary" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -0.03em; line-height: 1.1;">
-                Popular <strong class="font-bold">Locations</strong>
+                Explore <strong class="font-bold">Nashik</strong>
             </h2>
         </div>
 
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
-                <img src="https://images.unsplash.com/photo-1570168007204-dfb528c6958f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Juhu">
+            <a href="{{ route('properties.index', ['keyword' => 'Gangapur Road']) }}" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Gangapur Road">
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
                 <div class="absolute bottom-5 left-5">
-                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Juhu</h3>
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Gangapur Road</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 18+ Properties</p>
+                </div>
+            </a>
+            <a href="{{ route('properties.index', ['keyword' => 'Trimbakeshwar Road']) }}" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Trimbakeshwar Road">
+                <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
+                <div class="absolute bottom-5 left-5">
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Trimbakeshwar Rd</h3>
                     <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 12+ Properties</p>
                 </div>
             </a>
-            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
-                <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e13?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Worli">
+            <a href="{{ route('properties.index', ['keyword' => 'Panchavati']) }}" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Panchavati">
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
                 <div class="absolute bottom-5 left-5">
-                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Worli</h3>
-                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 28+ Properties</p>
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Panchavati</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 15+ Properties</p>
                 </div>
             </a>
-            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
-                <img src="https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Andheri">
+            <a href="{{ route('properties.index', ['keyword' => 'College Road']) }}" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
+                <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="College Road">
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
                 <div class="absolute bottom-5 left-5">
-                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Andheri</h3>
-                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 19+ Properties</p>
-                </div>
-            </a>
-            <a href="#" class="group relative h-60 md:h-72 rounded-3xl overflow-hidden shadow-sm cursor-pointer block">
-                <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Powai">
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-primary/10 to-transparent"></div>
-                <div class="absolute bottom-5 left-5">
-                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">Powai</h3>
-                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 35+ Properties</p>
+                    <h3 class="text-lg md:text-xl font-heading font-bold text-white">College Road</h3>
+                    <p class="text-[11px] text-white/50 mt-1 flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> 22+ Properties</p>
                 </div>
             </a>
         </div>
@@ -397,293 +419,74 @@
 
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 6 — WHY CHOOSE US (GSAP Animated - Premium Layout)
+     SECTION 5 — WHY CHOOSE US
      ═══════════════════════════════════════════════════════════════ --}}
-<section id="why-us" class="py-24 md:py-32 bg-[#F9F8F3] relative overflow-hidden">
-    <div class="absolute -top-60 -right-60 w-[700px] h-[700px] bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-    
+<section id="why-us" class="py-20 md:py-28 bg-[#F9F8F3] relative overflow-hidden">
+    <div class="absolute top-1/3 -right-48 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 left-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+
     <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
-        {{-- HEADLINE BLOCK — Mixed typography + inline images --}}
-        <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-16 md:mb-20" data-gsap="headline">
-            <span class="font-heading font-bold text-primary" style="font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1;">Where</span>
-            <span class="font-heading italic text-secondary" style="font-size: clamp(2.8rem, 5.5vw, 4.5rem); letter-spacing: -0.02em; line-height: 1; transform: translateY(-4px);" data-gsap="script-text">Your</span>
-            <span class="inline-block w-28 md:w-40 h-12 md:h-14 lg:h-16 rounded-full overflow-hidden flex-shrink-0 shadow-lg border-2 border-white/60" data-gsap="pill-img">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" class="w-full h-full object-cover" alt="Luxury villa at dusk">
-            </span>
-            <span class="inline-block w-12 md:w-14 lg:w-16 h-12 md:h-14 lg:h-16 rounded-full overflow-hidden flex-shrink-0 shadow-lg border-2 border-white/60" data-gsap="circle-img">
-                <img src="https://images.unsplash.com/photo-1570129477492-45c003d96a00?w=300&q=80" class="w-full h-full object-cover" alt="Modern high-rise">
-            </span>
-            <div class="w-full font-heading font-bold text-primary mt-2" style="font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; line-height: 1.1;">
-                dream home <span class="italic text-secondary font-bold">awaits</span>
-            </div>
-        </div>
-
-        {{-- BOTTOM GRID — Two columns --}}
-        <div class="grid lg:grid-cols-[1fr_2.5fr] gap-10 lg:gap-16">
-
-            {{-- LEFT COLUMN — Avatars, content, stats, CTA --}}
-            <div data-gsap="left-col">
-                {{-- Avatar stack --}}
-                <div class="flex -space-x-3 mb-6" data-gsap="avatars">
-                    <div class="w-12 h-12 rounded-full border-2 border-[#F9F8F3] shadow-md overflow-hidden">
-                        <img src="https://i.pravatar.cc/80?img=10" alt="Happy client" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-12 h-12 rounded-full border-2 border-[#F9F8F3] shadow-md overflow-hidden">
-                        <img src="https://i.pravatar.cc/80?img=11" alt="Happy client" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-12 h-12 rounded-full border-2 border-[#F9F8F3] shadow-md overflow-hidden">
-                        <img src="https://i.pravatar.cc/80?img=12" alt="Happy client" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-12 h-12 rounded-full border-2 border-[#F9F8F3] shadow-md overflow-hidden">
-                        <img src="https://i.pravatar.cc/80?img=13" alt="Happy client" class="w-full h-full object-cover">
-                    </div>
-                </div>
-
-                {{-- Section label --}}
-                <p data-gsap="label" class="text-[11px] uppercase tracking-[.3em] font-semibold text-secondary mb-3">Why Tranquil</p>
-                
-                {{-- Heading --}}
-                <h2 data-gsap="heading" class="font-heading font-light text-primary mb-4"
-                    style="font-size: clamp(1.8rem, 3.5vw, 2.5rem); letter-spacing: -0.04em; line-height: 1.1;">
-                    Expertise that<br><strong class="font-bold"><em class="italic text-secondary">tranquillizes.</em></strong>
-                </h2>
-                
-                {{-- Description --}}
-                <p data-gsap="desc" class="text-sm text-text-main/50 leading-relaxed mb-8 max-w-sm">
-                    We believe finding a home should be as serene as living in one. Our curated portfolio and dedicated agent support ensure a seamless transition to your architectural sanctuary.
-                </p>
-
-                {{-- Stats grid (2×2) --}}
-                <div data-gsap="stats" class="grid grid-cols-2 gap-x-6 gap-y-7 mb-8">
-                    <div data-gsap="stat" class="relative">
-                        <h4 class="text-3xl md:text-4xl font-heading font-bold text-secondary leading-none mb-1">
-                            <span data-count="500" data-suffix="+">0</span>
-                        </h4>
-                        <p class="text-[10px] uppercase tracking-widest text-primary/30 font-semibold">Properties Sold</p>
-                        <div class="absolute -bottom-2 left-0 h-0.5 bg-secondary/20 rounded-full w-0" data-gsap="stat-bar"></div>
-                    </div>
-                    <div data-gsap="stat" class="relative">
-                        <h4 class="text-3xl md:text-4xl font-heading font-bold text-secondary leading-none mb-1">
-                            <span data-count="98" data-suffix="%">0</span>
-                        </h4>
-                        <p class="text-[10px] uppercase tracking-widest text-primary/30 font-semibold">Satisfaction</p>
-                        <div class="absolute -bottom-2 left-0 h-0.5 bg-secondary/20 rounded-full w-0" data-gsap="stat-bar"></div>
-                    </div>
-                    <div data-gsap="stat" class="relative">
-                        <h4 class="text-3xl md:text-4xl font-heading font-bold text-secondary leading-none mb-1">
-                            <span data-count="24" data-suffix="/7">0</span>
-                        </h4>
-                        <p class="text-[10px] uppercase tracking-widest text-primary/30 font-semibold">Agent Support</p>
-                        <div class="absolute -bottom-2 left-0 h-0.5 bg-secondary/20 rounded-full w-0" data-gsap="stat-bar"></div>
-                    </div>
-                    <div data-gsap="stat" class="relative">
-                        <h4 class="text-3xl md:text-4xl font-heading font-bold text-secondary leading-none mb-1">
-                            <span data-count="0" data-suffix="%">0</span>
-                        </h4>
-                        <p class="text-[10px] uppercase tracking-widest text-primary/30 font-semibold">Hidden Fees</p>
-                        <div class="absolute -bottom-2 left-0 h-0.5 bg-secondary/20 rounded-full w-0" data-gsap="stat-bar"></div>
-                    </div>
-                </div>
-
-                {{-- CTA Button --}}
-                <a href="{{ route('pages.contact') }}" data-gsap="cta"
-                   class="inline-block bg-[#0C1E17] text-white px-8 py-4 rounded-full font-bold text-xs tracking-widest uppercase hover:bg-primary transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
-                    Contact Us Now
-                </a>
-            </div>
-
-            {{-- RIGHT COLUMN — Property Slider --}}
-            <div class="relative" data-gsap="slider">
-                {{-- Navigation arrows --}}
-                <div class="flex justify-end gap-3 mb-5">
-                    <button id="slider-prev" class="w-11 h-11 rounded-full border-2 border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 cursor-pointer flex-shrink-0" aria-label="Previous property">
-                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    </button>
-                    <button id="slider-next" class="w-11 h-11 rounded-full border-2 border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 cursor-pointer flex-shrink-0" aria-label="Next property">
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
-                </div>
-
-                {{-- Slider track --}}
-                <div class="overflow-hidden rounded-[24px] relative bg-white shadow-xl">
-                    <div class="flex" id="slider-track">
-                        {{-- Slide 1 --}}
-                        <div class="flex-shrink-0 w-full">
-                            <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80" 
-                                 class="w-full h-72 md:h-96 object-cover" 
-                                 alt="Mountain luxury villa">
-                            <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3 shadow-lg">
-                                <p class="font-heading font-bold text-primary text-sm">Mountain Retreat</p>
-                                <p class="text-[10px] text-primary/40">Bandra West • 5BHK Villa</p>
-                            </div>
-                        </div>
-                        {{-- Slide 2 --}}
-                        <div class="flex-shrink-0 w-[85%]">
-                            <img src="https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=900&q=80" 
-                                 class="w-full h-72 md:h-96 object-cover" 
-                                 alt="Cliffside ocean villa">
-                            <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3 shadow-lg">
-                                <p class="font-heading font-bold text-primary text-sm">Oceanview Estate</p>
-                                <p class="text-[10px] text-primary/40">Juhu • 4BHK Penthouse</p>
-                            </div>
-                        </div>
-                        {{-- Slide 3 --}}
-                        <div class="flex-shrink-0 w-[85%]">
-                            <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=900&q=80" 
-                                 class="w-full h-72 md:h-96 object-cover" 
-                                 alt="Modern architectural home">
-                            <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3 shadow-lg">
-                                <p class="font-heading font-bold text-primary text-sm">Skyline Residence</p>
-                                <p class="text-[10px] text-primary/40">BKC • 3BHK Apartment</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Slide indicators --}}
-                    <div class="absolute bottom-6 right-6 flex gap-2" id="slider-indicators">
-                        <span class="w-3 h-3 rounded-full bg-white/90 border border-white/60"></span>
-                        <span class="w-3 h-3 rounded-full bg-white/40 border border-white/60"></span>
-                        <span class="w-3 h-3 rounded-full bg-white/40 border border-white/60"></span>
-                    </div>
-                </div>
-
-                {{-- Peek effect hint --}}
-                <div class="absolute -right-4 top-20 bottom-20 w-20 bg-gradient-to-l from-white/20 to-transparent rounded-r-[24px] pointer-events-none hidden lg:block"></div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-{{-- ═══════════════════════════════════════════════════════════════
-     SECTION 7 — LATEST PROPERTIES
-     ═══════════════════════════════════════════════════════════════ --}}
-<section id="latest" class="py-24 md:py-32 bg-background">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-5">
-            <div>
-                <p class="text-[11px] uppercase tracking-[.3em] font-semibold text-secondary mb-3">Just Added</p>
-                <h2 class="font-heading font-light text-primary" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -0.03em; line-height: 1.1;">
-                    Latest <strong class="font-bold">Arrivals</strong>
-                </h2>
-            </div>
-            <div class="flex gap-2">
-                <button class="px-5 py-2 rounded-full bg-primary text-white text-sm font-semibold cursor-pointer">For Sale</button>
-                <button class="px-5 py-2 rounded-full border border-gray-200 text-primary/40 text-sm font-semibold hover:border-primary hover:text-primary transition-all duration-200 cursor-pointer">For Rent</button>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            <a href="{{ route('properties.index') }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
-                <div class="relative h-52 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1560185127-6f5fd2a02e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                         alt="Garden Terrace Residence">
-                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
-                        For Sale
-                    </span>
-                </div>
-                <div class="p-6">
-                    <span class="text-[11px] text-text-main/35 flex items-center gap-1 mb-2"><i data-lucide="map-pin" class="w-3 h-3"></i> Bandra West &bull; Villa</span>
-                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Garden Terrace Residence</h3>
-                    <div class="flex gap-4 text-[11px] text-text-main/35 mb-4">
-                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 5</span>
-                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 5</span>
-                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 5,400 sqft</span>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-                        <span class="font-heading font-bold text-primary">₹23.50 Cr</span>
-                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-                            View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="{{ route('properties.index') }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
-                <div class="relative h-52 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                         alt="Oceanview Penthouse">
-                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
-                        For Sale
-                    </span>
-                </div>
-                <div class="p-6">
-                    <span class="text-[11px] text-text-main/35 flex items-center gap-1 mb-2"><i data-lucide="map-pin" class="w-3 h-3"></i> Juhu &bull; Penthouse</span>
-                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Oceanview Penthouse</h3>
-                    <div class="flex gap-4 text-[11px] text-text-main/35 mb-4">
-                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 4</span>
-                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 4</span>
-                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 3,700 sqft</span>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-                        <span class="font-heading font-bold text-primary">₹15.75 Cr</span>
-                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-                            View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="{{ route('properties.index') }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
-                <div class="relative h-52 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1494527145368-48b2450bace5?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                         alt="Skyline Residence">
-                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-primary">
-                        For Rent
-                    </span>
-                </div>
-                <div class="p-6">
-                    <span class="text-[11px] text-text-main/35 flex items-center gap-1 mb-2"><i data-lucide="map-pin" class="w-3 h-3"></i> Bandra Kurla Complex &bull; Apartment</span>
-                    <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200">Skyline Residence</h3>
-                    <div class="flex gap-4 text-[11px] text-text-main/35 mb-4">
-                        <span class="flex items-center gap-1"><i data-lucide="bed" class="w-3 h-3"></i> 3</span>
-                        <span class="flex items-center gap-1"><i data-lucide="bath" class="w-3 h-3"></i> 3</span>
-                        <span class="flex items-center gap-1"><i data-lucide="maximize" class="w-3 h-3"></i> 2,800 sqft</span>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-50">
-                        <span class="font-heading font-bold text-primary">₹6.90 Cr</span>
-                        <span class="text-secondary text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-                            View <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-
-<!-- {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 8 — MAP
-     ═══════════════════════════════════════════════════════════════ --}}
-<section id="map" class="py-24 md:py-32 bg-white">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
-        <div class="text-center mb-14">
-            <p class="text-[11px] uppercase tracking-[.3em] font-semibold text-secondary mb-3">Locate</p>
-            <h2 class="font-heading font-light text-primary" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); letter-spacing: -0.03em; line-height: 1.1;">
-                Find on <strong class="font-bold">Map</strong>
+        <div class="mb-12 md:mb-14 text-center lg:text-left" data-gsap="headline">
+            <p class="text-[10px] uppercase tracking-[.3em] font-semibold text-secondary mb-3">Why Tranquil</p>
+            <h2 class="font-heading font-bold text-primary leading-tight"
+                style="font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -0.04em;">
+                Where <span class="italic text-secondary">Your</span> Dream Home Awaits
             </h2>
         </div>
-        <div class="rounded-3xl overflow-hidden shadow-md border border-gray-100 h-[400px] md:h-[480px] relative">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783912927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
-                    class="w-full h-full border-0" allowfullscreen="" loading="lazy" title="Mumbai Properties Map"></iframe>
-            <div class="absolute top-5 left-5 bg-white/95 backdrop-blur rounded-xl p-4 shadow-md border border-gray-100">
-                <p class="font-heading font-bold text-primary text-sm mb-0.5">Mumbai Metropolitan</p>
-                <p class="text-[10px] text-text-main/35">listings</p>
+
+        <div class="grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 items-stretch">
+
+            {{-- STATS GRID --}}
+            <div data-gsap="left-col">
+                <div class="grid grid-cols-2 gap-4 h-full">
+                    @php $statItems = [
+                        ['count' => '500', 'suffix' => '+', 'label' => 'Properties Sold', 'icon' => 'building', 'desc' => 'Across premium locations in Mumbai & Nashik'],
+                        ['count' => '98', 'suffix' => '%', 'label' => 'Client Satisfaction', 'icon' => 'star', 'desc' => 'From first consultation to final handover'],
+                        ['count' => '24', 'suffix' => '/7', 'label' => 'Dedicated Support', 'icon' => 'headphones', 'desc' => 'Your agent is always a call away'],
+                        ['count' => '0', 'suffix' => '%', 'label' => 'Hidden Fees', 'icon' => 'shield-check', 'desc' => 'Complete transparency in every transaction'],
+                    ]; @endphp
+                    @foreach($statItems as $i => $s)
+                    <div data-gsap="stat"
+                         class="bg-white rounded-2xl p-5 md:p-6 border border-primary/5 hover:border-secondary/20 hover:shadow-lg transition-all duration-300 cursor-default group {{ $i === 0 ? 'row-span-2 flex flex-col justify-center' : '' }}">
+                        <div class="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center mb-3 group-hover:bg-secondary/15 transition-colors duration-300">
+                            <i data-lucide="{{ $s['icon'] }}" class="w-4 h-4 text-secondary"></i>
+                        </div>
+                        <h4 class="text-2xl md:text-3xl font-heading font-bold text-secondary leading-none mb-1">
+                            <span data-count="{{ $s['count'] }}" data-suffix="{{ $s['suffix'] }}">0</span>
+                        </h4>
+                        <p class="text-[10px] uppercase tracking-widest text-primary/40 font-semibold mb-1">{{ $s['label'] }}</p>
+                        @if($i === 0)
+                        <p class="text-xs text-primary/30 leading-relaxed mt-1 max-w-xs">{{ $s['desc'] }}</p>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
             </div>
+
+            {{-- RIGHT — CINEMATIC CARD --}}
+            <div class="relative flex flex-col gap-4" data-gsap="slider">
+                <div class="relative overflow-hidden rounded-[24px] shadow-xl bg-black flex-1 min-h-[280px]">
+                    <video autoplay muted loop playsinline preload="auto"
+                           class="absolute inset-0 w-full h-full object-cover">
+                        <source src="{{ asset('nashik-cinematic.mp4') }}" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10 pointer-events-none"></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <div class="bg-white/90 backdrop-blur-md rounded-xl px-4 py-3 shadow-lg inline-block">
+                            <p class="font-heading font-bold text-primary text-xs">Discover Nashik</p>
+                            <p class="text-[9px] text-primary/40 mt-0.5">Premium vineyard estates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</section> -->
-
+</section>
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 9 — TESTIMONIALS
+     SECTION 7 — TESTIMONIALS
      ═══════════════════════════════════════════════════════════════ --}}
 <section id="testimonials" class="py-24 md:py-32 bg-primary relative overflow-hidden">
     <div class="absolute -top-40 -right-40 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -719,7 +522,7 @@
 
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 10 — CTA BANNER
+     SECTION 8 — CTA BANNER
      ═══════════════════════════════════════════════════════════════ --}}
 <section id="cta" class="py-24 md:py-32 bg-background">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
@@ -746,7 +549,7 @@
 
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 11 — BLOG
+     SECTION 9 — BLOG
      ═══════════════════════════════════════════════════════════════ --}}
 <section id="blog" class="py-24 md:py-32 bg-white">
     <div class="max-w-7xl mx-auto px-6 md:px-12">
@@ -798,22 +601,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    // Respect reduced motion
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) {
         document.querySelectorAll('[data-gsap]').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
-            el.style.clipPath = 'none';
         });
-        document.querySelectorAll('[data-gsap="stat-bar"]').forEach(el => el.style.width = '100%');
+        document.querySelectorAll('[data-gsap="stat-bar"]').forEach(el => { el.style.transform = 'scaleX(1)'; });
         document.querySelectorAll('[data-count]').forEach(el => {
             el.textContent = el.dataset.count + (el.dataset.suffix || '');
         });
         return;
     }
 
-    // -- Helper: counter animation --
     function animateCounter(el, target, suffix) {
         const obj = { val: 0 };
         gsap.to(obj, {
@@ -827,85 +627,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // -- Build master timeline with ScrollTrigger --
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: '#why-us',
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse',
-        },
-    });
-
-    // 1. Set initial clip-path on image wrappers
-    gsap.set('[data-gsap="img-wrap"]', { clipPath: 'inset(0 0 100% 0)' });
-
-    // 2. Animate clip-path reveal + slight scale entrance
-    tl.to('[data-gsap="img-wrap"]', {
-        clipPath: 'inset(0 0 0% 0)',
-        duration: 1.2,
-        ease: 'power3.out',
-        stagger: 0.2,
-    }, 0);
-
-    // 3. Floating badge slides and fades in
-    tl.fromTo('[data-gsap="badge"]',
-        { x: 40, opacity: 0, scale: 0.9 },
-        { x: 0, opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out' },
-        0.4
-    );
-
-    // 4. Small accent image scales in
-    tl.fromTo('[data-gsap="img-3"]',
-        { scale: 0, opacity: 0, rotate: -15 },
-        { scale: 1, opacity: 1, rotate: 0, duration: 0.7, ease: 'back.out(1.7)' },
-        0.55
-    );
-
-    // 5. Decorative corner subtle entrance
-    tl.fromTo('[data-gsap="deco-corner"]',
-        { opacity: 0, scale: 0.8, rotate: -20 },
-        { opacity: 1, scale: 1, rotate: 0, duration: 0.6, ease: 'power2.out' },
-        0.7
-    );
-
-    // 6. Decorative ring subtle entrance
-    tl.fromTo('[data-gsap="deco-ring"]',
-        { opacity: 0, scale: 0.5 },
-        { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' },
-        0.8
-    );
-
-    // 7. Text content stagger
-    tl.fromTo('[data-gsap="label"]',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
-        0.3
-    ).fromTo('[data-gsap="heading"]',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-        0.45
-    ).fromTo('[data-gsap="desc"]',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
-        0.6
-    );
-
-    // 8. Stat cards stagger
-    tl.fromTo('[data-gsap="stat"]',
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', stagger: 0.15 },
-        0.8
-    );
-
-    // 9. Stat underline bars animate width
-    tl.fromTo('[data-gsap="stat-bar"]',
-        { width: '0%' },
-        { width: '100%', duration: 0.8, ease: 'power2.out', stagger: 0.15 },
-        0.9
-    );
-
-    // 10. Counters trigger when stats enter viewport
     const counterElements = document.querySelectorAll('[data-count]');
     counterElements.forEach(el => {
         const target = parseFloat(el.dataset.count);
@@ -918,27 +639,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // -- Parallax on images --
-    gsap.to('[data-gsap="img-1"]', {
-        y: -30,
-        ease: 'none',
+    const revealItems = (selector, stagger = 0.15) => {
+        const items = document.querySelectorAll(selector);
+        if (!items.length) return;
+        gsap.fromTo(items,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', stagger,
+              scrollTrigger: { trigger: items[0].closest('section'), start: 'top 85%', toggleActions: 'play none none reverse' } }
+        );
+    };
+
+    revealItems('#featured-homes .grid a', 0.12);
+    revealItems('#locations .grid a', 0.1);
+    revealItems('#testimonials .grid > div', 0.12);
+    revealItems('#blog .grid a', 0.12);
+
+    const stl = gsap.timeline({
         scrollTrigger: {
             trigger: '#why-us',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.5,
+            start: 'top 82%',
+            toggleActions: 'play none none reverse',
         },
     });
-    gsap.to('[data-gsap="img-2"]', {
-        y: -20,
-        ease: 'none',
-        scrollTrigger: {
-            trigger: '#why-us',
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.5,
-        },
-    });
+
+    stl.fromTo('[data-gsap="headline"] > *',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', stagger: 0.06 },
+        0
+    ).fromTo('[data-gsap="avatars"] > *',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out', stagger: 0.04 },
+        0.2
+    ).fromTo('[data-gsap="label"]',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+        0.4
+    ).fromTo('[data-gsap="heading"]',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+        0.5
+    ).fromTo('[data-gsap="desc"]',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
+        0.65
+    ).fromTo('[data-gsap="stat"]',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', stagger: 0.1 },
+        0.75
+    ).fromTo('[data-gsap="stat-bar"]',
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.6, ease: 'power2.out', stagger: 0.1, transformOrigin: 'left center' },
+        0.85
+    ).fromTo('[data-gsap="cta"]',
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' },
+        0.9
+    ).fromTo('[data-gsap="slider"]',
+        { x: 40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
+        0.5
+    );
+
+
 });
 </script>
 @endsection

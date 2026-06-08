@@ -3,6 +3,8 @@
 @section('meta_title', 'The Journal - Luxury Real Estate Stories & Insights | Tranquil')
 @section('meta_description', 'Explore the Tranquil Journal — stories, insights, and trends shaping luxury real estate, architecture, design, and fine living.')
 @section('canonical_url', route('blogs.index'))
+@if(request()->page > 1)@section('prev_url', route('blogs.index', ['page' => request()->page - 1]))@endif
+@if(request()->page < $lastPage ?? 1)@section('next_url', route('blogs.index', ['page' => (request()->page ?? 1) + 1]))@endif
 
 @section('content')
 <section class="relative pt-40 pb-20 bg-teal-50/30 overflow-hidden">

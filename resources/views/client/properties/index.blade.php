@@ -3,6 +3,9 @@
 @section('meta_title', 'Property Listings - Explore Premium Real Estate | Tranquil')
 @section('meta_description', 'Browse our curated collection of luxury properties across Mumbai. From oceanfront villas to modern city apartments — find your dream home.')
 @section('canonical_url', route('properties.index'))
+{{-- Pagination SEO: yield prev_url / next_url from controller when pagination is active --}}
+@if(request()->page > 1)@section('prev_url', route('properties.index', ['page' => request()->page - 1]))@endif
+@if(request()->page < $lastPage ?? 1)@section('next_url', route('properties.index', ['page' => (request()->page ?? 1) + 1]))@endif
 
 @section('content')
 <section class="pt-40 pb-20 bg-teal-50/30">

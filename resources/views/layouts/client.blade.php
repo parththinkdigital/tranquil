@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0F766E">
+    <meta name="author" content="Tranquil Real Estate">
+    <meta name="geo.region" content="IN-MH">
+    <meta name="geo.placename" content="Mumbai">
 
     <title>@yield('meta_title', config('app.name', 'Tranquil') . ' - Premium Real Estate')</title>
     <meta name="description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquil. Explore exclusive properties, market insights, and architecture stories.')">
@@ -13,6 +17,12 @@
 
     {{-- Canonical --}}
     <link rel="canonical" href="@yield('canonical_url', url()->current())" />
+    @hasSection('prev_url')<link rel="prev" href="@yield('prev_url')" />@endif
+    @hasSection('next_url')<link rel="next" href="@yield('next_url')" />@endif
+
+    {{-- hreflang --}}
+    <link rel="alternate" href="{{ url('/') }}" hreflang="en" />
+    <link rel="alternate" href="{{ url('/') }}" hreflang="x-default" />
 
     {{-- Open Graph --}}
     <meta property="og:site_name" content="Tranquil" />
@@ -23,29 +33,76 @@
     <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_IN" />
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@tranquilrealty" />
     <meta name="twitter:title" content="@yield('meta_title', config('app.name', 'Tranquil') . ' - Premium Real Estate')" />
     <meta name="twitter:description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquil.')" />
     <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))" />
 
-    {{-- JSON-LD Organization --}}
+    {{-- Preconnect for performance --}}
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://fonts.bunny.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    {{-- Favicon --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
+
+    {{-- JSON-LD WebSite + Organization --}}
+    <script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        'name' => 'Tranquil',
+        'url' => url('/'),
+        'potentialAction' => [
+            '@type' => 'SearchAction',
+            'target' => [
+                '@type' => 'EntryPoint',
+                'urlTemplate' => url('/listings?keyword={search_term_string}'),
+            ],
+            'query-input' => 'required name=search_term_string',
+        ],
+    ]) !!}
+    </script>
     <script type="application/ld+json">
     {!! json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'Organization',
         'name' => 'Tranquil',
         'url' => url('/'),
+        'logo' => asset('images/og-default.jpg'),
         'description' => 'Premium luxury real estate platform.',
         'foundingDate' => '2026',
+        'contactPoint' => [
+            '@type' => 'ContactPoint',
+            'telephone' => '+91-22-1234-5678',
+            'contactType' => 'customer service',
+            'email' => 'hello@tranquil.in',
+            'availableLanguage' => ['en'],
+        ],
+        'sameAs' => [
+            'https://instagram.com/tranquilrealty',
+            'https://twitter.com/tranquilrealty',
+            'https://linkedin.com/company/tranquilrealty',
+        ],
     ]) !!}
     </script>
 
+    {{-- Per-page JSON-LD --}}
+    @yield('schema')
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
 
 <body class="antialiased">
@@ -57,29 +114,33 @@
     @yield('script')
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <script>
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
 
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
-        })
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+                infinite: false,
+            })
 
-        function raf(time) {
-            lenis.raf(time)
+            function raf(time) {
+                lenis.raf(time)
+                requestAnimationFrame(raf)
+            }
             requestAnimationFrame(raf)
-        }
-        requestAnimationFrame(raf)
 
-        if (typeof ScrollTrigger !== 'undefined') {
-            lenis.on('scroll', ScrollTrigger.update);
-        }
+            if (typeof ScrollTrigger !== 'undefined') {
+                lenis.on('scroll', ScrollTrigger.update);
+            }
+        });
     </script>
 </body>
 
