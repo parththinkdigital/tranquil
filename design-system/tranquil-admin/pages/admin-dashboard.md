@@ -1,6 +1,6 @@
 # Admin Dashboard Page Overrides
 
-> **PROJECT:** Tranquil Admin
+> **PROJECT:** Tranquilstead Admin
 > **Generated:** 2026-05-13 22:25:49
 > **Page Type:** Dashboard / Data View
 

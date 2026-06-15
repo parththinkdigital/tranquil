@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
-@section('meta_title', 'About Us - The Story Behind Tranquil | Luxury Real Estate')
-@section('meta_description', 'Discover the ethos behind Tranquil — a premium platform dedicated to curating the finest luxury real estate, architecture, and design stories.')
+@section('meta_title', 'About Us - The Story Behind Tranquilstead | Luxury Real Estate')
+@section('meta_description', 'Discover the ethos behind Tranquilstead — a premium platform dedicated to curating the finest luxury real estate, architecture, and design stories.')
 @section('canonical_url', route('pages.about'))
 
 {{-- JSON-LD LocalBusiness --}}
@@ -10,11 +10,11 @@
 {!! json_encode([
     '@context' => 'https://schema.org',
     '@type' => 'RealEstateAgent',
-    'name' => 'Tranquil',
+    'name' => 'Tranquilstead',
     'description' => 'Premium luxury real estate platform dedicated to curating the finest properties, architecture, and design stories.',
     'url' => url('/'),
     'telephone' => '+91-22-4567-8901',
-    'email' => 'concierge@tranquil.com',
+    'email' => 'concierge@tranquilstead.com',
     'address' => [
         '@type' => 'PostalAddress',
         'streetAddress' => 'Nariman Point',
@@ -38,7 +38,7 @@
         <div class="grid md:grid-cols-2 gap-20 items-center mb-32">
             <div>
                 <p class="text-2xl font-light text-primary mb-8 leading-relaxed">
-                    Tranquil was born from a simple observation: the process of finding a sanctuary should be as peaceful as the sanctuary itself.
+                    Tranquilstead was born from a simple observation: the process of finding a sanctuary should be as peaceful as the sanctuary itself.
                 </p>
                 <div class="h-1 w-20 bg-secondary mb-8"></div>
                 <p class="text-lg text-text-main/70 leading-relaxed font-light">

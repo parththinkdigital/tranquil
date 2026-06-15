@@ -10,7 +10,7 @@ $article = [
     'author' => [
         'name' => 'Aarav Mehta',
         'initials' => 'AM',
-        'role' => 'Senior Editor, Tranquil Journal',
+        'role' => 'Senior Editor, Tranquilstead Journal',
         'bio' => 'Aarav has spent over a decade covering luxury real estate and architecture across India and the Middle East. His work has appeared in Architectural Digest, The Economic Times, and Luxe Interiors.',
         'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
     ],
@@ -40,7 +40,7 @@ $related = [
 ];
 @endphp
 
-@section('meta_title', $article['title'] . ' - Tranquil Journal')
+@section('meta_title', $article['title'] . ' - Tranquilstead Journal')
 @section('meta_description', $article['excerpt'])
 @section('og_type', 'article')
 @section('og_image', $article['img'])
@@ -73,7 +73,7 @@ $related = [
     ],
     'publisher' => [
         '@type' => 'Organization',
-        'name' => 'Tranquil',
+        'name' => 'Tranquilstead',
         'logo' => [
             '@type' => 'ImageObject',
             'url' => asset('images/og-default.jpg'),
@@ -94,7 +94,7 @@ $related = [
     <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden opacity-[0.04]">
         <span class="font-heading font-black text-white leading-none tracking-[-0.06em] whitespace-nowrap"
               style="font-size: clamp(10rem, 18vw, 19rem);">
-            Tranquil
+            Tranquilstead
         </span>
     </div>
     <img src="{{ $article['img'] }}" alt="{{ $article['title'] }}" class="absolute inset-0 w-full h-full object-cover">

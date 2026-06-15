@@ -1,10 +1,10 @@
-# Tranquil — Premium Real Estate Platform
+# Tranquilstead — Premium Real Estate Platform
 
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" width="100%" alt="Tranquil Hero Banner">
+  <img src="https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" width="100%" alt="Tranquilstead Hero Banner">
 </p>
 
-Tranquil is a high-end, editorial-style real estate platform designed to offer a "serene" property search experience. Built with a focus on premium aesthetics and fluid interactions, Tranquil transforms the real estate journey into an architectural narrative.
+Tranquilstead is a high-end, editorial-style real estate platform designed to offer a "serene" property search experience. Built with a focus on premium aesthetics and fluid interactions, Tranquilstead transforms the real estate journey into an architectural narrative.
 
 ## ✨ Premium Features
 
@@ -35,8 +35,8 @@ Tranquil is a high-end, editorial-style real estate platform designed to offer a
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/ParthGorde/tranquil.git
-   cd tranquil
+   git clone https://github.com/ParthGorde/tranquilstead.git
+   cd tranquilstead
    ```
 
 2. **Install Dependencies**

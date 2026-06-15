@@ -7,13 +7,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#0F766E">
-    <meta name="author" content="Tranquil Real Estate">
+    <meta name="author" content="Tranquilstead Real Estate">
     <meta name="geo.region" content="IN-MH">
     <meta name="geo.placename" content="Mumbai">
 
-    <title>@yield('meta_title', config('app.name', 'Tranquil') . ' - Premium Real Estate')</title>
-    <meta name="description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquil. Explore exclusive properties, market insights, and architecture stories.')">
+    <title>@yield('meta_title', config('app.name', 'Tranquilstead') . ' - Premium Real Estate')</title>
+    <meta name="description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquilstead. Explore exclusive properties, market insights, and architecture stories.')">
     <meta name="keywords" content="@yield('meta_keywords', 'luxury real estate, premium properties, Mumbai real estate, architecture, interior design, property investment')">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=The+Nautigal:wght@400;700&display=swap" rel="stylesheet">
 
     {{-- Canonical --}}
     <link rel="canonical" href="@yield('canonical_url', url()->current())" />
@@ -25,9 +29,9 @@
     <link rel="alternate" href="{{ url('/') }}" hreflang="x-default" />
 
     {{-- Open Graph --}}
-    <meta property="og:site_name" content="Tranquil" />
-    <meta property="og:title" content="@yield('meta_title', config('app.name', 'Tranquil') . ' - Premium Real Estate')" />
-    <meta property="og:description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquil.')" />
+    <meta property="og:site_name" content="Tranquilstead" />
+    <meta property="og:title" content="@yield('meta_title', config('app.name', 'Tranquilstead') . ' - Premium Real Estate')" />
+    <meta property="og:description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquilstead.')" />
     <meta property="og:url" content="@yield('canonical_url', url()->current())" />
     <meta property="og:type" content="@yield('og_type', 'website')" />
     <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))" />
@@ -37,9 +41,9 @@
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@tranquilrealty" />
-    <meta name="twitter:title" content="@yield('meta_title', config('app.name', 'Tranquil') . ' - Premium Real Estate')" />
-    <meta name="twitter:description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquil.')" />
+    <meta name="twitter:site" content="@tranquilsteadrealty" />
+    <meta name="twitter:title" content="@yield('meta_title', config('app.name', 'Tranquilstead') . ' - Premium Real Estate')" />
+    <meta name="twitter:description" content="@yield('meta_description', 'Discover premium luxury real estate with Tranquilstead.')" />
     <meta name="twitter:image" content="@yield('og_image', asset('images/og-default.jpg'))" />
 
     {{-- Preconnect for performance --}}
@@ -60,7 +64,7 @@
     {!! json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'WebSite',
-        'name' => 'Tranquil',
+        'name' => 'Tranquilstead',
         'url' => url('/'),
         'potentialAction' => [
             '@type' => 'SearchAction',
@@ -76,7 +80,7 @@
     {!! json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'Organization',
-        'name' => 'Tranquil',
+        'name' => 'Tranquilstead',
         'url' => url('/'),
         'logo' => asset('images/og-default.jpg'),
         'description' => 'Premium luxury real estate platform.',
@@ -85,13 +89,13 @@
             '@type' => 'ContactPoint',
             'telephone' => '+91-22-1234-5678',
             'contactType' => 'customer service',
-            'email' => 'hello@tranquil.in',
+            'email' => 'hello@tranquilstead.in',
             'availableLanguage' => ['en'],
         ],
         'sameAs' => [
-            'https://instagram.com/tranquilrealty',
-            'https://twitter.com/tranquilrealty',
-            'https://linkedin.com/company/tranquilrealty',
+            'https://instagram.com/tranquilsteadrealty',
+            'https://twitter.com/tranquilsteadrealty',
+            'https://linkedin.com/company/tranquilsteadrealty',
         ],
     ]) !!}
     </script>

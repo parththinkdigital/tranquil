@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
-@section('meta_title', 'Sell Your Property with Tranquil | Premium Real Estate')
-@section('meta_description', 'List your premium property with Tranquil. Submit an enquiry and our experts will guide you through the selling process.')
+@section('meta_title', 'Sell Your Property with Tranquilstead | Premium Real Estate')
+@section('meta_description', 'List your premium property with Tranquilstead. Submit an enquiry and our experts will guide you through the selling process.')
 @section('canonical_url', route('pages.sell'))
 
 @section('content')

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('meta_title', 'Admin Dashboard - Tranquil')</title>
-    <meta name="description" content="Tranquil Real Estate Administration">
+    <title>@yield('meta_title', 'Admin Dashboard - Tranquilstead')</title>
+    <meta name="description" content="Tranquilstead Real Estate Administration">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>

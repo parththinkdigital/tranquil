@@ -1,6 +1,6 @@
 <aside class="w-72 bg-primary text-white flex flex-col shadow-2xl relative z-50">
     <div class="p-8">
-        <h1 class="text-2xl font-heading font-bold tracking-tighter">TRANQUIL <span class="text-secondary text-sm block tracking-widest uppercase opacity-60">Control</span></h1>
+        <h1 class="text-2xl font-heading font-bold tracking-tighter">TRANQUILSTEAD <span class="text-secondary text-sm block tracking-widest uppercase opacity-60">Control</span></h1>
     </div>
 
     <nav class="flex-1 px-4 space-y-2">

@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
-@section('meta_title', 'The Journal - Luxury Real Estate Stories & Insights | Tranquil')
-@section('meta_description', 'Explore the Tranquil Journal — stories, insights, and trends shaping luxury real estate, architecture, design, and fine living.')
+@section('meta_title', 'The Journal - Luxury Real Estate Stories & Insights | Tranquilstead')
+@section('meta_description', 'Explore the Tranquilstead Journal — stories, insights, and trends shaping luxury real estate, architecture, design, and fine living.')
 @section('canonical_url', route('blogs.index'))
 @if(request()->page > 1)@section('prev_url', route('blogs.index', ['page' => request()->page - 1]))@endif
 @if(request()->page < $lastPage ?? 1)@section('next_url', route('blogs.index', ['page' => (request()->page ?? 1) + 1]))@endif
@@ -12,7 +12,7 @@
     <div class="absolute inset-0 pointer-events-none select-none flex justify-center pt-32 md:pt-28 overflow-hidden">
         <span class="font-heading font-black text-primary/[0.03] leading-none tracking-[-0.06em] whitespace-nowrap"
               style="font-size: clamp(10rem, 25vw, 22rem);">
-            TRANQUIL
+            TRANQUILSTEAD
         </span>
     </div>
 

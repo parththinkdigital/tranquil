@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** Tranquil Admin
+**Project:** Tranquilstead Admin
 **Generated:** 2026-05-13 22:25:49
 **Category:** Analytics Dashboard
 

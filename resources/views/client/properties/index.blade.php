@@ -1,6 +1,6 @@
 @extends('layouts.client')
 
-@section('meta_title', 'Property Listings - Explore Premium Real Estate | Tranquil')
+@section('meta_title', 'Property Listings - Explore Premium Real Estate | Tranquilstead')
 @section('meta_description', 'Browse our curated collection of luxury properties across Mumbai. From oceanfront villas to modern city apartments — find your dream home.')
 @section('canonical_url', route('properties.index'))
 {{-- Pagination SEO: yield prev_url / next_url from controller when pagination is active --}}

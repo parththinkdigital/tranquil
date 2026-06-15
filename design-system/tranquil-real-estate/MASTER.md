@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** Tranquil Real Estate
+**Project:** Tranquilstead Real Estate
 **Generated:** 2026-05-13 22:06:06
 **Category:** Real Estate/Property
 

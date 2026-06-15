@@ -22,19 +22,19 @@ class DatabaseSeeder extends Seeder
         // 2. Users
         $admin = User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'admin@tranquil.com',
+            'email' => 'admin@tranquilstead.com',
         ]);
         $admin->assignRole($adminRole);
 
         $agent = User::factory()->create([
             'name' => 'Premium Agent',
-            'email' => 'agent@tranquil.com',
+            'email' => 'agent@tranquilstead.com',
         ]);
         $agent->assignRole($agentRole);
 
         $buyer = User::factory()->create([
             'name' => 'Happy Buyer',
-            'email' => 'buyer@tranquil.com',
+            'email' => 'buyer@tranquilstead.com',
         ]);
         $buyer->assignRole($buyerRole);
 

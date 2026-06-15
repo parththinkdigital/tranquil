@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('meta_title', config('app.name', 'Tranquil') . ' - Admin')</title>
-    <meta name="description" content="@yield('meta_description', 'Tranquil Real Estate - Administration')">
+    <title>@yield('meta_title', config('app.name', 'Tranquilstead') . ' - Admin')</title>
+    <meta name="description" content="@yield('meta_description', 'Tranquilstead Real Estate - Administration')">
     <link rel="canonical" href="{{ url()->current() }}" />
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

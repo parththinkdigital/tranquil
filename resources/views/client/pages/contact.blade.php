@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
-@section('meta_title', 'Contact Us - Get in Touch with Tranquil | Luxury Real Estate')
-@section('meta_description', 'Reach out to the Tranquil team. Whether you\'re buying, selling, or exploring — we\'d love to hear from you.')
+@section('meta_title', 'Contact Us - Get in Touch with Tranquilstead | Luxury Real Estate')
+@section('meta_description', 'Reach out to the Tranquilstead team. Whether you\'re buying, selling, or exploring — we\'d love to hear from you.')
 @section('canonical_url', route('pages.contact'))
 
 @section('content')
@@ -20,7 +20,7 @@
                     </div>
                     <div>
                         <p class="text-[10px] uppercase tracking-widest font-bold text-primary/40">Email Us</p>
-                        <p class="text-xl font-heading font-bold text-primary">concierge@tranquil.com</p>
+                        <p class="text-xl font-heading font-bold text-primary">concierge@tranquilstead.com</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-6">

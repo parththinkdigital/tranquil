@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
-@section('meta_title', ($property->title ?? 'Property Details') . ' - Tranquil')
-@section('meta_description', 'Explore ' . ($property->title ?? 'this luxury property') . ' — ' . ($property->excerpt ?? 'premium real estate listing by Tranquil.'))
+@section('meta_title', ($property->title ?? 'Property Details') . ' - Tranquilstead')
+@section('meta_description', 'Explore ' . ($property->title ?? 'this luxury property') . ' — ' . ($property->excerpt ?? 'premium real estate listing by Tranquilstead.'))
 @section('og_type', 'article')
 @section('og_image', $property->cover_image ?? asset('images/og-default.jpg'))
 

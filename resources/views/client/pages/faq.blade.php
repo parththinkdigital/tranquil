@@ -1,7 +1,7 @@
 @extends('layouts.client')
 
-@section('meta_title', 'FAQ - Frequently Asked Questions | Tranquil')
-@section('meta_description', 'Find answers to common questions about buying, selling, and renting luxury properties with Tranquil.')
+@section('meta_title', 'FAQ - Frequently Asked Questions | Tranquilstead')
+@section('meta_description', 'Find answers to common questions about buying, selling, and renting luxury properties with Tranquilstead.')
 @section('canonical_url', route('pages.faq'))
 
 @section('schema')
@@ -52,7 +52,7 @@
                 ['q' => 'Can I schedule a virtual tour?', 'a' => 'Absolutely. We offer immersive virtual tours and in-person site visits for all listed properties.'],
                 ['q' => 'What areas do you serve?', 'a' => 'We specialize in premium properties across Nashik, Mumbai, and emerging luxury markets throughout India.'],
                 ['q' => 'How does the consultation process work?', 'a' => 'Schedule a call with our team. We\'ll understand your requirements, curate a shortlist of properties, and arrange viewings — all at no obligation.'],
-                ['q' => 'What makes Tranquil different?', 'a' => 'Every property in our portfolio is hand-selected. We focus on architectural integrity, premium locations, and a seamless client experience from first tour to final closing.'],
+                ['q' => 'What makes Tranquilstead different?', 'a' => 'Every property in our portfolio is hand-selected. We focus on architectural integrity, premium locations, and a seamless client experience from first tour to final closing.'],
             ]; @endphp
             @foreach($faqs as $i => $faq)
             <div x-data="{ open: false }" class="bg-white rounded-2xl border border-primary/5 shadow-sm hover:shadow-md transition-shadow duration-200">

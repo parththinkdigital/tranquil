@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Admin Login - Tranquil</title>
+    <title>Admin Login - Tranquilstead</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -16,7 +16,7 @@
         <div class="absolute -left-8 -bottom-8 w-32 h-32 bg-secondary/10 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
         <div class="relative z-10 text-center mb-10">
-            <h1 class="text-3xl font-heading font-bold text-primary tracking-tighter">TRANQUIL</h1>
+            <h1 class="text-3xl font-heading font-bold text-primary tracking-tighter">TRANQUILSTEAD</h1>
             <span class="text-secondary text-xs block tracking-widest uppercase mt-1">Admin Control</span>
         </div>
 
@@ -38,7 +38,7 @@
                     </div>
                     <input type="email" name="email" id="email" value="{{ old('email') }}"
                         class="w-full pl-12 pr-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm @error('email') border-red-300 ring-red-100 @enderror"
-                        required autofocus placeholder="admin@tranquil.com">
+                        required autofocus placeholder="admin@tranquilstead.com">
                 </div>
                 @error('email')
                     <p class="text-red-500 text-xs mt-2 italic flex items-center gap-1">
