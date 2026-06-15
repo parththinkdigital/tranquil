@@ -65,7 +65,17 @@
             <i data-lucide="message-circle" class="w-5 h-5"></i>
             <span>Testimonials</span>
         </a>
-        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white transition-all font-medium">
+        {{-- Blog Posts --}}
+        <a href="{{ route('admin.blogs.index') }}"
+            class="flex items-center gap-4 px-4 py-3 rounded-xl
+        {{ request()->routeIs('admin.blogs.*')
+            ? 'bg-white/10 text-white'
+            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+        }} transition-all font-medium">
+            <i data-lucide="newspaper" class="w-5 h-5"></i>
+            <span>Blog Posts</span>
+        </a>
+        <!-- <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="users" class="w-5 h-5"></i>
             <span>Agents</span>
         </a>
@@ -73,7 +83,7 @@
         <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="target" class="w-5 h-5"></i>
             <span>Leads</span>
-        </a>
+        </a> -->
         <div class="pt-4 border-t border-white/10 mt-4">
             <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
                 <i data-lucide="settings" class="w-5 h-5"></i>
