@@ -14,37 +14,55 @@
             <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
             <span>Dashboard</span>
         </a>
-        {{-- Properties --}}
-        <a href="{{ route('admin.property.index') }}"
-            class="flex items-center gap-4 px-4 py-3 rounded-xl
-        {{ request()->routeIs('admin.property.*')
-            ? 'bg-white/10 text-white'
-            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
-        }} transition-all font-medium">
-            <i data-lucide="building-2" class="w-5 h-5"></i>
-            <span>Properties</span>
-        </a>
-        {{-- Property Type --}}
-        <a href="{{ route('admin.property-type.index') }}"
-            class="flex items-center gap-4 px-4 py-3 rounded-xl
-        {{ request()->routeIs('admin.property-type.*')
-            ? 'bg-white/10 text-white'
-            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
-        }}   transition-all font-medium">
-            <i data-lucide="home" class="w-5 h-5"></i>
-            <span>Property Types</span>
-        </a>
-        {{-- Property Details --}}
-        <a href="{{ route('admin.property-details.index') }}"
-            class="flex items-center gap-4 px-4 py-3 rounded-xl
-        {{ request()->routeIs('admin.property-details.*')
-            ? 'bg-white/10 text-white'
-            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
-        }}   transition-all font-medium">
-            <i data-lucide="info" class="w-5 h-5"></i>
-            <span>Property Details</span>
-        </a>
-        {{-- Inquiries --}}
+        {{-- Property Group --}}
+        <div class="pt-4 border-t border-white/10 mt-4">
+            <p class="px-4 pb-1 text-[10px] uppercase tracking-[.2em] text-teal-400/50 font-semibold">Property</p>
+            <a href="{{ route('admin.property.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
+            {{ request()->routeIs('admin.property.*')
+                ? 'bg-white/10 text-white'
+                : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+            }} transition-all font-medium">
+                <i data-lucide="building-2" class="w-5 h-5"></i>
+                <span>All Properties</span>
+            </a>
+            <a href="{{ route('admin.property-type.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
+            {{ request()->routeIs('admin.property-type.*')
+                ? 'bg-white/10 text-white'
+                : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+            }} transition-all font-medium">
+                <i data-lucide="home" class="w-5 h-5"></i>
+                <span>Property Types</span>
+            </a>
+            <a href="{{ route('admin.property-details.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
+            {{ request()->routeIs('admin.property-details.*')
+                ? 'bg-white/10 text-white'
+                : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+            }} transition-all font-medium">
+                <i data-lucide="info" class="w-5 h-5"></i>
+                <span>Property Details</span>
+            </a>
+        </div>
+
+        {{-- Blog Group --}}
+        <div class="pt-4 border-t border-white/10 mt-4">
+            <p class="px-4 pb-1 text-[10px] uppercase tracking-[.2em] text-teal-400/50 font-semibold">Blog</p>
+            <a href="{{ route('admin.blogs.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
+            {{ request()->routeIs('admin.blogs.*')
+                ? 'bg-white/10 text-white'
+                : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+            }} transition-all font-medium">
+                <i data-lucide="newspaper" class="w-5 h-5"></i>
+                <span>All Posts</span>
+            </a>
+        </div>
+        {{-- General Group --}}
+        <div class="pt-4 border-t border-white/10 mt-4">
+        <p class="px-4 pb-1 text-[10px] uppercase tracking-[.2em] text-teal-400/50 font-semibold">General</p>
+            {{-- Inquiries --}}
         <a href="{{ route('admin.contacts.index') }}"
             class="flex items-center gap-4 px-4 py-3 rounded-xl
         {{ request()->routeIs('admin.contacts.*')
@@ -61,20 +79,12 @@
         {{ request()->routeIs('admin.testimonials.*')
             ? 'bg-white/10 text-white'
             : 'text-teal-100/70 hover:text-white hover:bg-white/10'
-        }}   transition-all font-medium">
+        }} transition-all font-medium">
             <i data-lucide="message-circle" class="w-5 h-5"></i>
             <span>Testimonials</span>
         </a>
-        {{-- Blog Posts --}}
-        <a href="{{ route('admin.blogs.index') }}"
-            class="flex items-center gap-4 px-4 py-3 rounded-xl
-        {{ request()->routeIs('admin.blogs.*')
-            ? 'bg-white/10 text-white'
-            : 'text-teal-100/70 hover:text-white hover:bg-white/10'
-        }} transition-all font-medium">
-            <i data-lucide="newspaper" class="w-5 h-5"></i>
-            <span>Blog Posts</span>
-        </a>
+        </div>
+        
         <!-- <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="users" class="w-5 h-5"></i>
             <span>Agents</span>
@@ -84,12 +94,6 @@
             <i data-lucide="target" class="w-5 h-5"></i>
             <span>Leads</span>
         </a> -->
-        <div class="pt-4 border-t border-white/10 mt-4">
-            <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-                <i data-lucide="settings" class="w-5 h-5"></i>
-                <span>Settings</span>
-            </a>
-        </div>
     </nav>
 
     <div class="p-4 bg-teal-900/50 m-4 rounded-2xl">
