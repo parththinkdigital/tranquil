@@ -16,22 +16,7 @@ class User extends Authenticatable
     public function properties()
     {
         return $this->hasMany(Property::class);
-    }
-
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
-    }
-
-    public function leads()
-    {
-        return $this->hasMany(Lead::class, 'user_id');
-    }
-
-    public function agentLeads()
-    {
-        return $this->hasMany(Lead::class, 'agent_id');
-    }
+    }  
 
     /**
      * The attributes that are mass assignable.

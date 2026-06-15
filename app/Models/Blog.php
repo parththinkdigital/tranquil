@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     protected $fillable = [
+        'category_id',
         'title',
         'tag',
         'image',
@@ -21,4 +22,9 @@ class Blog extends Model
     protected $casts = [
         'event_date' => 'date',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

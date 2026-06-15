@@ -49,6 +49,15 @@
         {{-- Blog Group --}}
         <div class="pt-4 border-t border-white/10 mt-4">
             <p class="px-4 pb-1 text-[10px] uppercase tracking-[.2em] text-teal-400/50 font-semibold">Blog</p>
+            <a href="{{ route('admin.category.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
+            {{ request()->routeIs('admin.category.*')
+                ? 'bg-white/10 text-white'
+                : 'text-teal-100/70 hover:text-white hover:bg-white/10'
+            }} transition-all font-medium">
+                <i data-lucide="newspaper" class="w-5 h-5"></i>
+                <span>Categories</span>
+            </a>
             <a href="{{ route('admin.blogs.index') }}"
                 class="flex items-center gap-4 px-4 py-3 rounded-xl
             {{ request()->routeIs('admin.blogs.*')
@@ -61,30 +70,30 @@
         </div>
         {{-- General Group --}}
         <div class="pt-4 border-t border-white/10 mt-4">
-        <p class="px-4 pb-1 text-[10px] uppercase tracking-[.2em] text-teal-400/50 font-semibold">General</p>
+            <p class="px-4 pb-1 text-[10px] uppercase tracking-[.2em] text-teal-400/50 font-semibold">General</p>
             {{-- Inquiries --}}
-        <a href="{{ route('admin.contacts.index') }}"
-            class="flex items-center gap-4 px-4 py-3 rounded-xl
+            <a href="{{ route('admin.contacts.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
         {{ request()->routeIs('admin.contacts.*')
             ? 'bg-white/10 text-white'
             : 'text-teal-100/70 hover:text-white hover:bg-white/10'
         }}
         transition-all font-medium">
-            <i data-lucide="message-square" class="w-5 h-5"></i>
-            <span>Inquiries</span>
-        </a>
-        {{-- Testimonials --}}
-        <a href="{{ route('admin.testimonials.index') }}"
-            class="flex items-center gap-4 px-4 py-3 rounded-xl
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+                <span>Inquiries</span>
+            </a>
+            {{-- Testimonials --}}
+            <a href="{{ route('admin.testimonials.index') }}"
+                class="flex items-center gap-4 px-4 py-3 rounded-xl
         {{ request()->routeIs('admin.testimonials.*')
             ? 'bg-white/10 text-white'
             : 'text-teal-100/70 hover:text-white hover:bg-white/10'
         }} transition-all font-medium">
-            <i data-lucide="message-circle" class="w-5 h-5"></i>
-            <span>Testimonials</span>
-        </a>
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Testimonials</span>
+            </a>
         </div>
-        
+
         <!-- <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
             <i data-lucide="users" class="w-5 h-5"></i>
             <span>Agents</span>

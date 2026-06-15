@@ -20,13 +20,15 @@ class BlogController extends Controller
     }
     public function create()
     {
-        return view('admin.blog.create');
+        $categories = \App\Models\Category::all();
+        return view('admin.blog.create', compact('categories'));
     }
 
      public function store(Request $request)
     {
         $request->validate([
             'title'       => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'tag'         => 'required|string|max:255',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'short_desc'  => 'required|string',
@@ -56,7 +58,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('admin.blog.edit', compact('blog'));
+        $categories = \App\Models\Category::all();
+        return view('admin.blog.edit', compact('blog', 'categories'));
     }
 
     /**
@@ -66,6 +69,7 @@ class BlogController extends Controller
     {
         $request->validate([
             'title'       => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'tag'         => 'required|string|max:255',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'short_desc'  => 'required|string',

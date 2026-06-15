@@ -16,7 +16,6 @@ class DashboardController extends Controller
             'total_blogs' => \App\Models\Blog::count(),
             'total_testimonials' => \App\Models\Testimonial::count(),
             'total_contacts' => \App\Models\Contact::count(),
-            'total_leads' => \App\Models\Lead::count(),
         ];
 
         $recent_properties = \App\Models\PropertyDetail::with(['property', 'propertyType'])

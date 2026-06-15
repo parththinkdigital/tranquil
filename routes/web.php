@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\DashboardController;
 // SEO routes
 Route::get('/robots.txt', function () {
     $sitemapUrl = url('/sitemap.xml');
-
     $lines = [
         'User-agent: *',
         'Allow: /',
@@ -44,7 +43,6 @@ Route::get('/robots.txt', function () {
         '',
         "Sitemap: {$sitemapUrl}",
     ];
-
     return response(implode("\n", $lines))
         ->header('Content-Type', 'text/plain');
 })->name('robots.txt');
@@ -101,13 +99,11 @@ Route::get('/journal/{slug}', fn($slug) => view('client.blogs.show'))->name('blo
 //---------------------------------AdminLogin--------------------------------// 
 Route::get('/login', fn() => redirect('/admin/login'))->name('login');
 Route::prefix('admin')->name('admin.')->group(function () {
-
     // Guest-only routes: redirect to dashboard if already logged in as admin
     Route::middleware('admin.guest')->group(function () {
         Route::get('/login', [AuthController::class, 'loginForm'])->name('signIn');
         Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
     });
-
     Route::get('/register', [AuthController::class, 'register'])->name('register'); // Temporary route to seed admin
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     //----------------- Admin Authentication -----------------//
@@ -120,6 +116,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('property-details/get-property-types/{property}', [\App\Http\Controllers\Admin\PropertyDetailController::class, 'getPropertyTypes'])->name('property-details.get-types');
         Route::resource('property-details', \App\Http\Controllers\Admin\PropertyDetailController::class);
         Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class);
+        Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
     });
 });
 

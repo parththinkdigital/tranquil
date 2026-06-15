@@ -75,7 +75,7 @@
 
 @endpush
 @section('content')
-<div class="max-w-4xl mx-auto space-y-8">
+<div class="max-w-6xl mx-auto space-y-8">
 
     {{-- Page Header --}}
     <div class="flex justify-between items-center">
@@ -116,15 +116,19 @@
                     @enderror
                 </div>
 
-                {{-- Tag --}}
+                {{-- Category --}}
                 <div>
-                    <label for="tag" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
-                        Tag / Category <span class="text-red-400">*</span>
+                    <label for="category_id" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
+                        Category <span class="text-red-400">*</span>
                     </label>
-                    <input type="text" name="tag" id="tag" value="{{ old('tag') }}" required
-                        placeholder="e.g. Real Estate, Tips, News..."
-                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary placeholder-primary/30 @error('tag') border-red-300 ring-2 ring-red-100 @enderror">
-                    @error('tag')
+                    <select name="category_id" id="category_id" required
+                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary @error('category_id') border-red-300 ring-2 ring-red-100 @enderror">
+                        <option value="" disabled selected>Select Category</option>
+                        @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}" {{ old('category_id') == $cat->id ? 'selected' : '' }}>{{ $cat->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
                     <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
                     @enderror
                 </div>
@@ -270,6 +274,21 @@
                 </div>
 
             </div>
+
+            {{-- Tag --}}
+            <div class="mt-6">
+                <label for="tag" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
+                    Tags <span class="text-red-400">*</span>
+                    <span class="text-primary/30 font-normal normal-case ml-1">(Comma separated tags)</span>
+                </label>
+                <input type="text" name="tag" id="tag" value="{{ old('tag') }}" required
+                    placeholder="e.g. Real Estate, Tips, News..."
+                    class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary placeholder-primary/30 @error('tag') border-red-300 ring-2 ring-red-100 @enderror">
+                @error('tag')
+                <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
+                @enderror
+            </div>
+
         </div>
 
         {{-- Submit --}}
