@@ -38,227 +38,36 @@
 @section('content')
 
 {{-- ═══════════════════════════════════════════════════════════════
-     SECTION 1 — HERO (GSAP-Animated Premium)
+     SECTION 1 — HERO
+     Full-screen cinematic hero · Swiss-Industrial typographic treatment
      ═══════════════════════════════════════════════════════════════ --}}
-<style>
-.hero-section {
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
-    background: #0a0a0a;
-}
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    background: url('https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=85')
-        center center / cover no-repeat;
-    will-change: transform;
-}
-.hero-bg-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(0,0,0,0.65) 0%,
-        rgba(0,0,0,0.25) 40%,
-        rgba(0,0,0,0.55) 100%
-    );
-}
-.hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    will-change: transform;
-}
-.hero-brand {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    perspective: 2000px;
-    pointer-events: none;
-}
-.hero-brand-main {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    font-size: clamp(4rem, 12vw, 9rem);
-    line-height: 1;
-    color: rgba(255,255,255,0.95);
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    letter-spacing: -0.04em;
-}
-.hero-brand-main .char {
-    display: inline-block;
-}
-.hero-brand-cursive-wrap {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    font-family: 'The Nautigal', cursive;
-    font-weight: 700;
-    font-size: clamp(5rem, 16vw, 12rem);
-    line-height: 0.8;
-    color: #2DD4BF;
-    margin-top: -0.12em;
-    text-shadow: 0 0 80px rgba(45,212,191,0.25);
-}
-.hero-brand-cursive-wrap .char {
-    display: inline-block;
-}
-.hero-deco-line {
-    width: clamp(60px, 10vw, 140px);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(45,212,191,0.5), transparent);
-    transform-origin: center;
-}
-.hero-tagline-label {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-size: clamp(0.6rem, 1.2vw, 0.75rem);
-    color: rgba(255,255,255,0.4);
-}
-.hero-scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    z-index: 20;
-}
-.hero-scroll-indicator span {
-    font-size: 9px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-    font-family: 'Josefin Sans', sans-serif;
-}
-.hero-scroll-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.3), transparent);
-}
-.hero-search-glass {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 1rem;
-}
-.hero-search-glass:focus-within {
-    border-color: rgba(45,212,191,0.3);
-}
-@media (max-width: 768px) {
-    .hero-brand-main { font-size: clamp(2.5rem, 10vw, 4rem); }
-    .hero-brand-cursive-wrap { font-size: clamp(3rem, 14vw, 5rem); margin-top: -0.08em; }
-}
-</style>
-
-<section id="hero" class="hero-section relative w-full h-screen min-h-[700px] max-h-[1100px] overflow-hidden">
-
-    {{-- Background layers --}}
-    <div class="hero-bg" data-hero="bg"></div>
-    <div class="hero-bg-overlay" data-hero="overlay"></div>
-
-    {{-- Ambient floating orbs --}}
-    <div class="hero-orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(45,212,191,0.12),transparent);top:-15%;left:-5%;" data-hero="orb1"></div>
-    <div class="hero-orb" style="width:350px;height:350px;background:radial-gradient(circle,rgba(20,184,166,0.1),transparent);bottom:-8%;right:-3%;" data-hero="orb2"></div>
-    <div class="hero-orb" style="width:250px;height:250px;background:radial-gradient(circle,rgba(45,212,191,0.07),transparent);top:35%;right:15%;" data-hero="orb3"></div>
-
-    {{-- Top-right label --}}
-    <div class="absolute top-28 right-8 md:right-16 z-20 text-right hidden md:block" data-hero="tagline">
-        <span class="hero-tagline-label">Premium Real Estate</span>
+<section id="hero" class="relative h-screen min-h-[680px] overflow-hidden bg-primary">
+    <div data-hero="image" class="absolute inset-0 will-change-transform">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=90"
+             class="w-full h-full object-cover"
+             alt="Luxury estate">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/60 to-primary/30"></div>
     </div>
 
-    {{-- Center brand with per-character stagger --}}
-    <div class="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none px-6" data-hero="center" style="margin-top:-2%;">
-        <div class="hero-brand" data-hero="brand">
-            <div class="hero-deco-line mb-6 md:mb-8" data-deco="top-line"></div>
+    <div class="relative z-10 h-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-center justify-center text-center">
+        <h1 class="font-heading text-white" data-hero="heading" style="font-size:clamp(4rem,10vw,8rem);letter-spacing:-0.04em;line-height:1;font-weight:700;">
+            TranquilStead
+        </h1>
 
-            <h1 class="hero-brand-main" data-hero="tranquil" aria-label="Tranquil">
-                <span class="char">T</span><span class="char">r</span><span class="char">a</span><span class="char">n</span><span class="char">q</span><span class="char">u</span><span class="char">i</span><span class="char">l</span>
-            </h1>
+        <div data-hero="divider" class="w-16 md:w-24 h-0.5 bg-secondary my-6 md:my-8"></div>
 
-            <div class="hero-brand-cursive-wrap" data-hero="stead" aria-label="Stead">
-                <span class="char">S</span><span class="char">t</span><span class="char">e</span><span class="char">a</span><span class="char">d</span>
-            </div>
+        <p data-hero="label" class="text-[10px] md:text-[11px] uppercase tracking-[.4em] font-semibold text-white/50">Luxury Real Estate</p>
 
-            <div class="hero-deco-line mt-6 md:mt-8" data-deco="bottom-line"></div>
+        <div data-hero="bottombar" class="flex flex-wrap gap-3 md:gap-4 mt-8 md:mt-10">
+            <a href="{{ route('properties.index') }}" class="bg-secondary text-white px-6 md:px-8 py-3.5 md:py-4 rounded-xl md:rounded-2xl font-semibold hover:bg-white hover:text-primary transition-all duration-200 text-sm md:text-base shadow-lg cursor-pointer">
+                Explore Listings
+            </a>
+            <a href="{{ route('pages.contact') }}" class="border border-white/20 text-white px-6 md:px-8 py-3.5 md:py-4 rounded-xl md:rounded-2xl font-semibold hover:bg-white hover:text-primary transition-all duration-200 text-sm md:text-base cursor-pointer">
+                Book Consultation
+            </a>
         </div>
     </div>
-
-    {{-- Bottom content --}}
-    <div class="absolute bottom-0 left-0 right-0 z-20 px-6 md:px-12 pb-8 md:pb-12" data-hero="bottom">
-        <div class="max-w-7xl mx-auto">
-
-            <div class="text-center mb-6 md:mb-8" data-hero="subtitles">
-                <h2 class="font-heading text-white font-bold text-lg sm:text-xl md:text-2xl leading-snug tracking-tight mb-1" data-hero="sub1">
-                    Buy, Rent, or Sell &mdash; Simplifying Your
-                </h2>
-                <h2 class="font-heading text-white font-bold text-lg sm:text-xl md:text-2xl leading-snug tracking-tight" data-hero="sub2">
-                    Real Estate Journey
-                </h2>
-            </div>
-
-            <form action="{{ route('properties.index') }}" method="GET"
-                  class="hero-search-glass rounded-2xl p-2.5 flex flex-col md:flex-row items-stretch gap-0 max-w-4xl mx-auto" data-hero="search">
-
-                <div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10">
-                    <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Location</label>
-                    <div class="flex items-center gap-2">
-                        <input type="text" name="keyword" placeholder="Select Your City"
-                               class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white placeholder:text-white/40 p-0">
-                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-white/30 flex-shrink-0"></i>
-                    </div>
-                </div>
-
-                <div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10">
-                    <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Property Type</label>
-                    <select name="category_id" class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white/80 p-0 cursor-pointer">
-                        <option value="" class="text-primary">Choose Property Type</option>
-                        <option value="1" class="text-primary">Apartment</option>
-                        <option value="2" class="text-primary">Villa</option>
-                        <option value="3" class="text-primary">Commercial</option>
-                        <option value="4" class="text-primary">Plot</option>
-                    </select>
-                </div>
-
-                <div class="flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10">
-                    <label class="text-[10px] uppercase tracking-widest text-white/40 font-semibold block mb-1">Price Range</label>
-                    <select name="max_price" class="w-full border-none focus:ring-0 text-sm font-medium bg-transparent text-white/80 p-0 cursor-pointer">
-                        <option value="" class="text-primary">Choose Price Range</option>
-                        <option value="5000000" class="text-primary">Up to ₹50 Lakhs</option>
-                        <option value="10000000" class="text-primary">Up to ₹1 Crore</option>
-                        <option value="50000000" class="text-primary">Up to ₹5 Crore</option>
-                        <option value="100000000" class="text-primary">Up to ₹10 Crore</option>
-                    </select>
-                </div>
-
-                <button type="submit"
-                        class="bg-white text-primary px-8 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all duration-300 cursor-pointer whitespace-nowrap shadow-lg">
-                    <i data-lucide="search" class="w-4 h-4"></i>
-                    Browse Properties
-                </button>
-            </form>
-
-        </div>
-    </div>
-
-    {{-- Scroll indicator --}}
-    <div class="hero-scroll-indicator" data-hero="scroll">
-        <span>Scroll</span>
-        <div class="hero-scroll-line"></div>
-    </div>
-
 </section>
-
 
 {{-- ═══════════════════════════════════════════════════════════════
      SECTION 2 — TRUSTED BY / FEATURES
@@ -695,235 +504,47 @@
 
 @section('script')
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+document.addEventListener('DOMContentLoaded', function() {
+    var hero = document.getElementById('hero');
+    if (!hero || typeof gsap === 'undefined') return;
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-        document.querySelectorAll('[data-hero], [data-deco], .hero-scroll-indicator, .char').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        document.querySelectorAll('[data-gsap]').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        document.querySelectorAll('[data-gsap="stat-bar"]').forEach(el => { el.style.transform = 'scaleX(1)'; });
-        document.querySelectorAll('[data-count]').forEach(el => {
-            el.textContent = el.dataset.count + (el.dataset.suffix || '');
-        });
-        document.querySelectorAll('[data-hero="scroll"]').forEach(el => { el.style.opacity = '1'; });
-        return;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) { gsap.set('[data-hero]', { clearProps: 'all' }); return; }
+
+    var tl = gsap.timeline({ defaults: { ease: 'power1.out', duration: 0.6 } });
+
+    tl.from('[data-hero="image"]', { scale: 1.12, duration: 1.4 }, 0)
+      .from('[data-hero="topbar"]', { y: -10, opacity: 0 }, 0.2);
+
+    var heading = document.querySelector('[data-hero="heading"]');
+    if (heading) {
+      var text = heading.textContent.replace(/\s+/g, ' ').trim();
+      heading.textContent = '';
+      var chars = [];
+      for (var i = 0; i < text.length; i++) {
+        var span = document.createElement('span');
+        span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+        span.style.display = 'inline-block';
+        heading.appendChild(span);
+        chars.push(span);
+      }
+      tl.from(chars, { y: 80, rotationX: -90, opacity: 0, duration: 0.7, stagger: 0.035, ease: 'power3.out' }, 0.25);
     }
 
-    gsap.registerPlugin(ScrollTrigger);
+    tl.from('[data-hero="divider"]', { scaleX: 0, transformOrigin: 'center center', duration: 0.5 }, 0.55)
+      .from('[data-hero="label"]', { y: 12, opacity: 0 }, 0.65)
+      .from('[data-hero="bottombar"]', { y: 16, opacity: 0 }, 0.8);
 
-    // ── Hero: matchMedia for responsive ──
-    const mm = gsap.matchMedia();
-
-    mm.add({
-        isDesktop: '(min-width: 769px)',
-        isMobile: '(max-width: 768px)',
-    }, (context) => {
-        const { isDesktop } = context.conditions;
-
-        // Initial states
-        gsap.set('[data-hero="bg"]', { scale: 1.1 });
-        gsap.set('[data-hero="overlay"]', { autoAlpha: 0 });
-        gsap.set('[data-hero="orb1"], [data-hero="orb2"], [data-hero="orb3"]', { autoAlpha: 0, scale: 0.4 });
-        gsap.set('[data-hero="brand"]', { autoAlpha: 0, y: isDesktop ? 60 : 30 });
-        gsap.set('.hero-brand-main .char', { y: isDesktop ? 80 : 40, autoAlpha: 0, rotationX: isDesktop ? 25 : 10 });
-        gsap.set('.hero-brand-cursive-wrap .char', { y: isDesktop ? 80 : 40, autoAlpha: 0, rotationX: isDesktop ? 25 : 10 });
-        gsap.set('[data-deco="top-line"], [data-deco="bottom-line"]', { scaleX: 0, autoAlpha: 0 });
-        gsap.set('[data-hero="tagline"]', { autoAlpha: 0, y: -15 });
-        gsap.set('[data-hero="sub1"], [data-hero="sub2"]', { autoAlpha: 0, y: isDesktop ? 30 : 15 });
-        gsap.set('[data-hero="search"]', { autoAlpha: 0, y: isDesktop ? 40 : 20 });
-        gsap.set('[data-hero="scroll"]', { autoAlpha: 0 });
-
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-        // Phase 1: Background, overlay, ambience
-        tl
-            .to('[data-hero="bg"]', { scale: 1, duration: 15, ease: 'none' }, 0)
-            .to('[data-hero="overlay"]', { autoAlpha: 1, duration: 1.5, ease: 'power2.out' }, 0.3)
-            .to('[data-hero="orb1"]', { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, 0.6)
-            .to('[data-hero="orb2"]', { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, 0.8)
-            .to('[data-hero="orb3"]', { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, 1.0)
-
-        // Phase 2: Brand text — per-character stagger
-        tl
-            .to('[data-hero="brand"]', { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 1.2)
-            .to('.hero-brand-main .char', {
-                y: 0, autoAlpha: 1, rotationX: 0,
-                duration: 0.9, ease: 'power4.out',
-                stagger: { each: 0.06, from: 'start' }
-            }, 1.4)
-            .to('.hero-brand-cursive-wrap .char', {
-                y: 0, autoAlpha: 1, rotationX: 0,
-                duration: 0.6, ease: 'back.out(1.5)',
-                stagger: { each: 0.05, from: 'start' }
-            }, 1.9)
-            .to('[data-deco="top-line"]', { scaleX: 1, autoAlpha: 1, duration: 0.8, ease: 'power3.out' }, 1.6)
-            .to('[data-deco="bottom-line"]', { scaleX: 1, autoAlpha: 1, duration: 0.8, ease: 'power3.out' }, 1.8)
-
-        // Phase 3: Tagline & scroll indicator
-        tl
-            .to('[data-hero="tagline"]', { autoAlpha: 1, y: 0, duration: 0.8 }, 2.0)
-            .to('[data-hero="scroll"]', { autoAlpha: 1, duration: 0.6 }, 2.2)
-
-        // Phase 4: Subtitles & search bar
-        tl
-            .to('[data-hero="sub1"]', { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 2.4)
-            .to('[data-hero="sub2"]', { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 2.6)
-            .to('[data-hero="search"]', { autoAlpha: 1, y: 0, duration: 1, ease: 'expo.out' }, 2.8)
-
-        // ── Continuous ambient animations ──
-
-        // Orbs float in organic paths
-        gsap.to('[data-hero="orb1"]', {
-            y: isDesktop ? -40 : -20, x: isDesktop ? 25 : 12,
-            duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1
-        });
-        gsap.to('[data-hero="orb2"]', {
-            y: isDesktop ? 30 : 15, x: isDesktop ? -20 : -10,
-            duration: 8, ease: 'sine.inOut', yoyo: true, repeat: -1
-        });
-        gsap.to('[data-hero="orb3"]', {
-            y: isDesktop ? -25 : -12, x: isDesktop ? 35 : 15,
-            duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1
-        });
-
-        // Brand gentle hover
-        gsap.to('[data-hero="brand"]', {
-            y: isDesktop ? -6 : -3,
-            duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1,
-            delay: 3
-        });
-
-        // Scroll indicator line pulse
-        gsap.to('.hero-scroll-line', {
-            scaleY: 0.3, transformOrigin: 'top center',
-            duration: 1.5, ease: 'sine.inOut', yoyo: true, repeat: -1,
-            delay: 2.5
-        });
-
-        // ── Scroll-driven parallax ──
-        ScrollTrigger.create({
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5,
-            onUpdate: self => {
-                gsap.set('[data-hero="bg"]', {
-                    y: gsap.utils.interpolate(0, isDesktop ? -80 : -40, self.progress)
-                });
-                gsap.set('[data-hero="overlay"]', {
-                    autoAlpha: 1 - self.progress * 0.4
-                });
-            }
-        });
-
-        // ── Mouse parallax (desktop only, bg X only to avoid scroll conflict) ──
-        if (isDesktop) {
-            const bgX = gsap.quickTo('[data-hero="bg"]', 'x', { duration: 1.2, ease: 'power2.out' });
-            const hero = document.getElementById('hero');
-            hero.addEventListener('mousemove', (e) => {
-                const rect = hero.getBoundingClientRect();
-                bgX(((e.clientX - rect.left) / rect.width - 0.5) * 20);
-            });
-        }
+    gsap.to('[data-hero="image"]', {
+      scale: 1.25,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.2,
+      }
     });
-
-    // ── Counters ──
-    function animateCounter(el, target, suffix) {
-        const obj = { val: 0 };
-        gsap.to(obj, {
-            val: target,
-            duration: 1.8,
-            ease: 'power3.out',
-            onUpdate: () => {
-                const display = target % 1 === 0 ? Math.floor(obj.val) : obj.val.toFixed(1);
-                el.textContent = display + suffix;
-            },
-        });
-    }
-
-    const counterElements = document.querySelectorAll('[data-count]');
-    counterElements.forEach(el => {
-        const target = parseFloat(el.dataset.count);
-        const suffix = el.dataset.suffix || '';
-        ScrollTrigger.create({
-            trigger: el.closest('[data-gsap="stat"]'),
-            start: 'top 85%',
-            onEnter: () => animateCounter(el, target, suffix),
-            once: true,
-        });
-    });
-
-    // ── Reveal items on scroll ──
-    const revealItems = (selector, stagger = 0.15) => {
-        const items = document.querySelectorAll(selector);
-        if (!items.length) return;
-        gsap.fromTo(items,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', stagger,
-              scrollTrigger: { trigger: items[0].closest('section'), start: 'top 85%', toggleActions: 'play none none reverse' } }
-        );
-    };
-
-    revealItems('#featured-homes .grid a', 0.12);
-    revealItems('#locations .grid a', 0.1);
-    revealItems('#testimonials .grid > div', 0.12);
-    revealItems('#blog .grid a', 0.12);
-
-    // ── Why Us section timeline ──
-    const stl = gsap.timeline({
-        scrollTrigger: {
-            trigger: '#why-us',
-            start: 'top 82%',
-            toggleActions: 'play none none reverse',
-        },
-    });
-
-    stl.fromTo('[data-gsap="headline"] > *',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', stagger: 0.06 },
-        0
-    ).fromTo('[data-gsap="avatars"] > *',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out', stagger: 0.04 },
-        0.2
-    ).fromTo('[data-gsap="label"]',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
-        0.4
-    ).fromTo('[data-gsap="heading"]',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
-        0.5
-    ).fromTo('[data-gsap="desc"]',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' },
-        0.65
-    ).fromTo('[data-gsap="stat"]',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', stagger: 0.1 },
-        0.75
-    ).fromTo('[data-gsap="stat-bar"]',
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.6, ease: 'power2.out', stagger: 0.1, transformOrigin: 'left center' },
-        0.85
-    ).fromTo('[data-gsap="cta"]',
-        { y: 15, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' },
-        0.9
-    ).fromTo('[data-gsap="slider"]',
-        { x: 40, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
-        0.5
-    );
-
-
 });
 </script>
 @endsection
