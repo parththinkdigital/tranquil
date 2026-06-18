@@ -8,7 +8,8 @@ class PropertyController extends Controller
 {
     public function home()
     {
-        return view('client.home');
+        $blogs = \App\Models\Blog::latest()->take(3)->get();
+        return view('client.home', compact('blogs'));
     }
 
     public function index(Request $request)

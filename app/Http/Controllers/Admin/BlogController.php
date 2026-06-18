@@ -40,6 +40,7 @@ class BlogController extends Controller
         ]);
 
         $data = $request->except(['image', 'banner_img']);
+        $data['slug'] = Str::slug($request->title);
 
         // Store thumbnail image
         $data['image'] = $request->file('image')->store('blogs/thumbnails', 'public');
@@ -71,16 +72,17 @@ class BlogController extends Controller
             'title'       => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'tag'         => 'required|string|max:255',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,avif',
             'short_desc'  => 'required|string',
             'short_para'  => 'required|string',
             'long_desc1'  => 'required|string',
-            'banner_img'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+            'banner_img'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,avif',
             'long_desc2'  => 'required|string',
             'event_date'  => 'nullable|date',
         ]);
 
         $data = $request->except(['image', 'banner_img']);
+        $data['slug'] = Str::slug($request->title);
 
         // Update thumbnail image if new one is uploaded
         if ($request->hasFile('image')) {

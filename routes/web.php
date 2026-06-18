@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\PageController;
 
 // SEO routes
 Route::get('/robots.txt', function () {
@@ -76,16 +77,16 @@ Route::get('/sitemap.xml', function () {
 Route::get('/', [PropertyController::class, 'home'])->name('home');
 Route::get('/listings', [PropertyController::class, 'index'])->name('properties.index');
 Route::get('/listings/{slug}', [PropertyController::class, 'show'])->name('properties.show');
-Route::get('/about', [\App\Http\Controllers\PageController::class, 'about'])->name('pages.about');
-Route::get('/contact', [\App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
-Route::post('/contact', [\App\Http\Controllers\PageController::class, 'submitContact'])->name('pages.contact.submit');
+Route::get('/about', [PageController::class, 'about'])->name('pages.about');
+Route::get('/contact', [PageController::class, 'contact'])->name('pages.contact');
+Route::post('/contact', [PageController::class, 'submitContact'])->name('pages.contact.submit');
 
-Route::get('/faq', [\App\Http\Controllers\PageController::class, 'faq'])->name('pages.faq');
-Route::get('/sell', [\App\Http\Controllers\PageController::class, 'sell'])->name('pages.sell');
+Route::get('/faq', [PageController::class, 'faq'])->name('pages.faq');
+Route::get('/sell', [PageController::class, 'sell'])->name('pages.sell');
 
 // Blog routes (frontend only - controller pending)
-Route::get('/journal', fn() => view('client.blogs.index'))->name('blogs.index');
-Route::get('/journal/{slug}', fn($slug) => view('client.blogs.show'))->name('blogs.show');
+Route::get('/journal', [PageController::class, 'blogs'])->name('blogs.index');
+Route::get('/journal/{slug}', [PageController::class, 'blogShow'])->name('blogs.show');
 
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     Route::get('/dashboard', function () {

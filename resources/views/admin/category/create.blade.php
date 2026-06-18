@@ -20,7 +20,6 @@
             <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
             @enderror
         </div>
-
         <div class="pt-4 text-right">
             <button type="submit" class="bg-primary hover:bg-secondary text-white text-xs font-bold uppercase tracking-widest px-8 py-3 rounded-full transition-colors inline-flex items-center gap-2">
                 Save Category <i data-lucide="check" class="w-4 h-4"></i>

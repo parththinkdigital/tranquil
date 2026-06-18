@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Blog;
 
 class PageController extends Controller
 {
@@ -51,5 +52,41 @@ class PageController extends Controller
         \App\Models\Contact::create($request->only('name', 'phone', 'email', 'message'));
 
         return back()->with('success', 'Your message has been sent successfully!');
+    }
+
+    public function blogs()
+    {
+        $blogs = Blog::latest()->paginate(9);
+        return view('client.blogs.index', compact('blogs'));
+    }
+
+    public function blogShow($slug)
+    {
+        $blog = Blog::with('category')
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        // Related posts section at bottom
+        $relatedBlogs = Blog::with('category')
+            ->where('id', '!=', $blog->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        // Latest blogs for sidebar
+        $latestBlogs = Blog::with('category')
+            ->where('id', '!=', $blog->id)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        $categories = \App\Models\Category::orderBy('title')->get();
+
+        return view('client.blogs.show', compact(
+            'blog',
+            'relatedBlogs',
+            'latestBlogs',
+            'categories'
+        ));
     }
 }

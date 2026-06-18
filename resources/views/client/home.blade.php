@@ -471,26 +471,20 @@
             </a>
         </div>
 
-        @php $blogs = [
-            ['t'=>'10 Things to Check Before Buying a Flat in Mumbai','x'=>'From RERA registration to structural audits — a comprehensive checklist.','c'=>'Buying Guide','d'=>'May 10, 2026','img'=>'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80','s'=>'things-to-check-before-buying-flat-mumbai'],
-            ['t'=>'Why Bandra West Remains Mumbai\'s Most Coveted Address','x'=>'Exploring the timeless appeal of Bandra\'s tree-lined streets.','c'=>'Market Report','d'=>'May 5, 2026','img'=>'https://images.unsplash.com/photo-1600585154340-be6199f7a099?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80','s'=>'bandra-west-mumbai-coveted-address'],
-            ['t'=>'Interior Design Trends for Luxury Indian Homes in 2026','x'=>'How top architects are blending tradition with modernity.','c'=>'Lifestyle','d'=>'Apr 28, 2026','img'=>'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80','s'=>'interior-design-trends-luxury-indian-homes-2026'],
-        ]; @endphp
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
             @foreach($blogs as $b)
-            <a href="{{ route('blogs.show', $b['s']) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
+            <a href="{{ route('blogs.show', $b->slug) }}" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-lg transition-all duration-200 cursor-pointer block">
                 <div class="h-48 overflow-hidden">
-                    <img src="{{ $b['img'] }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $b['t'] }}">
+                    <img src="{{ asset('storage/' . $b->image) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $b->title }}">
                 </div>
-                <div class="p-6">
+                <div class="p-6 flex flex-col h-full">
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">{{ $b['c'] }}</span>
-                        <span class="text-[10px] text-primary/20">{{ $b['d'] }}</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">{{ $b->category->name ?? 'Uncategorized' }}</span>
+                        <span class="text-[10px] text-primary/20">{{ $b->created_at->format('M d, Y') }}</span>
                     </div>
-                    <h3 class="font-heading font-bold text-primary text-base mb-2 group-hover:text-secondary transition-colors duration-200 leading-snug">{{ $b['t'] }}</h3>
-                    <p class="text-[13px] text-text-main/40 leading-relaxed mb-5">{{ $b['x'] }}</p>
-                    <span class="text-primary/60 font-semibold text-sm flex items-center gap-1.5 group-hover:gap-2.5 group-hover:text-secondary transition-all">
+                    <h3 class="font-heading font-bold text-primary text-base mb-2 group-hover:text-secondary transition-colors duration-200 leading-snug">{{ $b->title }}</h3>
+                    <p class="text-[13px] text-text-main/40 leading-relaxed mb-5 line-clamp-2">{{ $b->short_desc }}</p>
+                    <span class="text-primary/60 font-semibold text-sm flex items-center gap-1.5 group-hover:gap-2.5 group-hover:text-secondary transition-all mt-auto">
                         Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                     </span>
                 </div>
