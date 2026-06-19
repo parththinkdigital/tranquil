@@ -78,7 +78,7 @@
     <div class="absolute bottom-0 left-0 right-0 p-8 md:p-16 lg:p-20">
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center gap-4 mb-6">
-                <span class="text-[10px] font-bold uppercase tracking-[.25em] text-white bg-white/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full">{{ optional($blog->category)->name ?? 'General' }}</span>
+                <span class="text-[10px] font-bold uppercase tracking-[.25em] text-white bg-white/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full">{{ optional($blog->category)->title ?: 'General' }}</span>
                 <span class="text-[11px] text-white/50 font-medium tracking-wide">{{ $blog->created_at->format('M d, Y') }}</span>
                 <span class="w-1 h-1 rounded-full bg-white/30"></span>
                 <span class="text-[11px] text-white/50 font-medium">5 min read</span>

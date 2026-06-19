@@ -90,7 +90,7 @@
                     </div>
                     <div class="lg:col-span-2 p-8 lg:p-12 lg:pl-0 flex flex-col justify-center">
                         <div class="flex items-center gap-4 mb-5">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-3 py-1.5 rounded-full">{{ $featured->category->name ?? 'Uncategorized' }}</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-3 py-1.5 rounded-full">{{ $featured->category->title ?? 'Uncategorized' }}</span>
                             <span class="text-[11px] text-primary/30 font-medium">5 min read</span>
                         </div>
                         <h2 class="font-heading font-bold text-primary leading-tight mb-5" style="font-size: clamp(1.5rem, 2.5vw, 2.2rem); letter-spacing: -0.03em;">
@@ -134,7 +134,7 @@
                         </div>
                         <div class="p-6 md:p-7 flex flex-col flex-1">
                             <div class="flex items-center gap-3 mb-3">
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-1 rounded-full">{{ $post->category->name ?? 'Uncategorized' }}</span>
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-1 rounded-full">{{ $post->category->title ?? 'Uncategorized' }}</span>
                                 <span class="text-[10px] text-primary/20 font-medium">5 min read</span>
                             </div>
                             <h3 class="font-heading font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors duration-200 leading-snug">{{ $post->title }}</h3>

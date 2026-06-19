@@ -479,7 +479,7 @@
                 </div>
                 <div class="p-6 flex flex-col h-full">
                     <div class="flex justify-between items-center mb-3">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">{{ $b->category->name ?? 'Uncategorized' }}</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">{{ $b->category->title ?? 'Uncategorized' }}</span>
                         <span class="text-[10px] text-primary/20">{{ $b->created_at->format('M d, Y') }}</span>
                     </div>
                     <h3 class="font-heading font-bold text-primary text-base mb-2 group-hover:text-secondary transition-colors duration-200 leading-snug">{{ $b->title }}</h3>
