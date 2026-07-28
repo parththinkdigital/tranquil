@@ -11,13 +11,6 @@
         </a>
     </div>
 
-    @if(session('success'))
-    <div class="bg-green-50 text-green-600 border border-green-100 px-4 py-3 rounded-2xl mb-6 text-sm flex items-center gap-3">
-        <i data-lucide="check-circle" class="w-4 h-4"></i>
-        {{ session('success') }}
-    </div>
-    @endif
-
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
@@ -41,7 +34,7 @@
                             <a href="{{ route('admin.property-type.edit', $type) }}" class="text-secondary hover:text-primary transition-colors">
                                 <i data-lucide="edit-2" class="w-4 h-4"></i>
                             </a>
-                            <form action="{{ route('admin.property-type.destroy', $type) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this property type?');">
+                            <form action="{{ route('admin.property-type.destroy', $type) }}" method="POST" class="inline-block" data-confirm="Delete this property type?">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-400 hover:text-red-600 transition-colors">

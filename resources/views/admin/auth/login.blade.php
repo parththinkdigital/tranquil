@@ -7,8 +7,29 @@
     <title>Admin Login - Tranquilstead</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .admin-login-toast {
+            animation: admin-login-toast-in 0.24s ease-out both;
+        }
+
+        .admin-login-toast.is-leaving {
+            animation: admin-login-toast-out 0.2s ease-in both;
+        }
+
+        @keyframes admin-login-toast-in {
+            from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes admin-login-toast-out {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 0; transform: translateY(-10px) scale(0.98); }
+        }
+    </style>
 </head>
 <body class="bg-teal-50/30 flex h-screen overflow-hidden font-body items-center justify-center">
+
+    <div id="admin-login-toast-root" class="fixed top-6 right-6 z-50 w-[min(420px,calc(100vw-32px))]"></div>
 
     <div class="bg-white p-12 rounded-[40px] shadow-2xl shadow-teal-900/10 border border-teal-50 w-full max-w-md relative overflow-hidden">
         <!-- Decorative element -->
@@ -19,13 +40,6 @@
             <h1 class="text-3xl font-heading font-bold text-primary tracking-tighter">TRANQUILSTEAD</h1>
             <span class="text-secondary text-xs block tracking-widest uppercase mt-1">Admin Control</span>
         </div>
-
-        @if (session('error'))
-            <div class="bg-red-50 text-red-500 border border-red-100 px-4 py-3 rounded-2xl mb-6 text-sm flex items-center gap-3">
-                <i data-lucide="alert-circle" class="w-4 h-4"></i>
-                <span class="block sm:inline">{{ session('error') }}</span>
-            </div>
-        @endif
 
         <form action="{{ route('admin.login.submit') }}" method="POST" class="relative z-10">
             @csrf
@@ -79,6 +93,49 @@
 
     <script>
         lucide.createIcons();
+
+        const adminLoginError = @json(session('error'));
+
+        if (adminLoginError) {
+            const root = document.getElementById('admin-login-toast-root');
+            const toast = document.createElement('div');
+            const iconWrap = document.createElement('div');
+            const icon = document.createElement('i');
+            const content = document.createElement('div');
+            const label = document.createElement('p');
+            const body = document.createElement('p');
+            const closeButton = document.createElement('button');
+            const closeIcon = document.createElement('i');
+
+            toast.className = 'admin-login-toast flex items-start gap-3 rounded-2xl border border-red-100 bg-white text-red-700 p-4 shadow-xl shadow-primary/10';
+            iconWrap.className = 'w-9 h-9 shrink-0 rounded-xl bg-red-50 text-red-500 flex items-center justify-center';
+            icon.setAttribute('data-lucide', 'alert-triangle');
+            icon.className = 'w-4 h-4';
+            content.className = 'min-w-0 flex-1';
+            label.className = 'text-[10px] uppercase tracking-[0.2em] font-bold opacity-60';
+            label.textContent = 'Needs attention';
+            body.className = 'text-sm font-semibold leading-snug mt-0.5';
+            body.textContent = adminLoginError;
+            closeButton.type = 'button';
+            closeButton.className = 'text-primary/25 hover:text-primary transition-colors';
+            closeButton.setAttribute('aria-label', 'Dismiss notification');
+            closeIcon.setAttribute('data-lucide', 'x');
+            closeIcon.className = 'w-4 h-4';
+
+            const closeToast = () => {
+                toast.classList.add('is-leaving');
+                window.setTimeout(() => toast.remove(), 180);
+            };
+
+            iconWrap.appendChild(icon);
+            content.append(label, body);
+            closeButton.appendChild(closeIcon);
+            toast.append(iconWrap, content, closeButton);
+            closeButton.addEventListener('click', closeToast);
+            root.appendChild(toast);
+            lucide.createIcons();
+            window.setTimeout(closeToast, 4200);
+        }
 
         function togglePassword() {
             const password = document.getElementById('password');

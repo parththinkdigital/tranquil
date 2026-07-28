@@ -17,14 +17,6 @@
         </a>
     </div>
 
-    {{-- Success Alert --}}
-    @if(session('success'))
-    <div class="bg-green-50 text-green-600 border border-green-100 px-4 py-3 rounded-2xl mb-6 text-sm flex items-center gap-3">
-        <i data-lucide="check-circle" class="w-4 h-4 shrink-0"></i>
-        {{ session('success') }}
-    </div>
-    @endif
-
     {{-- Table --}}
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
@@ -83,8 +75,7 @@
                                class="w-8 h-8 flex items-center justify-center rounded-lg bg-teal-50 text-primary hover:bg-secondary hover:text-white transition-all">
                                 <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
                             </a>
-                            <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" class="inline-block"
-                                  onsubmit="return confirm('Are you sure you want to delete this blog post? This cannot be undone.');">
+                            <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" class="inline-block" data-confirm="Delete this blog post? This cannot be undone.">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" title="Delete"

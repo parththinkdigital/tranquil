@@ -33,11 +33,12 @@ class BlogController extends Controller
             'short_para'  => 'required|string',
             'long_desc1'  => 'required|string',
             'banner_img'  => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
-            'long_desc2'  => 'required|string',
+            'long_desc2'  => 'nullable|string',
             'event_date'  => 'nullable|date',
         ]);
 
         $data = $request->except(['image', 'banner_img']);
+        $data['long_desc2'] = $data['long_desc2'] ?? '';
 
         // Store thumbnail image
         $data['image'] = $request->file('image')->store('blogs/thumbnails', 'public');
@@ -72,11 +73,12 @@ class BlogController extends Controller
             'short_para'  => 'required|string',
             'long_desc1'  => 'required|string',
             'banner_img'  => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
-            'long_desc2'  => 'required|string',
+            'long_desc2'  => 'nullable|string',
             'event_date'  => 'nullable|date',
         ]);
 
         $data = $request->except(['image', 'banner_img']);
+        $data['long_desc2'] = $data['long_desc2'] ?? '';
 
         // Update thumbnail image if new one is uploaded
         if ($request->hasFile('image')) {

@@ -7,11 +7,12 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable;
 
     public function properties()
     {
@@ -26,11 +27,6 @@ class User extends Authenticatable
     public function leads()
     {
         return $this->hasMany(Lead::class, 'user_id');
-    }
-
-    public function agentLeads()
-    {
-        return $this->hasMany(Lead::class, 'agent_id');
     }
 
     /**

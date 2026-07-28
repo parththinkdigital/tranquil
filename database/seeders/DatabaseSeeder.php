@@ -8,6 +8,7 @@ use App\Models\Location;
 use App\Models\Property;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -15,28 +16,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Roles
-        $adminRole = Role::create(['name' => 'admin']);
-        $agentRole = Role::create(['name' => 'agent']);
-        $buyerRole = Role::create(['name' => 'buyer']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
 
         // 2. Users
         $admin = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@tranquilstead.com',
+            'password' => Hash::make('123456'),
+            'role' => 'admin',
         ]);
         $admin->assignRole($adminRole);
 
-        $agent = User::factory()->create([
-            'name' => 'Premium Agent',
-            'email' => 'agent@tranquilstead.com',
-        ]);
-        $agent->assignRole($agentRole);
-
-        $buyer = User::factory()->create([
-            'name' => 'Happy Buyer',
-            'email' => 'buyer@tranquilstead.com',
-        ]);
-        $buyer->assignRole($buyerRole);
 
         // 3. Categories
         $categories = ['Apartment', 'Villa', 'Penthouse', 'Townhouse', 'Land'];
@@ -63,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
         // 6. Properties
         Property::create([
-            'user_id' => $agent->id,
+            'user_id' => $admin->id,
             'category_id' => 1,
             'location_id' => 3,
             'title' => 'Luxury Sea Facing Apartment',
@@ -82,7 +72,7 @@ class DatabaseSeeder extends Seeder
         ])->amenities()->sync([1, 2, 3]);
 
         Property::create([
-            'user_id' => $agent->id,
+            'user_id' => $admin->id,
             'category_id' => 2,
             'location_id' => 1,
             'title' => 'Modern Minimalist Villa',

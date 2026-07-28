@@ -8,13 +8,6 @@
         <h3 class="text-2xl font-heading font-bold text-primary italic">Manage <span class="text-secondary">Inquiries</span></h3>
     </div>
 
-    @if(session('success'))
-        <div class="bg-green-50 text-green-600 border border-green-100 px-4 py-3 rounded-2xl mb-6 text-sm flex items-center gap-3">
-            <i data-lucide="check-circle" class="w-4 h-4"></i>
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse">
             <thead>
@@ -46,7 +39,7 @@
                         </td>
                         <td class="py-4 px-6 text-right">
                             <div class="flex items-center justify-end gap-3">
-                                <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this inquiry?');">
+                                <form action="{{ route('admin.contacts.destroy', $contact) }}" method="POST" class="inline-block" data-confirm="Delete this inquiry?">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-400 hover:text-red-600 transition-colors">

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // The potential buyer
-            $table->foreignId('agent_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->foreignId('property_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // Optional logged-in visitor
+            $table->foreignId('property_id')->nullable()->constrained()->nullOnDelete();
             
             $table->string('source')->default('inquiry'); // inquiry, viewing_request, manual
             $table->string('status')->default('new'); // new, contacted, qualified, closed, lost

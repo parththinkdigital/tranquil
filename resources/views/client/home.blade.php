@@ -88,7 +88,7 @@
                     <strong class="font-bold">100 Million</strong> <em class="italic text-secondary font-bold">buyers</em>
                 </h2>
                 <p class="text-sm text-text-main/40 leading-relaxed max-w-sm">
-                    Only we connect you directly to the person that knows the most about a property for sale, the listing agent.
+                    We connect you directly with the Tranquilstead team that manages every curated property listing.
                 </p>
             </div>
 
@@ -349,7 +349,7 @@
                     @php $statItems = [
                         ['count' => '500', 'suffix' => '+', 'label' => 'Properties Sold', 'icon' => 'building', 'desc' => 'Across premium locations in Mumbai & Nashik'],
                         ['count' => '98', 'suffix' => '%', 'label' => 'Client Satisfaction', 'icon' => 'star', 'desc' => 'From first consultation to final handover'],
-                        ['count' => '24', 'suffix' => '/7', 'label' => 'Dedicated Support', 'icon' => 'headphones', 'desc' => 'Your agent is always a call away'],
+                        ['count' => '24', 'suffix' => '/7', 'label' => 'Dedicated Support', 'icon' => 'headphones', 'desc' => 'Our team is always a call away'],
                         ['count' => '0', 'suffix' => '%', 'label' => 'Hidden Fees', 'icon' => 'shield-check', 'desc' => 'Complete transparency in every transaction'],
                     ]; @endphp
                     @foreach($statItems as $i => $s)
@@ -407,7 +407,7 @@
             @php $testimonials = [
                 ['n'=>'Advik Sharma','r'=>'Homeowner, Bandra','q'=>'Tranquilstead made what seemed impossible feel effortless. Every step was handled with pure elegance.'],
                 ['n'=>'Priya Mehta','r'=>'Investor, Juhu','q'=>'The quality of listings is unmatched. I found my dream investment property within a week.'],
-                ['n'=>'Rohan Kapoor','r'=>'First-time Buyer','q'=>'As a first-time buyer, I was nervous. Tranquilstead\'s agents guided me patiently through every step.'],
+                ['n'=>'Rohan Kapoor','r'=>'First-time Buyer','q'=>'As a first-time buyer, I was nervous. Tranquilstead guided me patiently through every step.'],
             ]; @endphp
             @foreach($testimonials as $t)
             <div class="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-secondary/30 transition-all duration-200">
@@ -441,12 +441,12 @@
                         Ready to find<br><strong class="font-bold"><em class="italic text-secondary">your home?</em></strong>
                     </h2>
                     <p class="text-sm text-teal-100/40 leading-relaxed max-w-md">
-                        Whether you're buying, selling, or renting — our certified agents make your journey absolutely tranquil.
+                        Whether you're buying, selling, or renting, our team makes your journey absolutely tranquil.
                     </p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-end">
                     <a href="{{ route('properties.index') }}" class="bg-secondary text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-primary transition-all duration-200 text-center cursor-pointer shadow-lg text-sm">Browse Listings</a>
-                    <a href="{{ route('pages.contact') }}" class="bg-white/10 text-white border border-white/15 px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-primary transition-all duration-200 text-center cursor-pointer text-sm">Contact Agent</a>
+                    <a href="{{ route('pages.contact') }}" class="bg-white/10 text-white border border-white/15 px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-primary transition-all duration-200 text-center cursor-pointer text-sm">Contact Team</a>
                 </div>
             </div>
         </div>

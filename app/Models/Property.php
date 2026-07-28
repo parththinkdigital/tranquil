@@ -9,8 +9,34 @@ class Property extends Model
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
 
     protected $fillable = [
-        'name'
+        'user_id',
+        'category_id',
+        'location_id',
+        'name',
+        'title',
+        'slug',
+        'description',
+        'price',
+        'type',
+        'status',
+        'bedrooms',
+        'bathrooms',
+        'area',
+        'furnished_status',
+        'address',
+        'lat',
+        'lng',
     ];
+
+    public function amenities()
+    {
+        return $this->belongsToMany(Amenity::class)->withTimestamps();
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function types()
     {

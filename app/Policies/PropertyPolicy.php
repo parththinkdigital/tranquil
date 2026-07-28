@@ -19,21 +19,21 @@ class PropertyPolicy
             return true;
         }
 
-        return $user && ($user->hasRole('admin') || $user->id === $property->user_id);
+        return $user && $user->hasRole('admin');
     }
 
     public function create(User $user): bool
     {
-        return $user->hasRole('admin') || $user->hasRole('agent');
+        return $user->hasRole('admin');
     }
 
     public function update(User $user, Property $property): bool
     {
-        return $user->hasRole('admin') || ($user->hasRole('agent') && $user->id === $property->user_id);
+        return $user->hasRole('admin');
     }
 
     public function delete(User $user, Property $property): bool
     {
-        return $user->hasRole('admin') || ($user->hasRole('agent') && $user->id === $property->user_id);
+        return $user->hasRole('admin');
     }
 }

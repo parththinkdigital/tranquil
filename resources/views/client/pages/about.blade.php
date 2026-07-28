@@ -9,7 +9,7 @@
 <script type="application/ld+json">
 {!! json_encode([
     '@context' => 'https://schema.org',
-    '@type' => 'RealEstateAgent',
+    '@type' => 'RealEstateBusiness',
     'name' => 'Tranquilstead',
     'description' => 'Premium luxury real estate platform dedicated to curating the finest properties, architecture, and design stories.',
     'url' => url('/'),

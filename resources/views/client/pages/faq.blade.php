@@ -13,7 +13,7 @@
         {
             "@type": "Question",
             "name": "How do I start the property search?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Browse our curated listings, filter by location or type, and connect with our agents for personalized guidance." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Browse our curated listings, filter by location or type, and contact our team for personalized guidance." }
         },
         {
             "@type": "Question",
@@ -47,7 +47,7 @@
 
         <div class="space-y-4">
             @php $faqs = [
-                ['q' => 'How do I start my property search?', 'a' => 'Browse our curated listings, filter by location, type, or budget, and save your favorites. Our agents are available for personalized guidance at every step.'],
+                ['q' => 'How do I start my property search?', 'a' => 'Browse our curated listings, filter by location, type, or budget, and contact our team for personalized guidance at every step.'],
                 ['q' => 'Is there a fee to list my property?', 'a' => 'We offer flexible listing options tailored to your needs. Contact our team for a free consultation and detailed pricing.'],
                 ['q' => 'Can I schedule a virtual tour?', 'a' => 'Absolutely. We offer immersive virtual tours and in-person site visits for all listed properties.'],
                 ['q' => 'What areas do you serve?', 'a' => 'We specialize in premium properties across Nashik, Mumbai, and emerging luxury markets throughout India.'],

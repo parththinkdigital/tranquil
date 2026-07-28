@@ -251,28 +251,15 @@
                     @enderror
                 </div>
 
-                {{-- Long Description 1 --}}
+                {{-- Full Article Editor --}}
                 <div>
                     <label for="long_desc1" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
-                        Long Description 1 <span class="text-red-400">*</span>
-                        <span class="text-primary/30 font-normal normal-case ml-1">(First main section)</span>
+                        Full Article <span class="text-red-400">*</span>
+                        <span class="text-primary/30 font-normal normal-case ml-1">(Main blog body)</span>
                     </label>
                     <textarea name="long_desc1" id="long_desc1" rows="6" required
-                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary resize-y @error('long_desc1') border-red-300 ring-2 ring-red-100 @enderror">{{ old('long_desc1', $blog->long_desc1) }}</textarea>
+                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary resize-y @error('long_desc1') border-red-300 ring-2 ring-red-100 @enderror">{{ old('long_desc1', trim($blog->long_desc1 . "\n\n" . $blog->long_desc2)) }}</textarea>
                     @error('long_desc1')
-                    <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{-- Long Description 2 --}}
-                <div>
-                    <label for="long_desc2" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
-                        Long Description 2 <span class="text-red-400">*</span>
-                        <span class="text-primary/30 font-normal normal-case ml-1">(Second section, after banner)</span>
-                    </label>
-                    <textarea name="long_desc2" id="long_desc2" rows="6" required
-                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary resize-y @error('long_desc2') border-red-300 ring-2 ring-red-100 @enderror">{{ old('long_desc2', $blog->long_desc2) }}</textarea>
-                    @error('long_desc2')
                     <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
                     @enderror
                 </div>
@@ -322,7 +309,7 @@
 
     $(document).ready(function() {
 
-        $('#long_desc1, #long_desc2').summernote({
+        $('#long_desc1').summernote({
 
             height: 350,
 

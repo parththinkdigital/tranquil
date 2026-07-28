@@ -140,11 +140,11 @@
 
                         <div class="mt-12 flex items-center gap-4 border-t border-teal-800 pt-8">
                             <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center font-bold text-lg">
-                                {{ strtoupper(substr($property->agent->name ?? 'A', 0, 1)) }}
+                                {{ strtoupper(substr($property->owner->name ?? 'A', 0, 1)) }}
                             </div>
                             <div>
                                 <p class="text-xs uppercase tracking-tighter text-teal-300">Managed by</p>
-                                <p class="font-bold text-lg">{{ $property->agent->name ?? 'Agent' }}</p>
+                                <p class="font-bold text-lg">{{ $property->owner->name ?? 'Admin' }}</p>
                             </div>
                         </div>
                     </div>

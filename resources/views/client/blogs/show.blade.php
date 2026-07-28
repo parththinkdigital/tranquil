@@ -88,71 +88,173 @@ $related = [
 @endsection
 
 @section('content')
+<style>
+    .journal-prose {
+        color: rgba(15, 37, 35, 0.78);
+        font-size: 18px;
+        line-height: 1.82;
+    }
+
+    .journal-prose > * + * {
+        margin-top: 1.35rem;
+    }
+
+    .journal-prose h2 {
+        color: #073b37;
+        font-family: var(--font-heading, inherit);
+        font-size: clamp(1.75rem, 3vw, 2.65rem);
+        line-height: 1.12;
+        letter-spacing: -0.04em;
+        margin-top: 4.2rem;
+        margin-bottom: 1rem;
+        padding-top: 1.35rem;
+        border-top: 1px solid rgba(15, 118, 110, 0.13);
+    }
+
+    .journal-prose h2:first-child {
+        margin-top: 0;
+        border-top: 0;
+        padding-top: 0;
+    }
+
+    .journal-prose p {
+        max-width: 82ch;
+    }
+
+    .journal-prose strong {
+        color: #073b37;
+        font-weight: 700;
+    }
+
+    .journal-prose blockquote {
+        margin: 2.75rem 0;
+        max-width: 940px;
+        border-left: 4px solid #14b8a6;
+        background: linear-gradient(90deg, rgba(20, 184, 166, 0.1), rgba(20, 184, 166, 0.02));
+        border-radius: 0 24px 24px 0;
+        padding: 1.35rem 1.6rem;
+        color: #0f4f49;
+        font-size: clamp(1.25rem, 2vw, 1.65rem);
+        line-height: 1.55;
+    }
+
+    .journal-prose blockquote p {
+        margin: 0;
+        max-width: none;
+    }
+
+    .journal-prose img {
+        width: 100%;
+        max-width: 1080px;
+        border-radius: 28px;
+        margin: 3rem 0;
+        box-shadow: 0 28px 80px rgba(15, 37, 35, 0.14);
+    }
+
+    .journal-prose ul,
+    .journal-prose ol {
+        max-width: 82ch;
+        padding-left: 1.25rem;
+        margin-top: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .journal-prose li {
+        padding-left: 0.35rem;
+        margin-top: 0.75rem;
+    }
+
+    .journal-prose li::marker {
+        color: #14b8a6;
+        font-weight: 800;
+    }
+
+    @media (max-width: 768px) {
+        .journal-prose {
+            font-size: 16.5px;
+            line-height: 1.75;
+        }
+    }
+</style>
 
 {{-- Hero --}}
-<section class="relative h-[80vh] min-h-[600px] overflow-hidden bg-primary">
-    <div class="absolute inset-0 pointer-events-none select-none flex items-center justify-center overflow-hidden opacity-[0.04]">
-        <span class="font-heading font-black text-white leading-none tracking-[-0.06em] whitespace-nowrap"
-              style="font-size: clamp(10rem, 18vw, 19rem);">
-            Tranquilstead
-        </span>
-    </div>
-    <img src="{{ $article['img'] }}" alt="{{ $article['title'] }}" class="absolute inset-0 w-full h-full object-cover">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 via-40% to-transparent"></div>
-    <div class="absolute bottom-0 left-0 right-0 p-8 md:p-16 lg:p-20">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex items-center gap-4 mb-6">
-                <span class="text-[10px] font-bold uppercase tracking-[.25em] text-white bg-white/15 backdrop-blur-sm px-3.5 py-1.5 rounded-full">{{ $article['category'] }}</span>
-                <span class="text-[11px] text-white/50 font-medium tracking-wide">{{ $article['date'] }}</span>
-                <span class="w-1 h-1 rounded-full bg-white/30"></span>
-                <span class="text-[11px] text-white/50 font-medium">{{ $article['read_time'] }}</span>
+<section id="journal-hero" class="relative overflow-hidden bg-primary text-white lg:min-h-[76vh] flex items-center">
+    <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image: linear-gradient(rgba(255,255,255,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.35) 1px, transparent 1px); background-size: 54px 54px;"></div>
+    <div class="absolute -top-32 -right-32 w-[32rem] h-[32rem] rounded-full bg-secondary/20 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-32 md:pt-36 pb-14 md:pb-16 relative w-full">
+        <nav class="flex text-[10px] uppercase tracking-widest font-bold text-teal-100/45 mb-10 gap-2.5 items-center">
+            <a href="/" class="hover:text-white transition-colors">Home</a>
+            <i data-lucide="chevron-right" class="w-3 h-3 text-teal-100/25"></i>
+            <a href="{{ route('blogs.index') }}" class="hover:text-white transition-colors">Journal</a>
+            <i data-lucide="chevron-right" class="w-3 h-3 text-teal-100/25"></i>
+            <span class="text-teal-100/70 truncate max-w-[260px]">{{ $article['category'] }}</span>
+        </nav>
+
+        <div class="max-w-7xl">
+            <div class="rounded-[36px] md:rounded-[48px] border border-white/10 bg-white/[0.045] p-7 md:p-10 backdrop-blur-sm">
+                <div>
+                    <div class="flex flex-wrap items-center gap-3 mb-8">
+                        <span class="text-[10px] font-bold uppercase tracking-[.25em] text-primary bg-secondary px-4 py-2 rounded-full shadow-lg shadow-secondary/20">{{ $article['category'] }}</span>
+                        <span class="text-[12px] text-teal-100/55 font-semibold tracking-wide">{{ $article['date'] }}</span>
+                        <span class="w-1 h-1 rounded-full bg-teal-100/30"></span>
+                        <span class="text-[12px] text-teal-100/55 font-semibold">{{ $article['read_time'] }}</span>
+                    </div>
+
+                    <p class="text-[10px] uppercase tracking-[0.35em] font-bold text-teal-100/35 mb-5">Tranquilstead Journal</p>
+                    <h1 class="font-heading font-black leading-[1.02] tracking-[-0.045em] max-w-7xl" style="font-size: clamp(2.25rem, 4.8vw, 4.8rem);">
+                        {{ $article['title'] }}
+                    </h1>
+                    <p class="mt-7 text-base md:text-xl text-teal-50/68 leading-relaxed max-w-2xl">
+                        {{ $article['excerpt'] }}
+                    </p>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 border-t border-white/10 pt-6">
+                    <div class="flex items-center gap-4">
+                        <img src="{{ $article['author']['avatar'] }}" alt="{{ $article['author']['name'] }}" class="w-12 h-12 rounded-2xl object-cover ring-1 ring-white/20">
+                        <div>
+                            <p class="text-sm font-bold text-white">{{ $article['author']['name'] }}</p>
+                            <p class="text-[11px] text-teal-100/45 font-semibold">{{ $article['author']['role'] }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h1 class="font-heading font-black text-white leading-tight"
-                style="font-size: clamp(2rem, 5vw, 4.5rem); letter-spacing: -0.04em;">
-                {{ $article['title'] }}
-            </h1>
+
         </div>
     </div>
 </section>
 
-{{-- Content --}}
-<section class="py-16 md:py-24 bg-white">
+{{-- Featured Image --}}
+<section class="bg-white -mt-1 pt-10 md:pt-14">
     <div class="max-w-7xl mx-auto px-6">
+        <figure class="relative overflow-hidden rounded-[34px] md:rounded-[48px] border border-primary/10 bg-primary shadow-2xl shadow-primary/10">
+            <img data-featured-image src="{{ $article['img'] }}" alt="{{ $article['title'] }}" class="w-full h-[320px] md:h-[560px] object-cover">
+            <div class="absolute inset-x-0 bottom-0 p-5 md:p-8 bg-gradient-to-t from-primary/82 to-transparent">
+                <figcaption class="max-w-2xl rounded-3xl bg-white/10 backdrop-blur-md border border-white/15 p-5 text-white">
+                    <p class="text-[10px] uppercase tracking-[0.25em] font-bold text-teal-100/55 mb-2">Featured Image</p>
+                    <p class="text-sm md:text-base text-white/84 leading-relaxed">Architecture, lifestyle, and market signals shaping the next generation of Mumbai homes.</p>
+                </figcaption>
+            </div>
+        </figure>
+    </div>
+</section>
 
-        {{-- Breadcrumb --}}
-        <nav class="flex text-[10px] uppercase tracking-widest font-bold text-primary/30 mb-16 gap-2.5 items-center">
-            <a href="/" class="hover:text-secondary transition-colors">Home</a>
-            <i data-lucide="chevron-right" class="w-3 h-3 text-primary/20"></i>
-            <a href="{{ route('blogs.index') }}" class="hover:text-secondary transition-colors">Journal</a>
-            <i data-lucide="chevron-right" class="w-3 h-3 text-primary/20"></i>
-            <span class="text-primary/50 truncate max-w-[280px]">{{ $article['title'] }}</span>
-        </nav>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
+{{-- Content --}}
+<section id="article-content" class="py-14 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px] gap-12 lg:gap-14 xl:gap-18 items-start">
 
             {{-- Article Body --}}
-            <div class="lg:col-span-8">
+            <article class="min-w-0">
 
                 {{-- Lead --}}
-                <p class="text-2xl md:text-3xl font-light text-text-main/60 leading-[2] mb-14 border-l-4 border-secondary pl-6">
+                <p class="text-xl md:text-2xl text-primary/70 leading-relaxed mb-12 border-l-4 border-secondary pl-5 md:pl-7 max-w-[980px]">
                     {{ $article['excerpt'] }}
                 </p>
 
                 {{-- Article prose --}}
-                <div class="prose prose-teal max-w-none
-                            prose-headings:font-heading prose-headings:text-primary prose-headings:font-bold
-                            prose-h2:text-4xl prose-h2:tracking-tight prose-h2:mt-24 prose-h2:mb-6
-                            prose-h3:text-3xl prose-h3:tracking-tight prose-h3:mt-16
-                            prose-p:text-text-main/65 prose-p:leading-[2] prose-p:text-lg md:prose-p:text-xl prose-p:font-light
-                            prose-blockquote:border-l-[3px] prose-blockquote:border-secondary
-                            prose-blockquote:text-text-main/55 prose-blockquote:font-light prose-blockquote:text-xl md:prose-blockquote:text-2xl
-                            prose-blockquote:italic prose-blockquote:pl-8 prose-blockquote:py-4 prose-blockquote:my-12
-                            prose-blockquote:not-italic prose-blockquote:bg-teal-50/30 prose-blockquote:rounded-r-2xl
-                            prose-strong:text-primary prose-strong:font-semibold
-                            prose-a:text-secondary prose-a:no-underline hover:prose-a:underline
-                            prose-img:rounded-3xl prose-img:shadow-lg prose-img:my-12
-                            prose-ul:space-y-3 prose-ul:my-8 prose-li:text-text-main/65 prose-li:font-light
-                            prose-ol:space-y-3 prose-ol:my-8 prose-li:marker:text-primary/30">
+                <div class="journal-prose">
 
                     <p>Mumbai's skyline has never been static. But as we move through 2026, the city's architectural language is undergoing a transformation more profound than any renovation cycle before it. This isn't merely about taller buildings or shinier facades — it's a fundamental reimagining of what luxury living means in the context of a rapidly evolving metropolis.</p>
 
@@ -226,7 +328,7 @@ $related = [
                 </div>
 
                 {{-- Author Card --}}
-                <div class="p-8 md:p-10 bg-primary/[0.02] rounded-3xl border border-primary/5 mb-12">
+                <div class="p-7 md:p-9 bg-[#f7f3ea] rounded-[32px] border border-primary/10 mb-12 max-w-[820px]">
                     <div class="flex flex-col sm:flex-row gap-6 items-start">
                         <img src="{{ $article['author']['avatar'] }}" alt="{{ $article['author']['name'] }}" class="w-16 h-16 md:w-20 md:h-20 rounded-2xl object-cover shadow-md flex-shrink-0">
                         <div class="flex-1 min-w-0">
@@ -234,7 +336,7 @@ $related = [
                                 <h4 class="font-heading font-bold text-primary text-lg">{{ $article['author']['name'] }}</h4>
                                 <span class="text-[10px] uppercase tracking-widest font-semibold text-secondary bg-secondary/10 px-3 py-1 rounded-full">{{ $article['author']['role'] }}</span>
                             </div>
-                            <p class="text-text-main/45 text-sm font-light leading-relaxed">{{ $article['author']['bio'] }}</p>
+                            <p class="text-primary/55 text-sm leading-relaxed">{{ $article['author']['bio'] }}</p>
                         </div>
                     </div>
                 </div>
@@ -256,14 +358,23 @@ $related = [
                         <i data-lucide="link" class="w-3.5 h-3.5"></i>
                     </a>
                 </div>
-            </div>
+            </article>
 
             {{-- Sidebar --}}
-            <aside class="lg:col-span-4">
-                <div class="sticky top-40 space-y-3">
+            <aside class="min-w-0">
+                <div class="lg:sticky lg:top-28 space-y-4">
+
+                    <div class="bg-primary text-white rounded-[32px] p-7 shadow-xl shadow-primary/10">
+                        <p class="text-[10px] uppercase tracking-[.25em] font-bold text-teal-200/50 mb-3">Article Guide</p>
+                        <h3 class="font-heading font-bold text-2xl tracking-tight mb-4">Clear, calm reading</h3>
+                        <div class="space-y-3 text-sm text-teal-50/70 leading-relaxed">
+                            <p>{{ $article['read_time'] }} published {{ $article['date'] }}.</p>
+                            <p>Use the topic links below to continue browsing the journal.</p>
+                        </div>
+                    </div>
 
                     {{-- Browse by Category --}}    
-                    <div class="bg-white rounded-2xl p-6 border border-primary/5">
+                    <div class="bg-white rounded-[28px] p-6 border border-primary/10 shadow-sm">
                         <h4 class="text-[10px] uppercase tracking-[.2em] font-bold text-primary/30 mb-5 flex items-center gap-2">
                             <i data-lucide="folder" class="w-3.5 h-3.5"></i>
                             Browse by Topic
@@ -279,7 +390,7 @@ $related = [
                     </div>
 
                     {{-- Popular Posts --}}
-                    <div class="bg-white rounded-2xl p-6 border border-primary/5">
+                    <div class="bg-white rounded-[28px] p-6 border border-primary/10 shadow-sm">
                         <h4 class="text-[10px] uppercase tracking-[.2em] font-bold text-primary/30 mb-5 flex items-center gap-2">
                             <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
                             Popular Reads
@@ -359,8 +470,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     gsap.registerPlugin(ScrollTrigger);
 
-    const hero = document.querySelector('section.relative.h-\\[80vh\\]');
-    const heroImg = hero?.querySelector('img');
+    const hero = document.getElementById('journal-hero');
+    const heroImg = document.querySelector('[data-featured-image]');
     if (heroImg) {
         gsap.to(heroImg, {
             scale: 1.1,

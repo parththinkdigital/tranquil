@@ -85,15 +85,6 @@
         </a>
         </div>
         
-        <!-- <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-            <i data-lucide="users" class="w-5 h-5"></i>
-            <span>Agents</span>
-        </a>
-
-        <a href="#" class="flex items-center gap-4 px-4 py-3 rounded-xl text-teal-100/70 hover:text-white hover:bg-white/10 transition-all font-medium">
-            <i data-lucide="target" class="w-5 h-5"></i>
-            <span>Leads</span>
-        </a> -->
     </nav>
 
     <div class="p-4 bg-teal-900/50 m-4 rounded-2xl">

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -28,13 +29,16 @@ class AuthController extends Controller
     // Register new admin user
     public function register()
     {
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+
         $data = [
-            'name' => "admin",
-            'email' => "admin@gmail.com",
+            'name' => "Admin User",
+            'email' => "admin@tranquilstead.com",
             'password' => Hash::make("123456"),
             'role' => "admin"
         ];
         $user = User::firstOrCreate(['email' => $data['email']], $data);
+        $user->assignRole($adminRole);
         
         if ($user) {
             echo "Registered successfully";

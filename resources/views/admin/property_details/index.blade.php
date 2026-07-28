@@ -11,13 +11,6 @@
     </a>
 </div>
 
-@if(session('success'))
-<div class="bg-teal-50 text-teal-800 p-4 rounded-xl mb-6 flex items-center gap-3">
-    <i data-lucide="check-circle" class="w-5 h-5 text-teal-500"></i>
-    {{ session('success') }}
-</div>
-@endif
-
 <div class="bg-white rounded-3xl shadow-sm border border-teal-50 overflow-hidden">
     <table class="w-full text-left">
         <thead class="bg-teal-50/50 text-teal-800/60 text-[10px] uppercase tracking-widest">
@@ -40,7 +33,7 @@
                     <a href="{{ route('admin.property-details.edit', $detail->id) }}" class="text-teal-600 hover:text-teal-800 transition-colors inline-block">
                         <i data-lucide="edit" class="w-4 h-4"></i>
                     </a>
-                    <form action="{{ route('admin.property-details.destroy', $detail->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this?');">
+                    <form action="{{ route('admin.property-details.destroy', $detail->id) }}" method="POST" class="inline-block" data-confirm="Delete these property details?">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-500 hover:text-red-700 transition-colors">

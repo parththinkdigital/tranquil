@@ -3,73 +3,179 @@
 @section('page-title', 'Create Blog Post')
 @push('styles')
 
-<!-- Summernote CSS -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
-
 <style>
-    /* Main Editor */
-    .note-editor.note-frame {
-        border: 1px solid #ccfbf1 !important;
-        border-radius: 20px !important;
+    .blog-editor-shell {
+        border: 1px solid #ccfbf1;
+        border-radius: 28px;
         overflow: hidden;
-        background: #ffffff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        background: linear-gradient(180deg, #ffffff 0%, #f8fffd 100%);
+        box-shadow: 0 24px 70px rgba(15, 118, 110, 0.08);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* Toolbar */
+    .blog-editor-shell:focus-within {
+        border-color: #14b8a6;
+        box-shadow: 0 24px 70px rgba(15, 118, 110, 0.12), 0 0 0 4px rgba(20, 184, 166, 0.12);
+    }
+
+    .blog-editor-header {
+        background: radial-gradient(circle at top left, rgba(20, 184, 166, 0.18), transparent 34%), #082f2f;
+    }
+
+    .note-editor.note-frame {
+        border: 0 !important;
+        border-radius: 0 !important;
+        overflow: hidden;
+        background: transparent;
+        box-shadow: none !important;
+    }
+
     .note-toolbar {
-        background: #f0fdfa !important;
+        background: #f8fffd !important;
         border-bottom: 1px solid #ccfbf1 !important;
-        padding: 10px !important;
+        padding: 12px !important;
     }
 
-    /* Toolbar Buttons */
     .note-btn {
-        border-radius: 10px !important;
-        border: 1px solid #d1fae5 !important;
+        border-radius: 11px !important;
+        border: 1px solid transparent !important;
         background: white !important;
-        color: #0f172a !important;
+        color: #134e4a !important;
         transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
     }
 
-    .note-btn:hover {
+    .note-btn:hover,
+    .note-btn.active {
         background: #14b8a6 !important;
         color: white !important;
         border-color: #14b8a6 !important;
     }
 
-    /* Dropdown */
     .note-dropdown-menu {
         border-radius: 14px !important;
         border: 1px solid #ccfbf1 !important;
         overflow: hidden;
     }
 
-    /* Editable Area */
     .note-editing-area .note-editable {
         background: #ffffff !important;
-        color: #0f172a !important;
-        padding: 20px !important;
-        min-height: 300px;
-        font-size: 15px;
-        line-height: 1.8;
+        color: #134e4a !important;
+        padding: 34px 42px 34px 78px !important;
+        min-height: 480px;
+        font-size: 16px;
+        line-height: 1.85;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    /* Placeholder */
     .note-placeholder {
         color: #94a3b8 !important;
+        padding: 34px 42px 34px 78px !important;
+        font-style: italic;
     }
 
-    /* Status Bar */
     .note-statusbar {
-        background: #f0fdfa !important;
-        border-top: 1px solid #ccfbf1 !important;
+        display: none !important;
     }
 
-    /* Focus */
-    .note-editor.note-frame:focus-within {
-        border-color: #14b8a6 !important;
-        box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
+    .note-editable h1,
+    .note-editable h2,
+    .note-editable h3,
+    .note-editable h4,
+    .note-editable h5,
+    .note-editable h6 {
+        color: #042f2e;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-top: 1.45em;
+        margin-bottom: 0.55em;
+        position: relative;
+    }
+
+    .note-editable h1 { font-size: 34px; line-height: 1.08; }
+    .note-editable h2 { font-size: 27px; line-height: 1.16; border-left: 4px solid #14b8a6; padding-left: 14px; }
+    .note-editable h3 { font-size: 22px; line-height: 1.25; }
+    .note-editable h4 { font-size: 18px; line-height: 1.35; }
+
+    .note-editable h1:hover::before,
+    .note-editable h2:hover::before,
+    .note-editable h3:hover::before,
+    .note-editable h4:hover::before,
+    .note-editable h5:hover::before,
+    .note-editable h6:hover::before {
+        position: absolute;
+        left: -54px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #0f766e;
+        color: white;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        padding: 3px 7px;
+        border-radius: 999px;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        font-weight: 900;
+    }
+
+    .note-editable h1:hover::before { content: "H1"; }
+    .note-editable h2:hover::before { content: "H2"; }
+    .note-editable h3:hover::before { content: "H3"; }
+    .note-editable h4:hover::before { content: "H4"; }
+    .note-editable h5:hover::before { content: "H5"; }
+    .note-editable h6:hover::before { content: "H6"; }
+
+    .note-editable blockquote {
+        border-left: 4px solid #f59e0b;
+        background: #fffbeb;
+        color: #78350f;
+        border-radius: 0 18px 18px 0;
+        padding: 18px 22px;
+        margin: 24px 0;
+    }
+
+    .note-editable img {
+        max-width: 100%;
+        border-radius: 20px;
+        margin: 22px 0;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+    }
+
+    .note-editable table {
+        width: 100% !important;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-top: 1px solid #ccfbf1 !important;
+        border-radius: 16px;
+        overflow: hidden;
+        margin: 22px 0;
+    }
+
+    .note-editable table th,
+    .note-editable table td {
+        border-color: #ccfbf1 !important;
+        padding: 12px 14px !important;
+    }
+
+    .note-editable table th {
+        background: #f0fdfa;
+        color: #134e4a;
+    }
+
+    .highlight-text {
+        background: #fef3c7;
+        color: #78350f;
+        padding: 2px 5px;
+        border-radius: 7px;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+
+    @media (max-width: 768px) {
+        .note-editing-area .note-editable,
+        .note-placeholder {
+            padding: 24px !important;
+            min-height: 380px;
+        }
     }
 </style>
 
@@ -241,32 +347,26 @@
                     @enderror
                 </div>
 
-                {{-- Long Description 1 --}}
+                {{-- Full Article Editor --}}
                 <div>
-                    <label for="long_desc1" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
-                        Long Description 1 <span class="text-red-400">*</span>
-                        <span class="text-primary/30 font-normal normal-case ml-1">(Main body — first section)</span>
-                    </label>
-                    <textarea name="long_desc1" id="long_desc1" rows="6" required
-                        placeholder="First section of the full article content..."
-                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary placeholder-primary/30 resize-y @error('long_desc1') border-red-300 ring-2 ring-red-100 @enderror">{{ old('long_desc1') }}</textarea>
+                    <div class="blog-editor-shell @error('long_desc1') border-red-300 ring-2 ring-red-100 @enderror">
+                        <div class="blog-editor-header px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div>
+                                <label for="long_desc1" class="block text-[10px] uppercase tracking-[0.24em] font-bold text-teal-100/60 mb-1">
+                                    Full Article <span class="text-amber-300">*</span>
+                                </label>
+                                <p class="text-white font-heading font-bold text-xl tracking-tight">Write the complete post in one focused editor</p>
+                            </div>
+                            <div id="active-block" class="self-start md:self-auto rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-widest font-bold text-teal-50">
+                                Block: p
+                            </div>
+                        </div>
+                        <textarea name="long_desc1" id="long_desc1" required>{{ old('long_desc1') }}</textarea>
+                    </div>
                     @error('long_desc1')
                     <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
                     @enderror
-                </div>
-
-                {{-- Long Description 2 --}}
-                <div>
-                    <label for="long_desc2" class="block text-xs uppercase tracking-widest font-bold text-primary/60 mb-2">
-                        Long Description 2 <span class="text-red-400">*</span>
-                        <span class="text-primary/30 font-normal normal-case ml-1">(Main body — second section, after banner)</span>
-                    </label>
-                    <textarea name="long_desc2" id="long_desc2" rows="6" required
-                        placeholder="Continuation of the article, shown after the banner image..."
-                        class="w-full px-4 py-3 bg-teal-50/30 border border-teal-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all text-sm text-primary placeholder-primary/30 resize-y @error('long_desc2') border-red-300 ring-2 ring-red-100 @enderror">{{ old('long_desc2') }}</textarea>
-                    @error('long_desc2')
-                    <p class="text-red-500 text-xs mt-2 flex items-center gap-1"><i data-lucide="alert-circle" class="w-3 h-3"></i> {{ $message }}</p>
-                    @enderror
+                    <p class="mt-3 text-[11px] text-primary/35 leading-relaxed">Use headings, quotes, tables, images, and the highlight control for editorial callouts. The content is saved as the main blog body.</p>
                 </div>
 
             </div>
@@ -295,86 +395,125 @@
 <!-- Summernote JS -->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 <script>
+    function previewImage(input, previewId) {
+        const preview = document.getElementById(previewId);
+        const emptyState = document.getElementById(previewId + '-wrap');
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                if (emptyState) {
+                    emptyState.classList.add('hidden');
+                }
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     $(document).ready(function() {
+        function wrapSelectionWithTag(tag, className) {
+            const selection = window.getSelection();
 
-        $('#long_desc1, #long_desc2').summernote({
+            if (!selection.rangeCount || selection.isCollapsed) {
+                return;
+            }
 
-            height: 350,
+            const range = selection.getRangeAt(0);
+            const selectedContent = range.extractContents();
+            const element = document.createElement(tag);
 
-            placeholder: 'Write your blog content here...',
+            if (className) {
+                element.className = className;
+            }
+
+            element.appendChild(selectedContent);
+            range.insertNode(element);
+            range.setStartAfter(element);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            $('#long_desc1').summernote('triggerEvent', 'change', $('#long_desc1').summernote('code'));
+        }
+
+        function updateActiveBlock() {
+            const selection = window.getSelection();
+
+            if (!selection.rangeCount) {
+                return;
+            }
+
+            const node = selection.anchorNode;
+            const tag = $(node).closest('h1, h2, h3, h4, h5, h6, p, blockquote, li, td').prop('tagName') || 'p';
+            $('#active-block').text('Block: ' + tag.toLowerCase());
+        }
+
+        const HighlightButton = function(context) {
+            const ui = $.summernote.ui;
+
+            return ui.button({
+                contents: '<span class="font-bold">Highlight</span>',
+                tooltip: 'Highlight selected text',
+                click: function() {
+                    wrapSelectionWithTag('span', 'highlight-text');
+                }
+            }).render();
+        };
+
+        $('#long_desc1').summernote({
+
+            height: 480,
+
+            placeholder: 'Start with the story, then shape it with headings, images, quotes, and highlights...',
+            followingToolbar: true,
+            tabsize: 2,
+            disableDragAndDrop: false,
+            shortcuts: true,
+            buttons: {
+                highlight: HighlightButton
+            },
 
             toolbar: [
-
+                ['undo', ['undo', 'redo']],
                 ['style', ['style']],
-
-                ['font', [
-                    'bold',
-                    'italic',
-                    'underline',
-                    'strikethrough',
-                    'clear'
-                ]],
-
+                ['custom', ['highlight']],
+                ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
                 ['fontname', ['fontname']],
-
                 ['fontsize', ['fontsize']],
-
                 ['color', ['color']],
-
-                ['para', [
-                    'ul',
-                    'ol',
-                    'paragraph',
-                    'height'
-                ]],
-
+                ['para', ['ul', 'ol', 'paragraph', 'height']],
                 ['table', ['table']],
-
-                ['insert', [
-                    'link',
-                    'picture',
-                    'video'
-                ]],
-
-                ['view', [
-                    'fullscreen',
-                    'codeview',
-                    'help'
-                ]]
-
+                ['insert', ['link', 'picture', 'video', 'hr']],
+                ['view', ['fullscreen', 'codeview', 'help']]
             ],
+            fontNames: ['Inter', 'Poppins', 'Arial', 'Georgia', 'Helvetica', 'Times New Roman', 'Verdana'],
+            fontSizes: ['12', '14', '16', '18', '20', '24', '28', '32', '36', '48'],
+            callbacks: {
+                onInit: updateActiveBlock,
+                onKeyup: updateActiveBlock,
+                onMouseup: updateActiveBlock,
+                onChange: function(contents) {
+                    $('#long_desc1').val(contents);
+                },
+                onImageUpload: function(files) {
+                    Array.from(files).forEach(function(file) {
+                        const reader = new FileReader();
 
-            fontNames: [
-                'Arial',
-                'Arial Black',
-                'Comic Sans MS',
-                'Courier New',
-                'Helvetica',
-                'Impact',
-                'Tahoma',
-                'Times New Roman',
-                'Verdana',
-                'Poppins',
-                'Inter'
-            ],
+                        reader.onload = function(event) {
+                            $('#long_desc1').summernote('insertImage', event.target.result, function($image) {
+                                $image.css('max-width', '100%');
+                                $image.css('border-radius', '20px');
+                            });
+                        };
 
-            fontSizes: [
-                '8',
-                '9',
-                '10',
-                '11',
-                '12',
-                '14',
-                '16',
-                '18',
-                '20',
-                '24',
-                '28',
-                '32',
-                '36',
-                '48'
-            ]
-
+                        reader.readAsDataURL(file);
+                    });
+                }
+            }
         });
 
     });
